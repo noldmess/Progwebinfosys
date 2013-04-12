@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^(.*)/css(.*)\.css$ css/$2.css
+RewriteRule ^(.*)/img(.*)\.png$ img/$2.png
+RewriteRule ^(.[^\/]*)/$ index.php?page=$1
+RewriteRule ^wiki/$ index.php?page=wiki
+RewriteRule ^wiki/new/$ index.php?page=wiki&action=new
+RewriteRule ^wiki/(.*)/$ index.php?page=wiki&title=$1
+RewriteRule ^wiki/(.*)/(.*)$ index.php?page=wiki&title=$1&action=$2
+</IfModule>
