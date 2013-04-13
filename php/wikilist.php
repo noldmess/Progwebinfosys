@@ -26,12 +26,13 @@ class Wikilist{
 	}
 	
 	public function getIndexArray(){
-		return $_SESSION['index'];
+		$db=DB::getInstance();
+		return $db->selectList();//$_SESSION['index'];
 	}
 	
 	public  function  addNewArticle($title,$text){
-		$_SESSION['index'][]=$title;
-		$_SESSION[$title]=$text;
+		/*$_SESSION['index'][]=$title;
+		$_SESSION[$title]=$text;*/
 		$db=DB::getInstance();
 		$db->insert($title,$text);
 	}
@@ -40,17 +41,29 @@ class Wikilist{
 	public  function  updateArticle($title,$text){
 		$db=DB::getInstance();
 		$db->update($title,$text);
-		$_SESSION[$title]=$text;
+		//$_SESSION[$title]=$text;
 	}
 	
 	public  function removeArticle($title){
 		$db=DB::getInstance();
 		$db->remove($title);
-		$list=$_SESSION['index'];
+		/*$list=$_SESSION['index'];
 		$key=array_search($title,$list);
 		unset($list[$key]);
 		$_SESSION['index']=$list;
 		//var_dump($_SESSION['index']);
-		unset($_SESSION[$title]);
+		unset($_SESSION[$title]);*/
+	}
+	
+	public  function getArticle($title){
+		$db=DB::getInstance();
+		$array=$db->select($title);
+		return new Article($title,$array['text']);
+	}
+	
+	public function issetArtikle(){
+		$db=DB::getInstance();
+		$array=$db->select($title);
+		return isset($array['text']);
 	}
 }
