@@ -10,9 +10,9 @@ use Wiki\Article;
 use Wiki\DB;
 
 $TEMPLATE=array();
-if(!isset($_SESSION['index'])){
+/*if(!isset($_SESSION['index'])){
 		$_SESSION['index']=array();
-}
+}*/
 	session_set_cookie_params(604800); 
 	session_start();
 	$wiki=Wiki\Wikilist::getInstance();
@@ -45,7 +45,7 @@ switch ($_GET['action']){
 		$includeNewArticle = true;
 		break;
 	default:
-		if(!isset($_SESSION[$title])){
+		if($wiki->issetArtikle($title)){
 			$includeNewArticle = true;
 			$title=null;
 		}
@@ -57,17 +57,19 @@ $TEMPLATE['new']=false;
 if($includeNewArticle){
 		if(!$found){
 			$_GET['title'] = "";
+		}else{
+			$article=$wiki->getArticle(urlencode($_GET['title']));
+			$TEMPLATE['text']=$article->getText();
 		}
+		
 	$TEMPLATE['new']=true;
 }
-else{	if( !is_null($title)){
-		$article=new Wiki\Article($title,$_SESSION[$title]);
-	}else{
-		$article=new Wiki\Article($title,$_SESSION[$title]);
-	}
-	$TEMPLATE['title']=$article->getTitle();
-	$TEMPLATE['text']=$article->getText();
-	}
+elseif( !is_null($title)){
+		$wiki=Wiki\Wikilist::getInstance();
+		$article=$wiki->getArticle($title);
+		$TEMPLATE['title']=$article->getTitle();
+		$TEMPLATE['text']=$article->getText();
+}
 ?>
 <div class="row-fluid">
 <?php 
