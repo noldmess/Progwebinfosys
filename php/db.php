@@ -24,6 +24,27 @@ class DB{
  		$this->mysqli->close();
 	 }
 	 
+	 public function select($title){
+	 	$list=array();
+	 	if ($result = $this->mysqli->query("Select * from  article where title like '$title'")) {
+	 		while ($row = $result->fetch_object()){
+        		$list['title'] = $row->title;
+        		$list['text'] = $row->text;
+    		}
+	 	}
+	 	return $list;
+	 }
+	 
+	 public function selectList(){
+	 	$list=array();
+	 	if ($result = $this->mysqli->query("Select title from  article")) {
+	 		while ($row = $result->fetch_object()){
+        		$list[] = $row->title;
+        
+    		}
+	 	}
+	 	return $list;
+	 }
 	 
 	 public function insert($title,$text){
 	 	if ($this->mysqli->query("insert into article (title,text) value ('$title','$text')") === FALSE) {
