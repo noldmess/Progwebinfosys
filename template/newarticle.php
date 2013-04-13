@@ -1,6 +1,6 @@
 <div class="span9">
 	<div class="hero-unit">
-		<form  class="form-horizontal" action="/PvW/wiki/<?php echo (isset($_GET['title'])?urlencode($_GET['title'])."/":""); ?>" method="post">
+		<form  class="form-horizontal" action="/wiki/<?php echo (isset($_GET['title'])?urlencode($_GET['title'])."/":""); ?>" method="post">
 			<fieldset>
 				<label>Title</label>
 					<input  name="title" type="text" placeholder="Type something…" value="<?php echo (isset($_GET['title'])?$_GET['title']:""); ?>">

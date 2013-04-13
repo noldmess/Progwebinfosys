@@ -18,10 +18,9 @@ class Wikilist{
 	
 	public   function __toString(){
 		foreach ($_SESSION['index'] as $list){
-					$text.="<li><a href='/PvW/
-					wiki/$list/'>$list</a></li>";
+					$text.="<li><a href='wiki/$list/'>$list</a></li>";
 		}
-		$text.='<li><a href="/PvW/wiki/new/"><i class="icon-pencil"></i>Neuer Artikel</a></li>';
+		$text.='<li><a href="/wiki/new/"><i class="icon-pencil"></i>Neuer Artikel</a></li>';
 		return $text."</ul></div><!--/.well --></div><!--/span-->";
 	}
 	
