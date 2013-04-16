@@ -73,6 +73,7 @@ if($includeNewArticle){
 elseif( !is_null($title)){
 		$wiki=Wiki\Wikilist::getInstance();
 		$article=$wiki->getArticle($title);
+		echo $article->getTitle();
 		$TEMPLATE['title']=$article->getTitle();
 		$TEMPLATE['text']=$article->getText();
 		$TEMPLATE['id']=$article->getID();

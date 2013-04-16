@@ -3,6 +3,7 @@ namespace  Wiki;
 
 
 use Wiki\DB;
+use Wiki\Article;
 
 class Wikilist{
 	private  static $instance=null;
@@ -62,8 +63,8 @@ class Wikilist{
 	public  function getArticle($title){
 		$db=DB::getInstance();
 		$array=$db->select($title);
-		echo $array['id'];
-		return new Article($array['id'],$title,$array['text']);
+		echo $array['text'];
+		return new Wiki\Article($array['id'],$title,$array['text']);
 	}
 	
 	public function issetArticle($title){
