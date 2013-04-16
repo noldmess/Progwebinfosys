@@ -38,7 +38,7 @@ class DB{
 	 
 	 public function selectList(){
 	 	$list=array();
-	 	if ($result = $this->mysqli->query("Select title from  article")) {
+	 	if ($result = $this->mysqli->query("Select title from article")) {
 	 		while ($row = $result->fetch_object()){
         		$list[] = $row->title;
         
@@ -63,8 +63,8 @@ class DB{
 	 }
 	 
 	 public function update($id,$title,$text){
-	 	if ($this->mysqli->query("UPDATE article SET title='$title',text='$text' WHERE id == $id") === FALSE) {
-	 		echo ("Error");
+	 	if ($this->mysqli->query("UPDATE article SET title='$title',text='$text' WHERE id == '$id'") === FALSE) {
+	 		echo ("Error updating");
 	 	}
 	 }
 	 
