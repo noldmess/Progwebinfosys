@@ -52,7 +52,7 @@ switch ($_GET['action']){
 		break;
 	default:
 		if($wiki->issetArticle($title)){
-			$includeNewArticle = true;
+			$includeNewArticle = false;
 			$title=null;
 		}
 		break;
@@ -64,20 +64,14 @@ if($includeNewArticle){
 		if(!$found){
 			$_GET['title'] = "";
 		}else{
-			echo urlencode($_GET['title']);
 			$article=$wiki->getArticle(urlencode($_GET['title']));
-			echo $article->getTitle();
-			echo " ".$article->getText();
 			$TEMPLATE['text']=$article->getText();
 			$TEMPLATE['id']=$article->getID();
 		}
-		
 	
 }
 elseif( !is_null($title)){
-		$wiki=Wiki\Wikilist::getInstance();
 		$article=$wiki->getArticle($title);
-		echo $article->getTitle();
 		$TEMPLATE['title']=$article->getTitle();
 		$TEMPLATE['text']=$article->getText();
 		$TEMPLATE['id']=$article->getID();
