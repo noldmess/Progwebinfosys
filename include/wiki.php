@@ -19,7 +19,6 @@ $TEMPLATE=array();
 	$title=urlencode($_GET['title']);
 	if(isset($_POST['id'])){
 		$TEMPLATE['id'] = $_POST['id'];
-		echo $TEMPLATE['id'];
 	}
 	if(isset($_POST['text'])){
 		if(!in_array(urlencode($_POST['title']),$_SESSION['index'])){
@@ -49,7 +48,7 @@ switch ($_GET['action']){
 		$includeNewArticle = true;
 		break;
 	default:
-		if($wiki->issetArticle($TEMPLATE['id'])){
+		if($wiki->issetArticle($title)){
 			$includeNewArticle = true;
 			$title=null;
 		}
