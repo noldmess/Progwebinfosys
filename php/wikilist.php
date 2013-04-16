@@ -42,7 +42,7 @@ class Wikilist{
 	}
 	
 	
-	public  function  updateArticle($id,$title,$text){
+	public  function updateArticle($id,$title,$text){
 		$db=DB::getInstance();
 		$db->update($id,$title,$text);
 		//$_SESSION[$title]=$text;

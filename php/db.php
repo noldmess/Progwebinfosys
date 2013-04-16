@@ -63,7 +63,7 @@ class DB{
 	 }
 	 
 	 public function update($id,$title,$text){
-	 	if ($this->mysqli->query("UPDATE article SET title='$title',text='$text' WHERE id == '$id'") === FALSE) {
+	 	if ($this->mysqli->query("UPDATE article SET title='$title',text='$text' WHERE id = '$id'") === FALSE) {
 	 		echo ("Error updating");
 	 	}
 	 }

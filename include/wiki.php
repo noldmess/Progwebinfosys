@@ -63,6 +63,7 @@ if($includeNewArticle){
 		if(!$found){
 			$_GET['title'] = "";
 		}else{
+			echo $_GET['title'];
 			$article=$wiki->getArticle(urlencode($_GET['title']));
 			$TEMPLATE['text']=$article->getText();
 			$TEMPLATE['id']=$article->getID();
