@@ -34,7 +34,6 @@ $wiki=Wiki\Wikilist::getInstance();
 
 $includeNewArticle = false;
 $found = true;
-$TEMPLATE['new']=false;
 
 switch ($_GET['action']){
 	case "remove":
@@ -43,17 +42,14 @@ switch ($_GET['action']){
 		if(!$found){
 			$includeNewArticle = true;
 		}
-		$title=null;
 		break;
 	case "new";
 	case "change":
-		$title=null;
 		$includeNewArticle = true;
 		break;
 	default:
 		if($wiki->issetArticle($title)){
 			$includeNewArticle = false;
-			$title=null;
 		}
 		break;
 }
@@ -63,7 +59,7 @@ $TEMPLATE['index']=$wiki->getIndexArray();
 if(!$found){
 	$_GET['title'] = "";
 }else{
-	$article=$wiki->getArticle(urlencode($_GET['title']));
+	$article=$wiki->getArticle($title);
 	$TEMPLATE['title']=$article->getTitle();
 	$TEMPLATE['text']=$article->getText();
 	$TEMPLATE['id']=$article->getID();

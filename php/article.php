@@ -7,7 +7,6 @@ class Article{
 	private $text;
 	
  	 public function  __construct($id,$title,$text){
-		echo "hallo";
 		$this->id=$id;
 		$this->title=$title;
 		$this->text=$text;
