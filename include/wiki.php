@@ -17,7 +17,7 @@ $TEMPLATE=array();
 	session_start();
 	$wiki=Wiki\Wikilist::getInstance();
 	$title=urlencode($_GET['title']);
-	if(isset($_POST['id'])){
+	if(isset($_POST['id']) && !empty($_POST['id'])){
 		$TEMPLATE['id'] = $_POST['id'];
 	}
 	if(isset($_POST['text']) && trim($_POST['title'])!=""){
