@@ -34,6 +34,7 @@ $wiki=Wiki\Wikilist::getInstance();
 
 $includeNewArticle = false;
 $found = true;
+$TEMPLATE['new']=false;
 
 switch ($_GET['action']){
 	case "remove":
@@ -58,17 +59,20 @@ switch ($_GET['action']){
 }
 
 $TEMPLATE['index']=$wiki->getIndexArray();
-$TEMPLATE['new']=false;
+
 if($includeNewArticle){
 		if(!$found){
 			$_GET['title'] = "";
 		}else{
+			echo urlencode($_GET['title']);
 			$article=$wiki->getArticle(urlencode($_GET['title']));
+			echo $article->getTitle();
+			echo " ".$article->getText();
 			$TEMPLATE['text']=$article->getText();
 			$TEMPLATE['id']=$article->getID();
 		}
 		
-	$TEMPLATE['new']=true;
+	
 }
 elseif( !is_null($title)){
 		$wiki=Wiki\Wikilist::getInstance();
@@ -84,7 +88,7 @@ elseif( !is_null($title)){
 	include 'template/wikilist.php';
 	if(isset($TEMPLATE['removedTitle']))
 		include 'template/removearticle.php';
-	if($TEMPLATE['new'])
+	if($includeNewArticle)
 		include 'template/newarticle.php';
 	else
 		include 'template/article.php';
