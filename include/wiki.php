@@ -60,11 +60,21 @@ switch ($_GET['action']){
 
 $TEMPLATE['index']=$wiki->getIndexArray();
 
+if(!$found){
+	$_GET['title'] = "";
+}else{
+	$article=$wiki->getArticle(urlencode($_GET['title']));
+	$TEMPLATE['title']=$article->getTitle();
+	$TEMPLATE['text']=$article->getText();
+	$TEMPLATE['id']=$article->getID();
+}
+/*
 if($includeNewArticle){
 		if(!$found){
 			$_GET['title'] = "";
 		}else{
 			$article=$wiki->getArticle(urlencode($_GET['title']));
+			$TEMPLATE['title']=$article->getTitle();
 			$TEMPLATE['text']=$article->getText();
 			$TEMPLATE['id']=$article->getID();
 		}
@@ -76,6 +86,7 @@ elseif( !is_null($title)){
 		$TEMPLATE['text']=$article->getText();
 		$TEMPLATE['id']=$article->getID();
 }
+*/
 ?>
 <div class="row-fluid">
 <?php 
