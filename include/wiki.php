@@ -91,7 +91,8 @@ elseif( !is_null($title)){
 		include 'template/removearticle.php';
 	if($includeNewArticle)
 		include 'template/newarticle.php';
-	else
+	else{
 		include 'template/article.php';
+	}
 ?>
 </div>
