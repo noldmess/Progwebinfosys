@@ -1,5 +1,6 @@
 <?php
 namespace  Wiki;
+
 class Article{
 	private $id;
 	private $title;
