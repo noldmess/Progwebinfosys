@@ -20,13 +20,15 @@ $TEMPLATE=array();
 	if(isset($_POST['id'])){
 		$TEMPLATE['id'] = $_POST['id'];
 	}
-	if(isset($_POST['text'])){
-		if(!in_array(urlencode($_POST['title']),$_SESSION['index'])){
+	if(isset($_POST['text']) && trim($_POST['title'])!=""){
+		if(!isset($TEMPLATE['id'])){
 			$TEMPLATE['id'] = $wiki->addNewArticle(urlencode($_POST['title']),$_POST['text']);
 		}else{
 			$wiki->updateArticle($TEMPLATE['id'],urlencode($_POST['title']),$_POST['text']);
 		}
 		$title=urlencode($_POST['title']);
+	}elseif(isset($_POST['text'])){
+		echo "Title is needed!";
 	}
 $wiki=Wiki\Wikilist::getInstance();
 

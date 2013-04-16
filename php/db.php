@@ -49,7 +49,7 @@ class DB{
 	 
 	 public function insert($title,$text){
 	 	if ($this->mysqli->query("insert into article (title,text) value ('$title','$text')") === FALSE) {
-	 		echo ("Error");
+	 		echo ("Error insert");
 			return false;
 	 	}else{
 			return $this->mysqli->insert_id;
@@ -58,7 +58,7 @@ class DB{
 	 
  	public function remove($title){
  		if ($this->mysqli->query("DELETE FROM article WHERE title like '$title'") === FALSE) {
- 			echo ("Error");
+ 			echo ("Error remove");
  		}
 	 }
 	 
