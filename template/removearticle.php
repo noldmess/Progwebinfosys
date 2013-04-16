@@ -1,5 +1,5 @@
 <div class="span9">
 	<div class="hero-unit">
-			The Artikle <strong><?php echo $TEMPLATE['removetTitle']?> </strong>has benn removet
+			The Article <strong><?php echo $TEMPLATE['removedTitle']?> </strong>has been removed!
 	</div>
 </div>

@@ -30,6 +30,7 @@ class DB{
 	 		while ($row = $result->fetch_object()){
         		$list['title'] = $row->title;
         		$list['text'] = $row->text;
+				$list['id'] = $row->id;
     		}
 	 	}
 	 	return $list;
@@ -49,17 +50,20 @@ class DB{
 	 public function insert($title,$text){
 	 	if ($this->mysqli->query("insert into article (title,text) value ('$title','$text')") === FALSE) {
 	 		echo ("Error");
-	 	}
+			return false;
+	 	}else{
+			return $this->mysqli->insert_id;
+		}
 	 }
 	 
  	public function remove($title){
- 		if ($this->mysqli->query("DELETE FROM article WHERE  title like '$title'") === FALSE) {
+ 		if ($this->mysqli->query("DELETE FROM article WHERE title like '$title'") === FALSE) {
  			echo ("Error");
  		}
 	 }
 	 
-	 public function update($title,$text){
-	 	if ($this->mysqli->query("UPDATE article SET title='$title',text='$text' WHERE  title like '$title'") === FALSE) {
+	 public function update($id,$title,$text){
+	 	if ($this->mysqli->query("UPDATE article SET title='$title',text='$text' WHERE id == $id") === FALSE) {
 	 		echo ("Error");
 	 	}
 	 }

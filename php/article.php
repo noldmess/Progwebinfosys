@@ -1,10 +1,12 @@
 <?php
 namespace  Wiki;
 class Article{
+	private $id;
 	private $title;
 	private $text;
 	
- 	 public function  __construct($title,$text){
+ 	 public function  __construct($id,$title,$text){
+		$this->id=$id;
 		$this->title=$title;
 		$this->text=$text;
 	}
@@ -27,5 +29,6 @@ class Article{
 	
 	public  function getTitle(){return $this->title;}
 	public  function getText(){return $this->text;}
+	public function getID(){return $this->id;}
 	
 }

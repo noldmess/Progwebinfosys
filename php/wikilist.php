@@ -33,13 +33,18 @@ class Wikilist{
 		/*$_SESSION['index'][]=$title;
 		$_SESSION[$title]=$text;*/
 		$db=DB::getInstance();
-		$db->insert($title,$text);
+		
+		$id = $db->insert($title,$text);
+		if(!$id){
+			return "";	
+		}
+		return $id;
 	}
 	
 	
-	public  function  updateArticle($title,$text){
+	public  function  updateArticle($id,$title,$text){
 		$db=DB::getInstance();
-		$db->update($title,$text);
+		$db->update($id,$title,$text);
 		//$_SESSION[$title]=$text;
 	}
 	
@@ -57,12 +62,12 @@ class Wikilist{
 	public  function getArticle($title){
 		$db=DB::getInstance();
 		$array=$db->select($title);
-		return new Article($title,$array['text']);
+		return new Article($array['id'],$title,$array['text']);
 	}
 	
-	public function issetArtikle(){
+	public function issetArticle(){
 		$db=DB::getInstance();
-		$array=$db->select($title);
+		$array=$db->select($id);
 		return isset($array['text']);
 	}
 }
