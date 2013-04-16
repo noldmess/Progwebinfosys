@@ -27,7 +27,7 @@ class DB{
 	 public function select($title){
 	 	$list=array();
 	 	if ($result = $this->mysqli->query("Select * from  article where title like '$title'")) {
-	 		while ($row = $result->fetch_object()){
+	 		if($row = $result->fetch_object()){
         		$list['title'] = $row->title;
         		$list['text'] = $row->text;
 				$list['id'] = $row->id;

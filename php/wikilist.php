@@ -62,6 +62,7 @@ class Wikilist{
 	public  function getArticle($title){
 		$db=DB::getInstance();
 		$array=$db->select($title);
+		echo $array['id'];
 		return new Article($array['id'],$title,$array['text']);
 	}
 	
