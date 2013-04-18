@@ -96,7 +96,7 @@ class DB{
 	 
 	 
 	 public function countList(){
-	 	return 100;//sizeof($this->selectList())/30;
+	 	return sizeof($this->selectList())/30;
 	 }
 	 
 	 
