@@ -54,7 +54,7 @@ switch ($_GET['action']){
 		}
 		break;
 }
-echo $TEMPLATE['paginatornumber']=$wiki->getPaginator();
+$TEMPLATE['paginatornumber']=$wiki->getPaginator();
 if(isset($_GET['number']))
 	$TEMPLATE['paginatorstart']=$_GET['number'];
 else
