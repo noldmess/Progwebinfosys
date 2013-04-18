@@ -1,5 +1,5 @@
 <?php
-
+echo $_GET['searchtitle'];
 require_once 'php/wikilist.php';
 require_once 'php/article.php';
 require_once 'php/db.php';
@@ -10,6 +10,7 @@ use Wiki\Article;
 use Wiki\DB;
 
 $TEMPLATE=array();
+
 /*if(!isset($_SESSION['index'])){
 		$_SESSION['index']=array();
 }*/
@@ -53,8 +54,14 @@ switch ($_GET['action']){
 		}
 		break;
 }
-
-$TEMPLATE['index']=$wiki->getIndexArray();
+echo $TEMPLATE['paginatornumber']=$wiki->getPaginator();
+if(isset($_GET['number']))
+	$TEMPLATE['paginatorstart']=$_GET['number'];
+else
+	$TEMPLATE['paginatorstart']=0;
+$min=$TEMPLATE['paginatorstart']*30;
+$max=($TEMPLATE['paginatorstart']+1)*30;
+$TEMPLATE['index']=$wiki->getIndexArray($min,$max);
 
 if(!$found){
 	$_GET['title'] = "";
@@ -85,16 +92,22 @@ elseif( !is_null($title)){
 */
 ?>
 <div class="row-fluid">
-<?php 
+<?php
 	include 'template/wikilist.php';
 	if(isset($TEMPLATE['removedTitle']))
 		include 'template/removearticle.php';
-	if($includeNewArticle)
-		include 'template/newarticle.php';
-	elseif(isset($TEMPLATE['title']) && !empty($TEMPLATE['title'])){
-		include 'template/article.php';
-	}else{
-		include 'template/empty.php';
+	if(isset($_POST['searchtitle'])){
+		$TEMPLATE['searchTest']=$_POST['searchtitle'];
+		$TEMPLATE['searchList']=$wiki->searchArtikleTitle(urlencode($_POST['searchtitle']));
+		include 'template/searchResult.php';
+	}else {
+		if($includeNewArticle)
+			include 'template/newarticle.php';
+		elseif(isset($TEMPLATE['title']) && !empty($TEMPLATE['title'])){
+			include 'template/article.php';
+		}else{
+			include 'template/empty.php';
+		}
 	}
 ?>
 </div>

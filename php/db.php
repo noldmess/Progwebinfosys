@@ -47,6 +47,17 @@ class DB{
 	 	return $list;
 	 }
 	 
+	 public function selectListLimit($min,$max){
+	 	$list=array();
+	 	if ($result = $this->mysqli->query("Select title from article LIMIT $min,$max")) {
+	 		while ($row = $result->fetch_object()){
+	 			$list[] = $row->title;
+	 
+	 		}
+	 	}
+	 	return $list;
+	 }
+	 
 	 public function insert($title,$text){
 	 	if ($this->mysqli->query("insert into article (title,text) value ('$title','$text')") === FALSE) {
 	 		echo ("Error insert");
@@ -54,6 +65,21 @@ class DB{
 	 	}else{
 			return $this->mysqli->insert_id;
 		}
+	 }
+	 
+	 
+	 public function search($title){
+	 	$list=array();
+	 	$result=$this->mysqli->query("Select title from article where title like '%$title%' ") ;
+	 	if($result===FAlSE){
+	 		echo ("Error insert");
+	 		return false;
+	 	}else{
+	 	while ($row = $result->fetch_object()){
+        		$list[] = $row->title;
+    		}
+	 	}
+	 	return $list;
 	 }
 	 
  	public function remove($title){
@@ -66,6 +92,11 @@ class DB{
 	 	if ($this->mysqli->query("UPDATE article SET title='$title',text='$text' WHERE id = '$id'") === FALSE) {
 	 		echo ("Error updating");
 	 	}
+	 }
+	 
+	 
+	 public function countList(){
+	 	return 100;//sizeof($this->selectList())/30;
 	 }
 	 
 	 

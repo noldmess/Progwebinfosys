@@ -38,7 +38,19 @@
   </head>
 
   <body>
-
+	 <script src="/PvW/js/jquery.js"></script>
+    <script src="/PvW/js/bootstrap-transition.js"></script>
+    <script src="/PvW/js/bootstrap-alert.js"></script>
+    <script src="/PvW/js/bootstrap-modal.js"></script>
+    <script src="/PvW/js/bootstrap-dropdown.js"></script>
+    <script src="/PvW/js/bootstrap-scrollspy.js"></script>
+    <script src="/PvW/js/bootstrap-tab.js"></script>
+    <script src="/PvW/js/bootstrap-tooltip.js"></script>
+    <script src="/PvW/js/bootstrap-popover.js"></script>
+    <script src="/PvW/js/bootstrap-button.js"></script>
+    <script src="/PvW/js/bootstrap-collapse.js"></script>
+    <script src="/PvW/js/bootstrap-carousel.js"></script>
+    <script src="/PvW/js/bootstrap-typeahead.js"></script>
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
@@ -50,14 +62,14 @@
           <a class="brand" href="/">Gruppe 2</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a href="/info/">Gruppe Info</a></li>
-              <li><a href="/wiki/">Wiki</a></li>
+              <li><a href="/PvW/info/">Gruppe Info</a></li>
+              <li><a href="/PvW/wiki/">Wiki</a></li>
+             <li> <a herf="wwww.github.com/noldmess/Progwebinfosys">GIT</a></li>
             </ul>
-           	<form class="navbar-form pull-right" action="/index.php?page=wiki" method="GET">
+           	<form class="navbar-form pull-right" action="/PvW/wiki/search.php" method="POST">
            	 <div class="input-prepend">
 				<span class="add-on"><i class="icon-search"></i></span>
-				<input type="hidden" name="page" value="wiki">
-				<input class="span2" id="inputIcon" type="search" name="title">
+				<input class="span2" id="inputIcon" type="search" name="searchtitle">
 			</div>
             </form>
           </div><!--/.nav-collapse -->

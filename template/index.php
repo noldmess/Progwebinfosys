@@ -1,6 +1,6 @@
  
    <div class="hero-unit">
-   <a herf="https://github.com/noldmess/Progwebinfosys">git</a>
+ 
 	<ol>
 		<li><h3>Aufgabe1</h3>
 			<ol>

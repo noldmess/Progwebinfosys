@@ -25,9 +25,9 @@ class Wikilist{
 		return $text."</ul></div><!--/.well --></div><!--/span-->";
 	}
 	
-	public function getIndexArray(){
+	public function getIndexArray($min,$max){
 		$db=DB::getInstance();
-		return $db->selectList();//$_SESSION['index'];
+		return $db->selectListLimit($min,$max);//$_SESSION['index'];
 	}
 	
 	public  function  addNewArticle($title,$text){
@@ -71,5 +71,16 @@ class Wikilist{
 		$db=DB::getInstance();
 		$array=$db->select($title);
 		return isset($array['text']);
+	}
+	
+	public function searchArtikleTitle($search){
+		$db=DB::getInstance();
+		$array=$db->search($search);
+		return $array;
+	}
+	
+	public function getPaginator(){
+		$db=DB::getInstance();
+		return $db->countList();
 	}
 }
