@@ -11,7 +11,7 @@
 				}else{
 					foreach($TEMPLATE['searchList'] as $item){
 			?>
-					<li><a href="/PvW/wiki/<?php echo urlencode($item);?>/"> <?php echo urldecode($item);?></a></li>
+					<li><a href="/wiki/<?php echo urlencode($item);?>/"> <?php echo urldecode($item);?></a></li>
 			<?php 
 					}
 				}
