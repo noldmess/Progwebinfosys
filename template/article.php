@@ -8,7 +8,7 @@
 			foreach($TEMPLATE['linklist'] as $item){
 			if($first){
 				$first = false;
-				echo "Links:";
+				echo "<br>Links:";
 			}?>
 			<li><a href="/wiki/<?php echo urlencode($item);?>/"> <?php echo $item;?></a></li>
 		<?php }?> 
