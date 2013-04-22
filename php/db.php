@@ -39,7 +39,7 @@ class DB{
 	 
 	 public function selectLinks($title){
 		$list=array();
-	 	if ($result = $this->mysqli->query("Select from FROM links where to like '$title'")) {
+	 	if ($result = $this->mysqli->query("Select `from` FROM `links` where `to` like '$title'")) {
 	 		while($row = $result->fetch_object()){
         		$list[] = $row->from;
     		}
@@ -125,7 +125,6 @@ class DB{
         		array_push($list,$row->to);
     		}
 	 	}
-		var_dump($list);
 		$insertLinks = array();
 		$deleteLinks = array();
 		foreach($links as $index=>$link){
