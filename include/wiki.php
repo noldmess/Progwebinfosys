@@ -31,24 +31,27 @@ $wiki=Wiki\Wikilist::getInstance();
 $includeNewArticle = false;
 $found = true;
 
-switch ($_GET['action']){
-	case "remove":
-		$found = $wiki->removeArticle($title);
-		$TEMPLATE['removedTitle']=$title;
-		if(!$found){
+if(isset($_GET['action'])){
+	switch ($_GET['action']){
+		case "remove":
+			$found = $wiki->removeArticle($title);
+			$TEMPLATE['removedTitle']=$title;
+			if(!$found){
+				$includeNewArticle = true;
+			}
+			break;
+		case "new";
+		case "change":
 			$includeNewArticle = true;
-		}
-		break;
-	case "new";
-	case "change":
-		$includeNewArticle = true;
-		break;
-	default:
-		if($wiki->issetArticle($title)){
-			$includeNewArticle = false;
-		}
-		break;
+			break;
+		default:
+			if($wiki->issetArticle($title)){
+				$includeNewArticle = false;
+			}
+			break;
+	}
 }
+
 $TEMPLATE['paginatornumber']=$wiki->getPaginator();
 if(isset($_GET['number']))
 	$TEMPLATE['paginatorstart']=$_GET['number'];

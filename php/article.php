@@ -37,7 +37,6 @@ class Article{
 		$tmp=preg_replace( '/(.*)\-\-\-(.*)\-\-\-(.*)/', '$1<h3>$2</h3>$3', $text);
 		
 		preg_match_all('/(\w*)\[\[(\w*)\]\](\w*)/', $tmp, $m, PREG_SET_ORDER);
-		var_dump($m);
 		foreach($m as $val){
 			$this->addLinkTitle($val[2]);
 		}
