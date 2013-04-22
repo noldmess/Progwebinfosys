@@ -80,7 +80,6 @@ class DB{
 	 
 	 public function insertLinks($from, $links){
 		 foreach($links as $link){
-			echo $from." ".$link; 
 			if($this->mysqli->query("INSERT INTO `links`(`from`, `to`) VALUES ('$from','$link')") === FALSE){
 				echo ("Error inserting links");
 			}
@@ -126,7 +125,7 @@ class DB{
         		array_push($list,$row->to);
     		}
 	 	}
-		echo $list;
+		var_dump($list);
 		$insertLinks = array();
 		$deleteLinks = array();
 		foreach($links as $index=>$link){
@@ -146,7 +145,7 @@ class DB{
 	 
 	 public function removeLinks($from, $links){
 		 foreach($links as $link){
-			if($this->mysqli->query("DELETE FROM links where from like '$from' AND to like '$link'") === FALSE){
+			if($this->mysqli->query("DELETE FROM `links` where `from` like '$from' AND `to` like '$link'") === FALSE){
 				echo ("Error removing links");
 			}
 		 }
