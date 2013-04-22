@@ -80,6 +80,7 @@ class DB{
 	 
 	 public function insertLinks($from, $links){
 		 foreach($links as $link){
+			echo $from." ".$link; 
 			if($this->mysqli->query("insert into links (from,to) value ('$from','$link')") === FALSE){
 				echo ("Error inserting links");
 			}
@@ -138,7 +139,7 @@ class DB{
 			}
 		}
 		
-		$this->insertLinks($from, $insertLinks);
+		$this->insertLinks($from,$insertLinks);
 		$this->removeLinks($from,$deleteLinks);
 	 }
 	 
