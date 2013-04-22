@@ -32,14 +32,14 @@
 	 	for ($i=$min;$i<=$max;$i++){
 		if($TEMPLATE['paginatorstart']==$i){
 		?>
-			<a href="/wiki/<?php echo urlencode($i);?>/"><?php echo urlencode($i);?>-</a>|
+			<?php echo urlencode($i);?>|
 		<?php }else{?>
 			<a href="/wiki/<?php echo urlencode($i);?>/"><?php echo urlencode($i);?></a>|
 		<?php }
 	}
 	if($max<$TEMPLATE['paginatornumber']){
 		?>
-			<a href="/wiki/<?php echo $TEMPLATE['paginatornumber']?>/" title="ende"">></a>
+			<a href="/wiki/<?php echo round($TEMPLATE['paginatornumber'], 0, PHP_ROUND_HALF_DOWN);?>/" title="ende"">></a>
 		<?php 
 	}
 	?>
