@@ -17,17 +17,17 @@ $TEMPLATE=array();
 	session_set_cookie_params(604800); 
 	session_start();
 	$wiki=Wiki\Wikilist::getInstance();
-	$title=urlencode($_GET['title']);
+	$title=trim($_GET['title']);
 	if(isset($_POST['id']) && !empty($_POST['id'])){
 		$TEMPLATE['id'] = $_POST['id'];
 	}
 	if(isset($_POST['text']) && trim($_POST['title'])!=""){
 		if(!isset($TEMPLATE['id'])){
-			$TEMPLATE['id'] = $wiki->addNewArticle(urlencode($_POST['title']),$_POST['text']);
+			$TEMPLATE['id'] = $wiki->addNewArticle(trim($_POST['title']),trim($_POST['text']));
 		}else{
-			$wiki->updateArticle($TEMPLATE['id'],urlencode($_POST['title']),$_POST['text']);
+			$wiki->updateArticle($TEMPLATE['id'],trim($_POST['title']),trim($_POST['text']));
 		}
-		$title=urlencode($_POST['title']);
+		$title=($_POST['title']);
 	}elseif(isset($_POST['text'])){
 		echo "Title is needed!";
 	}
@@ -39,7 +39,7 @@ $found = true;
 switch ($_GET['action']){
 	case "remove":
 		$found = $wiki->removeArticle($title);
-		$TEMPLATE['removedTitle']=urldecode($title);
+		$TEMPLATE['removedTitle']=$title;
 		if(!$found){
 			$includeNewArticle = true;
 		}
@@ -70,35 +70,18 @@ if(!$found){
 	$TEMPLATE['title']=$article->getTitle();
 	$TEMPLATE['text']=$article->getText();
 	$TEMPLATE['id']=$article->getID();
+	$TEMPLATE['parsedText'] = $article->getParsedText();
+	$TEMPLATE['linklist'] = $article->getLinkList();
 }
-/*
-if($includeNewArticle){
-		if(!$found){
-			$_GET['title'] = "";
-		}else{
-			$article=$wiki->getArticle(urlencode($_GET['title']));
-			$TEMPLATE['title']=$article->getTitle();
-			$TEMPLATE['text']=$article->getText();
-			$TEMPLATE['id']=$article->getID();
-		}
-	
-}
-elseif( !is_null($title)){
-		$article=$wiki->getArticle($title);
-		$TEMPLATE['title']=$article->getTitle();
-		$TEMPLATE['text']=$article->getText();
-		$TEMPLATE['id']=$article->getID();
-}
-*/
 ?>
 <div class="row-fluid">
 <?php
 	include 'template/wikilist.php';
 	if(isset($TEMPLATE['removedTitle']))
 		include 'template/removearticle.php';
-	if(isset($_POST['searchtitle'])){
-		$TEMPLATE['searchTest']=$_POST['searchtitle'];
-		$TEMPLATE['searchList']=$wiki->searchArtikleTitle(urlencode($_POST['searchtitle']));
+	if(isset($_POST['searchtitle']) && !empty(trim($_POST['searchtitle']))){
+		$TEMPLATE['searchText']=trim($_POST['searchtitle']);
+		$TEMPLATE['searchList']=$wiki->searchArticleTitle(trim($_POST['searchtitle']));
 		include 'template/searchResult.php';
 	}else {
 		if($includeNewArticle)

@@ -27,15 +27,21 @@ class Wikilist{
 	
 	public function getIndexArray($min,$max){
 		$db=DB::getInstance();
-		return $db->selectListLimit($min,$max);//$_SESSION['index'];
+		return $db->selectListLimit($min,$max);
 	}
 	
 	public  function  addNewArticle($title,$text){
-		/*$_SESSION['index'][]=$title;
-		$_SESSION[$title]=$text;*/
+
 		$db=DB::getInstance();
 		
-		$id = $db->insert($title,$text);
+		$art = new Article("",$title,$text);
+		
+		$id = $db->insert($title, $text, $art->getParsedText());
+		
+		$links = $art->getLinkList();
+		
+		$db->insertLinks($title, $links);
+		
 		if(!$id){
 			return "";	
 		}
@@ -45,26 +51,29 @@ class Wikilist{
 	
 	public  function updateArticle($id,$title,$text){
 		$db=DB::getInstance();
-		$db->update($id,$title,$text);
-		//$_SESSION[$title]=$text;
+		
+		$art = new Article($id,$title,$text);
+		
+		$db->update($id,$title,$text,$art->getParsedText());
+		
+		$db->updateLinks($art->getLinks());
 	}
 	
 	public  function removeArticle($title){
 		$db=DB::getInstance();
 		$db->remove($title);
-		/*$list=$_SESSION['index'];
-		$key=array_search($title,$list);
-		unset($list[$key]);
-		$_SESSION['index']=$list;
-		//var_dump($_SESSION['index']);
-		unset($_SESSION[$title]);*/
 	}
 	
 	public  function getArticle($title){
 		$db=DB::getInstance();
 		$array=$db->select($title);
+		$links = $db->selectLinks($title);
 		
-		return new Article($array['id'],$title,$array['text']);
+		$art = new Article($array['id'],$title,$array['text'],$array['parsedText']);
+		
+		$art->setLinkList($links);
+		
+		return $art;
 	}
 	
 	public function issetArticle($title){

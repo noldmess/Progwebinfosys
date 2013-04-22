@@ -1,6 +1,6 @@
  <div class="span9">
    <div class="hero-unit">
- 	<h3>Search for:<?php echo $TEMPLATE['searchTest'];?></h3>
+ 	<h3>Search for:<?php echo $TEMPLATE['searchText'];?></h3>
 	
 			
 			<?php
