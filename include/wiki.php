@@ -10,10 +10,6 @@ use Wiki\Article;
 use Wiki\DB;
 
 $TEMPLATE=array();
-
-/*if(!isset($_SESSION['index'])){
-		$_SESSION['index']=array();
-}*/
 	session_set_cookie_params(604800); 
 	session_start();
 	$wiki=Wiki\Wikilist::getInstance();
