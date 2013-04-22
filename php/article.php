@@ -15,7 +15,6 @@ class Article{
 		$this->text=$text;
 		if($parsedText === '' && $text !== ''){
 			$this->parsedText = $this->parse($text);
-			eval($this->parsedText);
 		}else{
 			$this->parsedText=$parsedText;
 		}

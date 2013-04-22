@@ -56,7 +56,7 @@ class Wikilist{
 		
 		$db->update($id,$title,$text,$art->getParsedText());
 		
-		$db->updateLinks($art->getLinks());
+		$db->updateLinks($art->getLinkList());
 	}
 	
 	public  function removeArticle($title){

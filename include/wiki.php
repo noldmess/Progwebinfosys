@@ -1,5 +1,4 @@
 <?php
-echo $_GET['searchtitle'];
 require_once 'php/wikilist.php';
 require_once 'php/article.php';
 require_once 'php/db.php';
@@ -23,7 +22,7 @@ $TEMPLATE=array();
 		}else{
 			$wiki->updateArticle($TEMPLATE['id'],trim($_POST['title']),trim($_POST['text']));
 		}
-		$title=($_POST['title']);
+		$title=trim($_POST['title']);
 	}elseif(isset($_POST['text'])){
 		echo "Title is needed!";
 	}
