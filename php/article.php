@@ -36,12 +36,10 @@ class Article{
 	
 	public function parse($text){
 			 $tmp=preg_replace( '/(.*)\-\-\-(.*)\-\-\-(.*)/', '$1<h3>$2</h3>$3', $text);
-			 $matches = array();
-			 preg_match_all('/(.*)\[\[(.*)\]\](.*)/', $tmp, $matches);
-			 foreach($matches as $val){
-				 $this->addLinkTitle($val[2]);
-			 }
-			 return preg_replace( '/(.*)\[\[(.*)\]\](.*)/', '$1<a href="/wiki/<?php urlencode($2)?>/">$2</a>$3', $tmp);
+			 return preg_replace_callback( '/(.*)\[\[(.*)\]\](.*)/', 
+			 function($matches){
+				return $matches[1].'<a href="/wiki/<'.$this->addLinkTitle($matches[2]).'/">'.$matches[2].'</a>'.$matches[3]; 
+			 }, $tmp);
 	}
 	
 	public function getLinkList(){return $this->links;}
