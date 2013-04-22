@@ -36,12 +36,12 @@ class Article{
 	public function parse($text){
 		$tmp=preg_replace( '/(.*)\-\-\-(.*)\-\-\-(.*)/', '$1<h3>$2</h3>$3', $text);
 		
-		preg_match_all('/(.*)\[\[(.*)\]\](.*)/', $tmp, $m);
+		preg_match_all('/(\w*)\[\[(\w*)\]\](\w*)/', $tmp, $m, PREG_SET_ORDER);
 		var_dump($m);
 		foreach($m as $val){
 			$this->addLinkTitle($val[2]);
 		}
-		$res = preg_replace_callback('/(.*)\[\[(.*)\]\](.*)/', 
+		$res = preg_replace_callback('/(\w*)\[\[(\w*)\]\](\w*)/', 
 			function($matches){
 				return $matches[1].'<a href="/wiki/'.urlencode($matches[2]).'/">'.$matches[2].'</a>'.$matches[3]; 
 			}, $tmp);
