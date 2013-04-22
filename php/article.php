@@ -38,7 +38,7 @@ class Article{
 			 $tmp=preg_replace( '/(.*)\-\-\-(.*)\-\-\-(.*)/', '$1<h3>$2</h3>$3', $text);
 			 return preg_replace_callback( '/(.*)\[\[(.*)\]\](.*)/', 
 			 function($matches){
-				return $matches[1].'<a href="/wiki/<'.$this->addLinkTitle($matches[2]).'/">'.$matches[2].'</a>'.$matches[3]; 
+				return $matches[1].'<a href="/wiki/<'.addLinkTitle($matches[2]).'/">'.$matches[2].'</a>'.$matches[3]; 
 			 }, $tmp);
 	}
 	
