@@ -35,7 +35,7 @@ class Article{
 	
 	public function parse($text){
 		$tmp=preg_replace( '/(.*)\-\-\-(.*)\-\-\-(.*)/', '$1<h3>$2</h3>$3', $text);
-		$m = array();
+		
 		preg_match_all('/(.*)\[\[(.*)\]\](.*)/', $tmp, $m);
 		var_dump($m);
 		foreach($m as $val){
