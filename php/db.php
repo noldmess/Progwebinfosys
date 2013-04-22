@@ -70,7 +70,7 @@ class DB{
 	 }
 	 
 	 public function insert($title,$text,$parsedText){
-	 	if ($this->mysqli->query("insert into article (title,text,text_parsed) value ('$title','$text','$parsedText')") === FALSE) {
+	 	if ($this->mysqli->query("insert into article (title,text,text_parsed) values ('$title','$text','$parsedText')") === FALSE) {
 	 		echo ("Error insert");
 			return false;
 	 	}else{
@@ -81,7 +81,7 @@ class DB{
 	 public function insertLinks($from, $links){
 		 foreach($links as $link){
 			echo $from." ".$link; 
-			if($this->mysqli->query("insert into links (from,to) value ('$from','$link')") === FALSE){
+			if($this->mysqli->query("INSERT INTO `links`(`from`, `to`) VALUES ('$from','$link')") === FALSE){
 				echo ("Error inserting links");
 			}
 		 }
