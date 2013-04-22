@@ -120,12 +120,13 @@ class DB{
 	 public function updateLinks($from, $links){
 		 
 		$list=array();
-	 	$result=$this->mysqli->query("Select to from links where from like '$from' ") ;
+	 	$result=$this->mysqli->query("SELECT  `to` FROM `links` WHERE `from` LIKE '$from'") ;
 	 	if($result!==FAlSE){
 			while ($row = $result->fetch_object()){
         		array_push($list,$row->to);
     		}
 	 	}
+		echo $list;
 		$insertLinks = array();
 		$deleteLinks = array();
 		foreach($links as $index=>$link){
