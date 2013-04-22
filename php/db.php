@@ -101,6 +101,34 @@ class DB{
 	 	return $list;
 	 }
 	 
+	 public function searchLimit($title,$min,$max){
+	 	$list=array();
+	 	$result=$this->mysqli->query("Select title from article where title like '%$title%' LIMIT $min,$max ") ;
+	 	if($result===FAlSE){
+	 		echo ("Error insert");
+	 		return false;
+	 	}else{
+	 		while ($row = $result->fetch_object()){
+	 			$list[] = $row->title;
+	 		}
+	 	}
+	 	return $list;
+	 }
+	 
+	 public function searchCount($title){
+	 	$list=array();
+	 	$result=$this->mysqli->query("Select count(*) as number from article where title like '%$title%' ") ;
+	 	if($result===FAlSE){
+	 		echo ("Error insert");
+	 		return false;
+	 	}else{
+	 		while ($row = $result->fetch_object()){
+	 			return  $row->number;
+	 		}
+	 	}
+	 	return $list;
+	 }
+	 
  	public function remove($title){
  		if ($this->mysqli->query("DELETE FROM article WHERE title like '$title'") === FALSE) {
  			echo ("Error remove");
