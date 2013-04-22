@@ -75,7 +75,7 @@ if(!$found){
 	include 'template/wikilist.php';
 	if(isset($TEMPLATE['removedTitle']))
 		include 'template/removearticle.php';
-	if(isset($_POST['searchtitle']) && !empty(trim($_POST['searchtitle']))){
+	if(isset($_POST['searchtitle']) && !empty($_POST['searchtitle'])){
 		$TEMPLATE['searchText']=trim($_POST['searchtitle']);
 		$TEMPLATE['searchList']=$wiki->searchArticleTitle(trim($_POST['searchtitle']));
 		include 'template/searchResult.php';
