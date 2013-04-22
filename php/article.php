@@ -30,19 +30,20 @@ class Article{
 	}
 	
 	public function addLinkTitle($title){
-		array_push($links, $title);
-		return urlencode($title);	
+		array_push($links, $title);	
 	}
 	
 	public function parse($text){
 		$tmp=preg_replace( '/(.*)\-\-\-(.*)\-\-\-(.*)/', '$1<h3>$2</h3>$3', $text);
-		$l = array();
+		$m = array();
+		preg_match_all('/(.*)\[\[(.*)\]\](.*)/', $tmp, $m);
+		foreach($m as $val){
+			$this->addLinkTitle($val[2]);
+		}
 		$res = preg_replace_callback( '/(.*)\[\[(.*)\]\](.*)/', 
 			function($matches){
-				array_push($l, $matches[2]);
-				return $matches[1].'<a href="/wiki/<'.urlencode($matches[2]).'/">'.$matches[2].'</a>'.$matches[3]; 
+				return $matches[1].'<a href="/wiki/'.urlencode($matches[2]).'/">'.$matches[2].'</a>'.$matches[3]; 
 			}, $tmp);
-		$this->links = $l;
 		return $res;
 	}
 	
