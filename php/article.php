@@ -35,11 +35,15 @@ class Article{
 	}
 	
 	public function parse($text){
-			 $tmp=preg_replace( '/(.*)\-\-\-(.*)\-\-\-(.*)/', '$1<h3>$2</h3>$3', $text);
-			 return preg_replace_callback( '/(.*)\[\[(.*)\]\](.*)/', 
-			 function($matches){
-				return $matches[1].'<a href="/wiki/<'.addLinkTitle($matches[2]).'/">'.$matches[2].'</a>'.$matches[3]; 
-			 }, $tmp);
+		$tmp=preg_replace( '/(.*)\-\-\-(.*)\-\-\-(.*)/', '$1<h3>$2</h3>$3', $text);
+		$l = array();
+		$res = preg_replace_callback( '/(.*)\[\[(.*)\]\](.*)/', 
+			function($matches){
+				array_push($l, $matches[2]);
+				return $matches[1].'<a href="/wiki/<'.urlencode($matches[2]).'/">'.$matches[2].'</a>'.$matches[3]; 
+			}, $tmp);
+		$this->links = $l;
+		return $res;
 	}
 	
 	public function getLinkList(){return $this->links;}
