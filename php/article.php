@@ -34,13 +34,13 @@ class Article{
 	}
 	
 	public function parse($text){
-		$tmp=preg_replace( '/(\w*)\-\-\-(.*)\-\-\-(\w*)/', '$1<h3>$2</h3>$3', $text);
+		$tmp=preg_replace( '/([^\-]*)\-{3}([^\-]*)\-{3}([^\-]*)/', '$1<b>$2</b>$3', $text);
 		
-		preg_match_all('/(\w*)\[\[(.*)\]\](\w*)/', $tmp, $m, PREG_SET_ORDER);
+		preg_match_all('/(\w*)\[\[(.[^\]]*)\]\](\w*)/', $tmp, $m, PREG_SET_ORDER);
 		foreach($m as $val){
 			$this->addLinkTitle($val[2]);
 		}
-		$res = preg_replace_callback('/(\w*)\[\[(\w*)\]\](\w*)/', 
+		$res = preg_replace_callback('/(\w*)\[\[(.[^\]]*)\]\](\w*)/', 
 			function($matches){
 				return $matches[1].'<a href="/wiki/'.urlencode($matches[2]).'/">'.$matches[2].'</a>'.$matches[3]; 
 			}, $tmp);
