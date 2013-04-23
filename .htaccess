@@ -5,10 +5,10 @@ RewriteRule ^(.*)/img(.*)\.png$ img/$2.png
 RewriteRule ^(.[^\/]*)/$ index.php?page=$1
 RewriteRule ^wiki/search\.php$ index.php?page=wiki
 RewriteRule ^wiki/search/([0-9]*)/(.*)/$  index.php?page=wiki&searchpaginator=$1&searchtitle=$2
+RewriteRule ^wiki/generator/([0-9]*)/$ php/generator.php?generate=$1
 RewriteRule ^wiki/$ index.php?page=wiki
 RewriteRule ^wiki/([0-9]*)/$ index.php?page=wiki&number=$1
 RewriteRule ^wiki/new/$ index.php?page=wiki&action=new
 RewriteRule ^wiki/(.*)/$ index.php?page=wiki&title=$1
-RewriteRule ^wiki/generator/([0-9]*)/$ php/generator.php?generate=$1
 RewriteRule ^wiki/(.*)/(.*)$ index.php?page=wiki&title=$1&action=$2
 </IfModule>
