@@ -80,8 +80,8 @@ if($found && isset($_GET['title'])){
 			$TEMPLATE['searchPaginatorStart']=$_GET['searchpaginator'];
 		else
 		$TEMPLATE['searchPaginatorStart']=0;
-		echo $min=$TEMPLATE['searchPaginatorStart']*2;
-		echo $max=$TEMPLATE['searchPaginatorStart'];
+		echo $min=$TEMPLATE['searchPaginatorStart'];
+		echo $max=2;
 		$TEMPLATE['searchText']=trim($_POST['searchtitle']);
 		if( isset($_GET['searchtitle']) )
 			$TEMPLATE['searchText']=$_GET['searchtitle'];
