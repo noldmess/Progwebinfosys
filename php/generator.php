@@ -38,7 +38,12 @@ for($i = 0; $i<$numberArticles; $i++){
 	}
 	
 	array_push($articles, $title);
+	
+	$links = $art->getLinkList();
+	$db->insertLinks($title, $links);
 }
+
+echo "finished inserting ".$numberArticles." new articles!";
 
 function generateTitle($words){
 	$minWords = 1;
