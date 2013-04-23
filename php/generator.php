@@ -1,5 +1,6 @@
 <?php
-require_once 'php/db.php';
+require_once 'db.php';
+require_once 'article.php';
 
 use Wiki\DB;
 use Wiki\Article;
