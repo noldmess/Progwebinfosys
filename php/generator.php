@@ -11,62 +11,77 @@ if(isset($_GET['generate']) && is_numeric($_GET['generate'])){
 	$numberArticles = 1000;	
 }
 
+$words = array();
+$handle = fopen("words.txt", "r");
+if ($handle) {
+    while (!feof($handle)) {
+        $buffer = fgets($handle);
+        $words = explode(" ",$buffer);
+    }
+    fclose($handle);
+}
+
+
 $db=DB::getInstance();
 
 $articles = $db->selectList();
 
-var_dump($articles);
-
-echo 'before '.$articles[0];
-shuffle($articles);
-echo 'after '.$articles[0];
-
 for($i = 0; $i<$numberArticles; $i++){
-	$title = generateTitle($articles);
-	$text = generateText($articles);
+	$title = generateTitle($words);
+	$text = generateText($articles, $words);
 	
 	
 	$art = new Article("",$title,$text);
 	
-	/*	
 	while(!$db->insert($title, $text, $art->getParsedText())){
-		$title = generateTitle($articles);
+		$title = generateTitle($words);
 	}
-	*/
 	
 	array_push($articles, $title);
 }
 
-function generateTitle($articles){
+function generateTitle($words){
+	$minWords = 1;
 	$maxWords = 5;
+	$usedWords = rand($minWords, $maxWords);
 	$result = "";
-	for($i = 0; $i<$maxWords; $i++){
-		
+	for($i = 0; $i<$usedWords; $i++){
+			$result .= getWord($words).' ';
 	}
+
 	
-	return $result;	
+	return trim($result);	
 }
 
-function generateText($articles){
+function generateText($articles, $words){
 	
+	$minWords = 5;
 	$maxWords = 100;
+	$usedWords = rand($minWords, $maxWords);
 	$result = "";
-	for($i = 0; $i<$maxWords; $i++){
-		
+	for($i = 0; $i<$usedWords; $i++){
+		$r = rand(0, 100);
+		if($r <= 20){
+			$result .= getLink($articles).' ';	
+		}else{
+			$result .= getWord($words).' ';
+		}
 	}
 	
-	//getLink($articles);
-	
-	return $result;	
+	return trim($result);
 }
 
 function getLink($articles){
-	shuffle($articles);
-	return '[['.$articles[0].']]';
+	
+	$count = count($articles);
+	$index = rand(0, $count-1);
+	return '[['.$articles[$index].']]';
 }
 
-function getWord(){
-
+function getWord($words){
+	$count = count($words);
+	$index = rand(0, $count-1);
+	return $words[$index];	
 }
 
 ?>
