@@ -1,6 +1,4 @@
 <?php
-namespace  Wiki;
-
 
 use Wiki\DB;
 use Wiki\Article;
