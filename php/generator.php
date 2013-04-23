@@ -15,9 +15,11 @@ $db=DB::getInstance();
 
 $articles = $db->selectList();
 
-echo $articles[0];
+var_dump($articles);
+
+echo 'before '.$articles[0];
 shuffle($articles);
-echo $articles[0];
+echo 'after '.$articles[0];
 
 for($i = 0; $i<$numberArticles; $i++){
 	$title = generateTitle($articles);
