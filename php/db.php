@@ -156,7 +156,7 @@ class DB{
 		$insertLinks = array();
 		$deleteLinks = array();
 		foreach($links as $index=>$link){
-			if(!in_array($link, $list)){
+			if(!in_array($link, $list) && !in_array($link, $insertLinks)){
 				array_push($insertLinks, $link);
 			}
 		}

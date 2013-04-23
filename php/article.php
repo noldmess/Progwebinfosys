@@ -34,9 +34,9 @@ class Article{
 	}
 	
 	public function parse($text){
-		$tmp=preg_replace( '/(.*)\-\-\-(.*)\-\-\-(.*)/', '$1<h3>$2</h3>$3', $text);
+		$tmp=preg_replace( '/(\w*)\-\-\-(.*)\-\-\-(\w*)/', '$1<h3>$2</h3>$3', $text);
 		
-		preg_match_all('/(\w*)\[\[(\w*)\]\](\w*)/', $tmp, $m, PREG_SET_ORDER);
+		preg_match_all('/(\w*)\[\[(.*)\]\](\w*)/', $tmp, $m, PREG_SET_ORDER);
 		foreach($m as $val){
 			$this->addLinkTitle($val[2]);
 		}
