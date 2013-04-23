@@ -30,7 +30,9 @@ class Article{
 	}
 	
 	public function addLinkTitle($title){
-		array_push($this->links, $title);	
+		if(!in_array($title, $this->links){
+			array_push($this->links, $title);
+		}
 	}
 	
 	public function parse($text){
