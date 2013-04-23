@@ -29,7 +29,7 @@
 	 			<a href="/wiki/" title="ende""><</a>
 	 		<?php 
 	 	}
-	 	for ($i=$min;$i<=$max;$i++){
+	 	for ($i=$min-1;$i<=$max;$i++){
 		if($TEMPLATE['paginatorstart']==$i){
 		?>
 			<?php echo urlencode($i);?>|
