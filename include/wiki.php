@@ -7,6 +7,7 @@ require_once 'php/db.php';
 use Wiki\Wikilist;
 use Wiki\Article;
 use Wiki\DB;
+$timestart= microtime();
 $TEMPLATE=array();
 	session_set_cookie_params(604800); 
 	session_start();
@@ -97,5 +98,6 @@ if($found && isset($_GET['title'])){
 			include 'template/empty.php';
 		}
 	}
+	$TEMPLATE['time']=microtime()-$timestart;
 ?>
 </div>
