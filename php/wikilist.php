@@ -16,14 +16,7 @@ class Wikilist{
 		}
 		return self::$instance;
 	}
-	
-	public   function __toString(){
-		foreach ($_SESSION['index'] as $list){
-					$text.="<li><a href='wiki/$list/'>$list</a></li>";
-		}
-		$text.='<li><a href="/wiki/new/"><i class="icon-pencil"></i>Neuer Artikel</a></li>';
-		return $text."</ul></div><!--/.well --></div><!--/span-->";
-	}
+
 	
 	public function getIndexArray($min,$max){
 		$db=DB::getInstance();
@@ -82,9 +75,22 @@ class Wikilist{
 		return isset($array['text']);
 	}
 	
-	public function searchArtikleTitle($search){
+	public function searchArticleTitle($search){
 		$db=DB::getInstance();
 		$array=$db->search($search);
+		return $array;
+	}
+	
+	
+	public function searchArticleTitleLimit($search,$min,$max){
+		$db=DB::getInstance();
+		$array=$db->searchLimit($search,$min,$max);
+		return $array;
+	}
+	
+	public function searchArticleTitleCount($search){
+		$db=DB::getInstance();
+		$array=$db->searchCount($search);
 		return $array;
 	}
 	
