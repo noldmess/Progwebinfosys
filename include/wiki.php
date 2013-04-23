@@ -57,8 +57,8 @@ if(isset($_GET['number']))
 	$TEMPLATE['paginatorstart']=$_GET['number'];
 else
 	$TEMPLATE['paginatorstart']=0;
-$min=$TEMPLATE['paginatorstart']*30;
-$max=($TEMPLATE['paginatorstart']+1)*30;
+$min=$TEMPLATE['paginatorstart']*10;
+$max=10;
 $TEMPLATE['index']=$wiki->getIndexArray($min,$max);
 
 if($found && isset($_GET['title'])){
