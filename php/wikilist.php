@@ -30,14 +30,14 @@ class Wikilist{
 		$art = new Article("",$title,$text);
 		
 		$id = $db->insert($title, $text, $art->getParsedText());
-		
-		$links = $art->getLinkList();
-		
-		$db->insertLinks($title, $links);
-		
+
 		if(!$id){
 			return "";	
 		}
+		
+		$links = $art->getLinkList();
+		$db->insertLinks($title, $links);
+		
 		return $id;
 	}
 	
