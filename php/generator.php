@@ -66,7 +66,7 @@ function generateText($articles, $words){
 	$result = "";
 	for($i = 0; $i<$usedWords; $i++){
 		$r = rand(0, 100);
-		if($r <= 20){
+		if($r <= 15){
 			$result .= getLink($articles).' ';	
 		}else{
 			$result .= getWord($words).' ';
