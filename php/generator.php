@@ -79,8 +79,13 @@ function generateText($articles, $words){
 function getLink($articles){
 	
 	$count = count($articles);
-	$index = rand(0, $count-1);
-	return '[['.$articles[$index].']]';
+	
+	if($count > 0){
+		$index = rand(0, $count-1);
+		return '[['.$articles[$index].']]';
+	}else{
+		return '';
+	}
 }
 
 function getWord($words){
