@@ -33,7 +33,7 @@
 	 
 	 if($min>1){
 	 	?>
-	 			<a href="/PvW/wiki/search/0/<?php echo $TEMPLATE['searchText'];?>/" title="ende""><</a>
+	 			<a href="/wiki/search/0/<?php echo $TEMPLATE['searchText'];?>/" title="ende""><</a>
 	 		<?php 
 	 	}
 	 	for ($i=$min-1;$i<=$max;$i++){
@@ -41,12 +41,12 @@
 		?>
 			<?php echo $i;?>|
 		<?php }else{?>
-			<a href="/PvW/wiki/search/<?php echo urlencode($i)."/".$TEMPLATE['searchText'];?>/"><?php echo urlencode($i);?></a>|
+			<a href="/wiki/search/<?php echo urlencode($i)."/".$TEMPLATE['searchText'];?>/"><?php echo urlencode($i);?></a>|
 		<?php }
 	}
 	if($max<$TEMPLATE['searchPaginatorNumber']){
 		?>
-			<a href="/PvW/wiki/search/<?php echo $TEMPLATE['searchPaginatorNumber']."/".$TEMPLATE['searchText'];?>/" title="ende"">></a>
+			<a href="/wiki/search/<?php echo $TEMPLATE['searchPaginatorNumber']."/".$TEMPLATE['searchText'];?>/" title="ende"">></a>
 		<?php 
 	}
 	?>

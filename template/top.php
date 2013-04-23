@@ -66,7 +66,7 @@
               <li><a href="/wiki/">Wiki</a></li>
              <li> <a href="https://github.com/noldmess/Progwebinfosys">GIT</a></li>
             </ul>
-           	<form class="navbar-form pull-right" action="/PvW/wiki/search.php" method="POST">
+           	<form class="navbar-form pull-right" action="/wiki/search.php" method="POST">
            	 <div class="input-prepend">
 				<span class="add-on"><i class="icon-search"></i></span>
 				<input class="span2" id="inputIcon" type="search" name="searchtitle">
