@@ -1,4 +1,5 @@
 <?php
+require_once 'php/db.php';
 
 use Wiki\DB;
 use Wiki\Article;
