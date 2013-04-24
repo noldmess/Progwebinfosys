@@ -87,7 +87,7 @@ if($found && isset($_GET['title'])){
 		if( isset($_GET['searchtitle']) )
 			$TEMPLATE['searchText']=$_GET['searchtitle'];
 		$TEMPLATE['searchList']=$wiki->searchArticleTitleLimit(trim($_POST['searchtitle']),$min,$max);
-			$TEMPLATE['searchPaginatorNumber']=round($wiki->searchArticleTitleCount(trim($_POST['searchtitle']))/2, 0, PHP_ROUND_HALF_DOWN)-1;
+			$TEMPLATE['searchPaginatorNumber']=round($wiki->searchArticleTitleCount(trim($_POST['searchtitle']))/10, 0, PHP_ROUND_HALF_DOWN)-1;
 		include 'template/searchResult.php';
 	}else {
 		if($includeNewArticle)
