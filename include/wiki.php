@@ -53,7 +53,7 @@ if(isset($_GET['action'])){
 	}
 }
 
-$TEMPLATE['paginatornumber']=$wiki->getPaginator();
+$TEMPLATE['paginatornumber']=round($wiki->getPaginator()/2, 0, PHP_ROUND_HALF_DOWN)-1;
 if(isset($_GET['number']))
 	$TEMPLATE['paginatorstart']=$_GET['number'];
 else
