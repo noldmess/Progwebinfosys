@@ -37,9 +37,9 @@ class DB{
 	 	return $list;
 	 }
 	 
-	 public function selectLinks($title){
+	 public function selectLinks($to){
 		$list=array();
-	 	if ($result = $this->mysqli->query("Select `from` FROM `links` where `to` like '$title'")) {
+	 	if ($result = $this->mysqli->query("Select `from` FROM `links` where `to` like '$to'")) {
 	 		while($row = $result->fetch_object()){
         		$list[] = $row->from;
     		}
@@ -147,7 +147,7 @@ class DB{
 	 public function updateLinks($from, $links){
 		 
 		$list=array();
-	 	$result=$this->mysqli->query("SELECT  `to` FROM `links` WHERE `from` LIKE '$from'") ;
+	 	$result=$this->mysqli->query("SELECT `to` FROM `links` WHERE `from` LIKE '$from'") ;
 	 	if($result!==FAlSE){
 			while ($row = $result->fetch_object()){
         		array_push($list,$row->to);
@@ -156,7 +156,7 @@ class DB{
 		$insertLinks = array();
 		$deleteLinks = array();
 		foreach($links as $index=>$link){
-			if(!in_array($link, $list)){
+			if(!in_array($link, $list) && !in_array($link, $insertLinks)){
 				array_push($insertLinks, $link);
 			}
 		}
