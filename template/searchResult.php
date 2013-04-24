@@ -31,7 +31,7 @@
 	 }
 	 if($min>1){
 	 	?>
-	 			<a href="/PvW/wiki/search/0/<?php echo $TEMPLATE['searchText'];?>/" title="ende""><</a>
+	 			<a href="/wiki/search/0/<?php echo $TEMPLATE['searchText'];?>/" title="ende""><</a>
 	 		<?php 
 	 	}
 	 	for ($i=$min;$i<=$max;$i++){
