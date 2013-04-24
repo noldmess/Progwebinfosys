@@ -39,12 +39,12 @@
 		?>
 			<?php echo $i;?>|
 		<?php }else{?>
-			<a href="/PvW/wiki/search/<?php echo urlencode($i)."/".$TEMPLATE['searchText'];?>/"><?php echo urlencode($i);?></a>|
+			<a href="/wiki/search/<?php echo urlencode($i)."/".$TEMPLATE['searchText'];?>/"><?php echo urlencode($i);?></a>|
 		<?php }
 	}
 	if($max<$TEMPLATE['searchPaginatorNumber']){
 		?>
-			<a href="/PvW/wiki/search/<?php echo $TEMPLATE['searchPaginatorNumber']."/".$TEMPLATE['searchText'];?>/" title="ende"">></a>
+			<a href="/wiki/search/<?php echo $TEMPLATE['searchPaginatorNumber']."/".$TEMPLATE['searchText'];?>/" title="ende"">></a>
 		<?php 
 	}
 	?>
