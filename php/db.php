@@ -24,14 +24,19 @@ class DB{
  		$this->mysqli->close();
 	 }
 	 
-	 public function select($title){
+	 public function select($id){
 	 	$list=array();
-	 	if ($result = $this->mysqli->query("Select * from  article where title like '$title'")) {
+
+	 	if ($result = $this->mysqli->query("Select * from  article where `id` = $id")) {
 	 		if($row = $result->fetch_object()){
-        		$list['title'] = $row->title;
-        		$list['text'] = $row->text;
+        		echo $list['title'] = $row->title;
+        	 	$list['text'] = $row->text;
+        	 	$list['text_parsed'] = $row->text_parsed;
 				$list['id'] = $row->id;
-				$list['parsedText'] = $row->text_parsed;
+				$list['usercreate'] = $row->usercreate;
+				$list['usermodifi'] = $row->usermodifi;
+				$list['modifi_timestam'] = $row->modifi_timestam;
+				$list['image']= $row->image;
     		}
 	 	}
 	 	return $list;
@@ -60,17 +65,17 @@ class DB{
 	 
 	 public function selectListLimit($min,$max){
 	 	$list=array();
-	 	if ($result = $this->mysqli->query("Select title from article LIMIT $min,$max")) {
+	 	if ($result = $this->mysqli->query("Select id,title from article LIMIT $min,$max")) {
 	 		while ($row = $result->fetch_object()){
-	 			$list[] = $row->title;
+	 			$list[] = array("id"=>$row->id,"title"=>$row->title);
 	 
 	 		}
 	 	}
 	 	return $list;
 	 }
 	 
-	 public function insert($title,$text,$parsedText){
-	 	if ($this->mysqli->query("insert into article (title,text,text_parsed) values ('$title','$text','$parsedText')") === FALSE) {
+	 public function insert($title,$text,$parsedText,$usercreate,$usermodifi,$image){
+	 	if ($this->mysqli->query("insert into article (title,text,text_parsed,usercreate,usermodifi,image) values ('$title','$text','$parsedText','$usercreate','$usermodifi','$image')") === FALSE) {
 	 		echo ("Error insert");
 			return false;
 	 	}else{
@@ -138,8 +143,8 @@ class DB{
 		}
 	 }
 	 
-	 public function update($id,$title,$text,$parsedText){
-	 	if ($this->mysqli->query("UPDATE article SET title='$title',text='$text', text_parsed='$parsedText' WHERE id = '$id'") === FALSE) {
+	 public function update($id,$title,$text,$parsedText,$usermodifi,$image){
+	 	if ($this->mysqli->query("UPDATE article SET title='$title',text='$text',text_parsed='$parsedText',usermodifi= '$usermodifi', image = '$image',modifi_timestam = UTC_TIMESTAMP( ) WHERE id = '$id'") === FALSE) {
 	 		echo ("Error updating");
 	 	}
 	 }
