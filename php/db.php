@@ -26,10 +26,9 @@ class DB{
 	 
 	 public function select($id){
 	 	$list=array();
-
-	 	if ($result = $this->mysqli->query("Select * from  article where `id` = $id")) {
+	 	if ($result = $this->mysqli->query("select art.title as title,art.text_parsed as text_parsed,art.text as text,art.id as id,art.usermodifi as usermodifi,art.modifi_timestam as modifi_timestam,art.usercreate as usercreate,autc.name as autcname,autm.name as autmname from article as art inner join author as autc on (art.usercreate=autc.id) inner join author as autm on (art.usermodifi=autm.id) where art.id = $id")) {
 	 		if($row = $result->fetch_object()){
-        		echo $list['title'] = $row->title;
+        		$list['title'] = $row->title;
         	 	$list['text'] = $row->text;
         	 	$list['text_parsed'] = $row->text_parsed;
 				$list['id'] = $row->id;
@@ -37,16 +36,35 @@ class DB{
 				$list['usermodifi'] = $row->usermodifi;
 				$list['modifi_timestam'] = $row->modifi_timestam;
 				$list['image']= $row->image;
+			 	$list['usercreate'] = $row->autcname;
+				$list['usermodifi'] = $row->autmname;
     		}
+	 	}
+	 	return $list;
+	 }
+	 
+	 
+	 public function selectTitle($title){
+	 	$list=array();
+	 	if ($result = $this->mysqli->query("Select * from  article where title like '$title'")) {
+	 		if($row = $result->fetch_object()){
+	 			$list['title'] = $row->title;
+	 			$list['text'] = $row->text;
+	 			$list['text_parsed'] = $row->text_parsed;
+	 			$list['id'] = $row->id;
+	 			$list['usercreate'] = $row->usercreate;
+	 			$list['usermodifi'] = $row->usermodifi;
+	 			$list['modifi_timestam'] = $row->modifi_timestam;
+	 		}
 	 	}
 	 	return $list;
 	 }
 	 
 	 public function selectLinks($to){
 		$list=array();
-	 	if ($result = $this->mysqli->query("Select `from` FROM `links` where `to` like '$to'")) {
+	 	if ($result = $this->mysqli->query("Select article.title AS fromtitle,article.id as id  FROM `links` inner join article on(links.from=article.id) where `to` like '$to'")) {
 	 		while($row = $result->fetch_object()){
-        		$list[] = $row->from;
+        	 $list[] = array('id'=>$row->id,'title'=>$row->fromtitle);        	 		
     		}
 	 	}
 	 	return $list;
@@ -76,7 +94,8 @@ class DB{
 	 
 	 public function insert($title,$text,$parsedText,$usercreate,$usermodifi,$image){
 	 	if ($this->mysqli->query("insert into article (title,text,text_parsed,usercreate,usermodifi,image) values ('$title','$text','$parsedText','$usercreate','$usermodifi','$image')") === FALSE) {
-	 		echo ("Error insert");
+	 		echo ("ERROR INSERT");
+	 		
 			return false;
 	 	}else{
 			return $this->mysqli->insert_id;
@@ -85,7 +104,10 @@ class DB{
 	 
 	 public function insertLinks($from, $links){
 		 foreach($links as $link){
-			if($this->mysqli->query("INSERT INTO `links`(`from`, `to`) VALUES ('$from','$link')") === FALSE){
+		 	$article=$this->selectTitle($link);
+		 	$to=$article['id'];
+		 	echo $from."-".$to."<br>";
+			if($this->mysqli->query("INSERT INTO `links`(`from`, `to`) VALUES ('$from','$to')") === FALSE){
 				echo ("Error inserting links");
 			}
 		 }
@@ -108,16 +130,41 @@ class DB{
 	 
 	 public function searchLimit($title,$min,$max){
 	 	$list=array();
-	 	$result=$this->mysqli->query("Select title from article where title like '%$title%' LIMIT $min,$max ") ;
+	 	$result=$this->mysqli->query("Select title,id from article where title like '%$title%' LIMIT $min,$max ") ;
 	 	if($result===FAlSE){
 	 		echo ("Error insert");
 	 		return false;
 	 	}else{
 	 		while ($row = $result->fetch_object()){
-	 			$list[] = $row->title;
+	 			$list[] = array("id"=>$row->id,"title"=>$row->title);
 	 		}
 	 	}
 	 	return $list;
+	 }
+	 
+	 
+
+	 public function getUser($name,$pass){
+	 	$list=array();
+	 	$result=$this->mysqli->query("Select * from author where name like '$name' and password like'$pass' ") ;
+	 	if($result===FAlSE){
+	 		echo ("Error insert");
+	 		return false;
+	 	}else{
+	 		while ($row = $result->fetch_object()){
+	 			$list= array("id"=>$row->id,'name'=>$row->name,"pass"=>$row->password);
+	 		}
+	 	}
+	 	return $list;
+	 }
+	 
+	 public function insertUser($name,$pass){
+	 	$list=array();
+	 	$result=$this->mysqli->query("INSERT INTO author (`name`, `password`) VALUES ('$name','$pass') ") ;
+	 	if($result===FAlSE){
+	 		echo ("Error insert");
+	 		return false;
+	 	}
 	 }
 	 
 	 public function searchCount($title){
@@ -134,12 +181,12 @@ class DB{
 	 	return $list;
 	 }
 	 
- 	public function remove($title){
- 		if ($this->mysqli->query("DELETE FROM article WHERE title like '$title'") === FALSE) {
+ 	public function remove($id){
+ 		if ($this->mysqli->query("DELETE FROM article WHERE id=$id") === FALSE) {
  			echo ("Error remove");
  		}
-		if($this->mysqli->query("DELETE FROM links WHERE from like '$title'") === FALSE){
-			echo ("Error removing links");	
+		if($this->mysqli->query("DELETE FROM links WHERE `from` like '$id'") === FALSE){
+			echo $this->mysqli->error;	
 		}
 	 }
 	 
@@ -187,6 +234,8 @@ class DB{
 	 public function countList(){
 	 	return sizeof($this->selectList())/30;
 	 }
+	 
+	 
 	 
 	 
 }

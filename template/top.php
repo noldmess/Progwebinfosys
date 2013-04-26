@@ -31,26 +31,26 @@
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
+      <script src="../assets<?php echo  dirname($_SERVER['SCRIPT_NAME']);?>/js/html5shiv.js"></script>
     <![endif]-->
 
 
   </head>
 
   <body>
-	 <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap-transition.js"></script>
-    <script src="/js/bootstrap-alert.js"></script>
-    <script src="/js/bootstrap-modal.js"></script>
-    <script src="/js/bootstrap-dropdown.js"></script>
-    <script src="/js/bootstrap-scrollspy.js"></script>
-    <script src="/js/bootstrap-tab.js"></script>
-    <script src="/js/bootstrap-tooltip.js"></script>
-    <script src="/js/bootstrap-popover.js"></script>
-    <script src="/js/bootstrap-button.js"></script>
-    <script src="/js/bootstrap-collapse.js"></script>
-    <script src="/js/bootstrap-carousel.js"></script>
-    <script src="/js/bootstrap-typeahead.js"></script>
+	 <script src="<?php echo  dirname($_SERVER['SCRIPT_NAME']);?>/js/jquery.js"></script>
+    <script src="<?php echo  dirname($_SERVER['SCRIPT_NAME']);?>/js/bootstrap-transition.js"></script>
+    <script src="<?php echo  dirname($_SERVER['SCRIPT_NAME']);?>/js/bootstrap-alert.js"></script>
+    <script src="<?php echo  dirname($_SERVER['SCRIPT_NAME']);?>/js/bootstrap-modal.js"></script>
+    <script src="<?php echo  dirname($_SERVER['SCRIPT_NAME']);?>/js/bootstrap-dropdown.js"></script>
+    <script src="<?php echo  dirname($_SERVER['SCRIPT_NAME']);?>/js/bootstrap-scrollspy.js"></script>
+    <script src="<?php echo  dirname($_SERVER['SCRIPT_NAME']);?>/js/bootstrap-tab.js"></script>
+    <script src="<?php echo  dirname($_SERVER['SCRIPT_NAME']);?>/js/bootstrap-tooltip.js"></script>
+    <script src="<?php echo  dirname($_SERVER['SCRIPT_NAME']);?>/js/bootstrap-popover.js"></script>
+    <script src="<?php echo  dirname($_SERVER['SCRIPT_NAME']);?>/js/bootstrap-button.js"></script>
+    <script src="<?php echo  dirname($_SERVER['SCRIPT_NAME']);?>/js/bootstrap-collapse.js"></script>
+    <script src="<?php echo  dirname($_SERVER['SCRIPT_NAME']);?>/js/bootstrap-carousel.js"></script>
+    <script src="<?php echo  dirname($_SERVER['SCRIPT_NAME']);?>/js/bootstrap-typeahead.js"></script>
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
@@ -59,14 +59,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="/">Gruppe 2</a>
+          <a class="brand" href="<?php echo  dirname($_SERVER['SCRIPT_NAME']);?>">Gruppe 2</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a href="/info/">Gruppe Info</a></li>
-              <li><a href="/wiki/">Wiki</a></li>
+              <li><a href="<?php echo  dirname($_SERVER['SCRIPT_NAME']);?>/info/">Gruppe Info</a></li>
+              <li><a href="<?php echo  dirname($_SERVER['SCRIPT_NAME']);?>/wiki/">Wiki</a></li>
              <li> <a href="https://github.com/noldmess/Progwebinfosys">GIT</a></li>
             </ul>
-           	<form class="navbar-form pull-right" action="/wiki/search.php" method="POST">
+           	<form class="navbar-form pull-right" action="<?php echo  dirname($_SERVER['SCRIPT_NAME']);?>/wiki/search.php" method="POST">
            	 <div class="input-prepend">
 				<span class="add-on"><i class="icon-search"></i></span>
 				<input class="span2" id="inputIcon" type="search" name="searchtitle">

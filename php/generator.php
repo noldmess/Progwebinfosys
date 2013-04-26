@@ -31,16 +31,16 @@ for($i = 0; $i<$numberArticles; $i++){
 	$text = generateText($articles, $words);
 	
 	
-	$art = new Article("",$title,$text);
-	
-	while(!$db->insert($title, $text, $art->getParsedText())){
+	$art = new Article("",$title,$text,1,1);
+	while(!$db->insert($title, $text, $art->getParsedText(),$art->getUserModifiet(),$art->getUserModifiet(),"")){
 		$title = generateTitle($words);
 	}
-	
+	$art_id=$db->selectTitle($title);
 	array_push($articles, $title);
 	
 	$links = $art->getLinkList();
-	$db->insertLinks($title, $links);
+	echo $art_id['id'];
+	$db->insertLinks($art_id['id'], $links);
 }
 
 echo "finished inserting ".$numberArticles." new articles!";

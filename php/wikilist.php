@@ -23,13 +23,13 @@ class Wikilist{
 		return $db->selectListLimit($min,$max);
 	}
 	
-	public  function  addNewArticle($title,$text){
+	public  function  addNewArticle($title,$text,$userid,$image){
 
 		$db=DB::getInstance();
 		
-		$art = new Article("",$title,$text);
+		$art = new Article("",$title,$text,$userid,$userid,$image);
 		
-		$id = $db->insert($title, $text, $art->getParsedText());
+		echo $id = $db->insert($title, $text, $art->getParsedText(),$userid,$userid,$image);
 
 		if(!$id){
 			return "";	
@@ -42,12 +42,12 @@ class Wikilist{
 	}
 	
 	
-	public  function updateArticle($id,$title,$text){
+	public  function updateArticle($id,$title,$text,$usermodifi,$image){
 		$db=DB::getInstance();
 		
 		$art = new Article($id,$title,$text);
 		
-		$db->update($id,$title,$text,$art->getParsedText());
+		$db->update($id,$title,$text,$art->getParsedText(),$usermodifi,$image);
 		
 		$db->updateLinks($title, $art->getLinkList());
 	}
@@ -57,13 +57,11 @@ class Wikilist{
 		$db->remove($title);
 	}
 	
-	public  function getArticle($title){
+	public  function getArticle($id){
 		$db=DB::getInstance();
-		$array=$db->select($title);
-		$links = $db->selectLinks($title);
-		
-		$art = new Article($array['id'],$title,$array['text'],$array['parsedText']);
-		
+		$array=$db->select($id);
+		$art = new Article($array['id'],$array['title'],$array['text'],$array['usercreate'] ,$array['usermodifi'],$array['image'],$array['text_parsed'],$array['modifi_timestam'],"hallo","test");
+		$links = $db->selectLinks($array['id']);
 		$art->setLinkList($links);
 		
 		return $art;
@@ -74,6 +72,7 @@ class Wikilist{
 		$array=$db->select($title);
 		return isset($array['text']);
 	}
+	
 	
 	public function searchArticleTitle($search){
 		$db=DB::getInstance();
