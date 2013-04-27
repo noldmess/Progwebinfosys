@@ -26,7 +26,7 @@ class DB{
 	 
 	 public function select($id){
 	 	$list=array();
-	 	if ($result = $this->mysqli->query("select art.title as title,art.text_parsed as text_parsed,art.text as text,art.id as id,art.usermodifi as usermodifi,art.modifi_timestam as modifi_timestam,art.usercreate as usercreate,autc.name as autcname,autm.name as autmname from article as art inner join author as autc on (art.usercreate=autc.id) inner join author as autm on (art.usermodifi=autm.id) where art.id = $id")) {
+	 	if ($result = $this->mysqli->query(" select art.title as title,art.text_parsed as text_parsed,art.text as text,art.id as id,art.image as images,art.usermodifi as usermodifi,art.modifi_timestam as modifi_timestam,art.usercreate as usercreate,autc.name as autcname,autm.name as autmname from article as art left  outer  join author as autc on (art.usercreate=autc.id) left outer  join  author as autm on (art.usermodifi=autm.id) where art.id = $id")) {
 	 		if($row = $result->fetch_object()){
         		$list['title'] = $row->title;
         	 	$list['text'] = $row->text;
