@@ -12,6 +12,8 @@ if(isset($_GET['page'])){
 		case 'login':
 			include 'template/login.php';
 			break;
+		case 'logout':
+			Login::destructedSession();
 		default:
 			include 'template/index.php';
 			break;
