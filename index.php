@@ -9,6 +9,9 @@ if(isset($_GET['page'])){
 		case 'info':
 			include 'template/info.php';
 			break;
+		case 'login':
+			include 'template/login.php';
+			break;
 		default:
 			include 'template/index.php';
 			break;

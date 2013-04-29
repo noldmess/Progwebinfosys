@@ -1,21 +1,25 @@
 <div class="span9">
 	<div class="hero-unit">
-		<form  class="form-horizontal" action="<?php echo $_SERVER['HTTP_REFERER'];?> /wiki/<?php echo (isset($_GET['title'])?urlencode($_GET['title'])."/":""); ?>" method="post" enctype="multipart/form-data">
+		<form  class="form-horizontal" action="<?php echo $_SERVER['HTTP_REFERER']; echo (isset($_GET['title'])?urlencode($_GET['title'])."/":""); ?>" method="post" enctype="multipart/form-data">
 			<fieldset>
-				<label>Title</label>
                 <input name="id" type="hidden" value="<?php if($_GET['action']==="change"){echo $TEMPLATE['id'];}?>" />
-                <input name="title" type="text" placeholder="Type something…" value="<?php echo $TEMPLATE['title']; ?>">
+                <span class="help-block">Title</span>
+                <input name="title" type="text" placeholder="Type something…" value="<?php if(isset($_GET['title'])){echo $TEMPLATE['title'];}?>">
                 <span class="help-block">Description</span>
-                <label class="checkbox">
-                    <textarea name="text" rows="3"><?php if($_GET['action']==="change"){echo $TEMPLATE['text'];}?></textarea>
+                <label>
+                    <textarea class="article" name="text" rows="5"><?php if($_GET['action']==="change" && isset($_GET['title'])){echo $TEMPLATE['text'];}?></textarea>
                 </label>
-                <label>Image</label>
+                <label>Image:</label>
                 <input name="image" type="file" />
+                <label>Alignment:
                 <select name="align">
                 	<option>left</option>
                     <option>right</option>
                	</select>
-                <button type="submit" class="btn">Submit</button>
+                </label>
+                <label>
+               		<button type="submit" class="btn">Submit</button>
+                </label>
 			</fieldset>
 		</form>
 	</div>

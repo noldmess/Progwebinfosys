@@ -10,18 +10,20 @@ class Article{
 	private $usermodifiet;
 	private $usercreate;
 	private $imageName;
+	private $align;
 	private $namemodifiet;
 	private $namecreate;
 	
 	private $links = array();
 	
- 	 public function  __construct($id,$title,$text,$usercreate,$usermodifiet,$imagename='',$parsedText='',$date='',$namemodifiet='',$namecreate=''){
+ 	 public function  __construct($id,$title,$text,$usercreate,$usermodified, $imagename='', $algin, $parsedText='',$date=''){
 		$this->id=$id;
 		$this->title=$title;
 		$this->text=$text;
 		$this->usercreate=$usercreate;
 		$this->usermodifiet=$usermodifiet;
 		$this->imageName=$imagename;
+		$this->align = $algin;
 		$this->date=$date;
 		$this->namecreate=$namecreate;
 		$this->namemodifiet=$namemodifiet;
@@ -47,7 +49,7 @@ class Article{
 		}
 		$res = preg_replace_callback('/(\w*)\[\[(.[^\]]*)\]\](\w*)/', 
 			function($matches){
-				return $matches[1].'<a href="/wiki/'.urlencode($matches[2]).'/">'.$matches[2].'</a>'.$matches[3]; 
+				return $matches[1].'<a href="/wiki/<?php echo $TEMPLATE[\'id\'];?>/'.urlencode($matches[2]).'/">'.$matches[2].'</a>'.$matches[3]; 
 			}, $tmp);
 		return $res;
 	}
@@ -72,11 +74,8 @@ class Article{
 	public function setImageName($imagename){$this->imageName = $imagename;}
 	public function getImageName(){return $this->imageName;}
 	
-	public function setNameCreate($imagename){$this->imageName = $imagename;}
-	public function getNameCreate(){return $this->imageName;}
-	
-	public function setNameModifiet($imagename){$this->imageName = $imagename;}
-	public function getNameModifiet(){return $this->imageName;}
+	public function setAlign($align){$this->align = $align;}
+	public function getAlign(){return $this->align;}
 	
 	public function setData($date){$this->date = $date;}
 	public function getData(){return $this->date;}

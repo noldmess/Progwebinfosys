@@ -19,7 +19,7 @@ if(isset($_POST['username']) && isset($_POST['password'])){
 		$TEMPLATE['user_id']=Wiki\Login::checkloginSession();
 	}
 }else{
-	//echo $TEMPLATE['user_id']=Wiki\Login::checkloginSession();
+	$TEMPLATE['user_id']=Wiki\Login::checkloginSession();
 }
 //echo $_POST['user_id']=$_SESSION['user'];
 $timestart= microtime();
@@ -86,9 +86,9 @@ if($found && isset($_GET['title'])){
 	$TEMPLATE['title']=$article->getTitle();
 	$TEMPLATE['text']=$article->getText();
 	$TEMPLATE['id']=$article->getID();
-	$TEMPLATE['UserModifiet']=$article->getUserModifiet();
+	$TEMPLATE['UserModified']=$article->getUserModifiet();
 	$TEMPLATE['UserCreate']=$article->getUserCreate();
-	$TEMPLATE['data']=$article->getData();
+	$TEMPLATE['dateMod']=$article->getData();
 	$TEMPLATE['parsedText'] = $article->getParsedText();
 	$TEMPLATE['linklist'] = $article->getLinkList();
 }

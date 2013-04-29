@@ -30,12 +30,16 @@ class Login{
 	}
 	
 	public static function  checkloginSession(){
-		return self::checklogin($_SESSION['user'],$_SESSION['pass']);
+		if(isset($_SESSION['user']) && isset($_SESSION['pass'])){
+			return self::checklogin($_SESSION['user'],$_SESSION['pass']);
+		}else{
+			return false;
+		}
 	}
 	
 	public static function illegaltry(){
 		if(self::checkloginSession()===false)
-			header("Location:".dirname($_SERVER['SCRIPT_NAME'])."/login/");
+			header("Location:".ltrim(dirname($_SERVER['SCRIPT_NAME']), ' \\')."/login/");
 	}
 	
 	public static function createSession($name,$pass){

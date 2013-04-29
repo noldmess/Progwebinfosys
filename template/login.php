@@ -1,4 +1,3 @@
-<div class="container">
     <div class="content">
       <div class="row">
         <div class="login-form">
@@ -17,4 +16,3 @@
         </div>
       </div>
     </div>
-  </div> <!-- /container -->

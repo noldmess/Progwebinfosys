@@ -23,20 +23,20 @@ class Wikilist{
 		return $db->selectListLimit($min,$max);
 	}
 	
-	public  function  addNewArticle($title,$text,$userid,$image){
+	public  function  addNewArticle($title,$text,$userid,$image,$align){
 
 		$db=DB::getInstance();
 		
-		$art = new Article("",$title,$text,$userid,$userid,$image);
+		$art = new Article("",$title,$text,$userid,$userid,$image,$align);
 		
-		echo $id = $db->insert($title, $text, $art->getParsedText(),$userid,$userid,$image);
+		$id = $db->insert($title, $text, $art->getParsedText(),$userid,$userid,$image);
 
 		if(!$id){
 			return "";	
 		}
 		
 		$links = $art->getLinkList();
-		$db->insertLinks($title, $links);
+		$db->insertLinks($id, $links);
 		
 		return $id;
 	}
