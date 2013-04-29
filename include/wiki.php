@@ -11,7 +11,7 @@ use Wiki\DB;
 $TEMPLATE=array();
 if(isset($_POST['username']) && isset($_POST['password'])){
 	$TEMPLATE['user_id']=Wiki\Login::checkloginFirst($_POST['username'],$_POST['password']);
-	if($TEMPLATE['user_id']==!false){
+	if($TEMPLATE['user_id']!== false){
 		Wiki\Login::createSession($_POST['username'],$_POST['password']);
 	}else{
 		Wiki\Login::newUser($_POST['username'],$_POST['password']);
@@ -19,12 +19,12 @@ if(isset($_POST['username']) && isset($_POST['password'])){
 		$TEMPLATE['user_id']=Wiki\Login::checkloginSession();
 	}
 }else{
-	echo $TEMPLATE['user_id']=Wiki\Login::checkloginSession();
+	//echo $TEMPLATE['user_id']=Wiki\Login::checkloginSession();
 }
-echo $_POST['user_id']=$_SESSION['user'];
+//echo $_POST['user_id']=$_SESSION['user'];
 $timestart= microtime();
 	$wiki=Wiki\Wikilist::getInstance();
-	//lock if the id is given
+	//look if the id is given
 	if(isset($_GET['title_id'])){
 		 $id=$_GET['title_id'];
 	}
@@ -38,7 +38,7 @@ $timestart= microtime();
 			$wiki->updateArticle($TEMPLATE['id'],trim($_POST['title']),trim($_POST['text']),$TEMPLATE['user_id'],"image");
 		}
 		/**
-		 * DOTO
+		 * TODO
 		 * */
 		$id=trim($_POST['title']);
 	}elseif(isset($_POST['text'])){
