@@ -23,31 +23,37 @@ if ($handle) {
 
 
 $db=DB::getInstance();
-
+$userID = $db->getRandomUser();
+if($userID === false){
+	$user = 'generate';
+	$pass=hash('sha256',$user.$pass.$user);
+	$userID = $db->insertUser($user, $pass);
+}
 $articles = $db->selectList();
-
+set_time_limit(0);
 for($i = 0; $i<$numberArticles; $i++){
 	$title = generateTitle($words);
+	while(in_array($title, $articles)){
+		$title = generateTitle($words);
+	}
 	$text = generateText($articles, $words);
 	
 	
-	$art = new Article("",$title,$text,1,1);
-	while(!$db->insert($title, $text, $art->getParsedText(),$art->getUserModifiet(),$art->getUserModifiet(),"")){
+	$art = new Article("",$title,$text,$userID,$userID,'NOIMG', 'right', '', '');
+	while(!$art_id=$db->insert($title, $text, $art->getParsedText(),$userID,$userID,"NOIMG", 'right')){
 		$title = generateTitle($words);
 	}
-	$art_id=$db->selectTitle($title);
 	array_push($articles, $title);
 	
 	$links = $art->getLinkList();
-	echo $art_id['id'];
 	$db->insertLinks($art_id['id'], $links);
 }
 
-echo "finished inserting ".$numberArticles." new articles!";
+echo "<br>finished inserting ".$numberArticles." new articles!";
 
 function generateTitle($words){
 	$minWords = 1;
-	$maxWords = 5;
+	$maxWords = 10;
 	$usedWords = rand($minWords, $maxWords);
 	$result = "";
 	for($i = 0; $i<$usedWords; $i++){

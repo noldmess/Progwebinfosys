@@ -119,8 +119,8 @@ class DB{
 	 public function search($title){
 	 	$list=array();
 	 	$result=$this->mysqli->query("Select title from article where title like '%$title%' ") ;
-	 	if($result===FAlSE){
-	 		echo ("Error insert");
+	 	if($result===FALSE){
+	 		echo ("Error search");
 	 		return false;
 	 	}else{
 	 	while ($row = $result->fetch_object()){
@@ -133,8 +133,8 @@ class DB{
 	 public function searchLimit($title,$min,$max){
 	 	$list=array();
 	 	$result=$this->mysqli->query("Select title,id from article where title like '%$title%' LIMIT $min,$max ") ;
-	 	if($result===FAlSE){
-	 		echo ("Error insert");
+	 	if($result===FALSE){
+	 		echo ("Error search limit");
 	 		return false;
 	 	}else{
 	 		while ($row = $result->fetch_object()){
@@ -143,13 +143,11 @@ class DB{
 	 	}
 	 	return $list;
 	 }
-	 
-	 
 
 	 public function getUser($name,$pass){
 	 	$list=array();
 	 	$result=$this->mysqli->query("Select * from author where name like '$name' and password like'$pass' ") ;
-	 	if($result===FAlSE){
+	 	if($result===FALSE){
 	 		return false;
 	 	}else{
 	 		while ($row = $result->fetch_object()){
@@ -159,27 +157,40 @@ class DB{
 	 	return $list;
 	 }
 	 
+	 public function getRandomUser(){
+		$result = $this->mysqli->query("Select id from author order by rand() limit 1" );
+		if($result===FALSE){
+			return false;
+		}else{
+			if($row = $result->fetch_object()){
+	 			return $row->id;
+	 		}else{
+				return false;
+			}
+		}
+	 }
+	 
 	 public function insertUser($name,$pass){
 	 	$list=array();
 	 	$result=$this->mysqli->query("INSERT INTO author (`name`, `password`) VALUES ('$name','$pass') ") ;
-	 	if($result===FAlSE){
-	 		echo ("Error insert");
+	 	if($result===FALSE){
+	 		echo ("Error insert user");
 	 		return false;
-	 	}
+	 	}else{
+			return $this->mysqli->insert_id;
+		}
 	 }
 	 
 	 public function searchCount($title){
-	 	$list=array();
 	 	$result=$this->mysqli->query("Select count(*) as number from article where title like '%$title%' ") ;
-	 	if($result===FAlSE){
-	 		echo ("Error insert");
+	 	if($result===FALSE){
+	 		echo ("Error counting");
 	 		return false;
 	 	}else{
-	 		while ($row = $result->fetch_object()){
+	 		if($row = $result->fetch_object()){
 	 			return  $row->number;
 	 		}
 	 	}
-	 	return $list;
 	 }
 	 
  	public function remove($id){
