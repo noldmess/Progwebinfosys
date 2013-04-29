@@ -26,7 +26,7 @@ class DB{
 	 
 	 public function select($id){
 	 	$list=array();
-	 	if ($result = $this->mysqli->query("select art.title as title,art.text_parsed as text_parsed,art.text as text,art.id as id,art.image as image,art.user_mod as user_mod,art.timestamp_mod as timestamp_mod,art.user_create as user_create,autc.name as autcname,autm.name as autmname from article as art left outer join author as autc on (art.user_create=autc.id) left outer join author as autm on (art.user_mod=autm.id) where art.id = '$id'")) {
+	 	if ($result = $this->mysqli->query("select art.title as title,art.text_parsed as text_parsed,art.text as text,art.id as id,art.image as image, art.align as align, art.user_mod as user_mod,art.timestamp_mod as timestamp_mod,art.user_create as user_create,autc.name as autcname,autm.name as autmname from article as art left outer join author as autc on (art.user_create=autc.id) left outer join author as autm on (art.user_mod=autm.id) where art.id = '$id'")) {
 	 		if($row = $result->fetch_object()){
         		$list['title'] = $row->title;
         	 	$list['text'] = $row->text;
@@ -34,8 +34,9 @@ class DB{
 				$list['id'] = $row->id;
 				$list['timestamp_mod'] = $row->timestamp_mod;
 				$list['image']= $row->image;
-			 	$list['usercreate'] = $row->autcname;
-				$list['usermodifi'] = $row->autmname;
+			 	$list['user_create'] = $row->autcname;
+				$list['user_mod'] = $row->autmname;
+				$list['align'] = $row->align;
     		}
 	 	}
 	 	return $list;
@@ -50,9 +51,9 @@ class DB{
 	 			$list['text'] = $row->text;
 	 			$list['text_parsed'] = $row->text_parsed;
 	 			$list['id'] = $row->id;
-	 			$list['usercreate'] = $row->usercreate;
-	 			$list['usermodifi'] = $row->usermodifi;
-	 			$list['modifi_timestam'] = $row->modifi_timestam;
+	 			$list['user_create'] = $row->user_create;
+	 			$list['user_mod'] = $row->user_mod;
+	 			$list['timestamp_mod'] = $row->timestamp_mod;
 	 		}
 	 	}
 	 	return $list;
@@ -91,9 +92,15 @@ class DB{
 	 }
 	 
 	 public function insert($title,$text,$parsedText,$usercreate,$usermodifi,$image,$align){
-	 	if ($this->mysqli->query("insert into article (title,text,text_parsed,user_create,user_mod,image,align) values ('$title','$text','$parsedText','$usercreate','$usermodifi','$image','$align')") === FALSE) {
+		 if($image!==false){
+			 $attr = "title,text,text_parsed,user_create,user_mod,image,align";
+			 $vals = "'$title','$text','$parsedText','$usercreate','$usermodifi','$image','$align'";
+		 }else{
+			 $attr = "title,text,text_parsed,user_create,user_mod,align";
+			 $vals = "'$title','$text','$parsedText','$usercreate','$usermodifi','$align'";
+		 }
+	 	if ($this->mysqli->query("insert into article (".$attr.") values (".$vals.")") === FALSE) {
 	 		echo ("ERROR INSERT");
-	 		
 			return false;
 	 	}else{
 			return $this->mysqli->insert_id;
@@ -101,10 +108,7 @@ class DB{
 	 }
 	 
 	 public function insertLinks($from, $links){
-		 foreach($links as $link){
-		 	$article=$this->selectTitle($link);
-		 	$to=$article['id'];
-		 	echo $from."-".$to."<br>";
+		 foreach($links as $to){
 			if($this->mysqli->query("INSERT INTO `links`(`from`, `to`) VALUES ('$from','$to')") === FALSE){
 				echo ("Error inserting links");
 			}
@@ -188,18 +192,21 @@ class DB{
 	 }
 	 
 	 public function update($id,$title,$text,$parsedText,$usermodifi,$image, $align){
+		 if($image ===false){
+			 $image = "NOIMG";
+		 }
 	 	if ($this->mysqli->query("UPDATE article SET title = '$title', text = '$text', text_parsed = '$parsedText', user_mod = '$usermodifi', image = '$image', align = '$align', timestamp_mod = UTC_TIMESTAMP() WHERE id = '$id'") === FALSE) {
 	 		echo ("Error updating");
 	 	}
 	 }
 	 
-	 public function updateLinks($from, $links){
+	 public function updateLinks($from, $links){	
 		 
 		$list=array();
-	 	$result=$this->mysqli->query("SELECT `title` FROM `links` inner join `article` on(links.to=article.id) WHERE `from`='$from'") ;
+	 	$result=$this->mysqli->query("SELECT `to` FROM `links` WHERE `from`='$from'") ;
 	 	if($result!==FAlSE){
 			while ($row = $result->fetch_object()){
-        		array_push($list,$row->title);
+        		array_push($list,$row->to);
     		}
 	 	}
 		$insertLinks = array();
@@ -220,13 +227,17 @@ class DB{
 	 }
 	 
 	 public function removeLinks($from, $links){
-		 foreach($links as $link){
-			$article=$this->selectTitle($link);
-		 	$to=$article['id'];
-			if($this->mysqli->query("DELETE FROM `links` where `from`='$from' AND `to`='$to'") === FALSE){
-				echo ("Error removing links");
-			}
-		 }
+		if(count($links)<1){
+			return;
+		}
+		$in = "";
+		foreach($links as $to){
+			$in.=$to.',';
+		}
+		rtrim($in, ',');
+		if($this->mysqli->query("DELETE FROM `links` where `from`='$from' AND `to`IN($in)") === FALSE){
+			echo ("Error removing links");
+		}
 	 }
 	 
 	 

@@ -3,6 +3,7 @@ require_once 'php/wikilist.php';
 require_once 'php/article.php';
 require_once 'php/db.php';
 require_once 'php/login.php';
+require_once 'php/image.php';
 
 use Wiki\Wikilist;
 use Wiki\Login;
@@ -23,27 +24,36 @@ if(isset($_POST['username']) && isset($_POST['password'])){
 }
 //echo $_POST['user_id']=$_SESSION['user'];
 $timestart= microtime();
-	$wiki=Wiki\Wikilist::getInstance();
-	//look if the id is given
-	if(isset($_GET['title_id'])){
-		 $id=$_GET['title_id'];
+$wiki=Wiki\Wikilist::getInstance();
+//look if the id is given
+if(isset($_GET['title_id'])){
+	 $id=trim($_GET['title_id']);
+}
+if(isset($_POST['id']) && !empty($_POST['id'])){
+	$TEMPLATE['id'] = trim($_POST['id']);
+}
+if(isset($_POST['text']) && trim($_POST['title'])!=""){
+	if(!isset($_FILES["image"]["name"]) || $_FILES["image"]["name"] === ''){
+		$image = false;
+	}else{
+		$image = $_FILES["image"]["name"];
 	}
-	if(isset($_POST['id']) && !empty($_POST['id'])){
-		$TEMPLATE['id'] = $_POST['id'];
+	if(!isset($TEMPLATE['id'])){
+		$TEMPLATE['id'] = $wiki->addNewArticle(trim($_POST['title']),trim($_POST['text']),$TEMPLATE['user_id'],$image, $_POST['align']);
+	}else{
+		$wiki->updateArticle($TEMPLATE['id'],trim($_POST['title']),trim($_POST['text']),$TEMPLATE['user_id'],$image, $_POST['align']);
 	}
-	if(isset($_POST['text']) && trim($_POST['title'])!=""){
-		if(!isset($TEMPLATE['id'])){
-			$TEMPLATE['id'] = $wiki->addNewArticle(trim($_POST['title']),trim($_POST['text']),$TEMPLATE['user_id'],"image");
-		}else{
-			$wiki->updateArticle($TEMPLATE['id'],trim($_POST['title']),trim($_POST['text']),$TEMPLATE['user_id'],"image");
-		}
-		/**
-		 * TODO
-		 * */
-		$id=trim($_POST['title']);
-	}elseif(isset($_POST['text'])){
-		echo "Title is needed!";
-	}
+	/**
+	 * TODO
+	 * */
+	
+}elseif(isset($_POST['text'])){
+	echo "Title is needed!";
+}
+if(isset($TEMPLATE['id'])){
+	$id=$TEMPLATE['id'];
+}
+
 $wiki=Wiki\Wikilist::getInstance();
 
 $includeNewArticle = false;
@@ -81,16 +91,18 @@ $min=$TEMPLATE['paginatorstart']*10;
 $max=10;
 $TEMPLATE['index']=$wiki->getIndexArray($min,$max);
 
-if($found && isset($_GET['title'])){
+if($found && (isset($_GET['title_id']) || isset($_POST['id']))){
 	$article=$wiki->getArticle($id);
 	$TEMPLATE['title']=$article->getTitle();
 	$TEMPLATE['text']=$article->getText();
 	$TEMPLATE['id']=$article->getID();
-	$TEMPLATE['UserModified']=$article->getUserModifiet();
+	$TEMPLATE['UserModified']=$article->getUserModified();
 	$TEMPLATE['UserCreate']=$article->getUserCreate();
-	$TEMPLATE['dateMod']=$article->getData();
+	$TEMPLATE['dateMod']=$article->getDate();
 	$TEMPLATE['parsedText'] = $article->getParsedText();
 	$TEMPLATE['linklist'] = $article->getLinkList();
+	$TEMPLATE['image'] = $article->getImageName();
+	$TEMPLATE['align'] = $article->getAlign();
 }
 ?>
 <div class="row-fluid">
@@ -99,8 +111,7 @@ if($found && isset($_GET['title'])){
 	if(isset($TEMPLATE['removedTitle'])){
 	
 		include 'template/removearticle.php';
-	}
-	if(isset($_POST['searchtitle']) && !empty($_POST['searchtitle']) || isset($_GET['searchtitle']) && !empty($_GET['searchtitle']) ){
+	}elseif(isset($_POST['searchtitle']) && !empty($_POST['searchtitle']) || isset($_GET['searchtitle']) && !empty($_GET['searchtitle']) ){
 		if(isset($_GET['searchpaginator']))
 			$TEMPLATE['searchPaginatorStart']=$_GET['searchpaginator'];
 		else
