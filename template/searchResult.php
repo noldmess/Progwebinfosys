@@ -11,7 +11,7 @@
 				}else{
 					foreach($TEMPLATE['searchList'] as $item){
 			?>
-					<li><a href="<?php echo ltrim(dirname($_SERVER['SCRIPT_NAME']), ' \\');?>/wiki/<?php echo $item['id']."/".preg_replace( '/\s+/', '_', $item['title']);?>/"> <?php echo $item['title'];?></a></li>
+					<li><a href="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>wiki/<?php echo $item['id']."/".preg_replace( '/\s+/', '_', $item['title']);?>/"> <?php echo $item['title'];?></a></li>
 			<?php 
 					}
 				}
@@ -31,7 +31,7 @@
 	 }
 	 if($min>1){
 	 	?>
-	 			<a href="<?php echo ltrim(dirname($_SERVER['SCRIPT_NAME']), ' \\');?>/wiki/search/0/<?php echo $TEMPLATE['searchText'];?>/" title="ende""><</a>
+	 			<a href="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>wiki/search/0/<?php echo $TEMPLATE['searchText'];?>/" title="ende""><</a>
 	 		<?php 
 	 	}
 	 	for ($i=$min;$i<=$max;$i++){
@@ -39,12 +39,12 @@
 		?>
 			<?php echo $i;?>|
 		<?php }else{?>
-			<a href="<?php echo ltrim(dirname($_SERVER['SCRIPT_NAME']), ' \\');?>/wiki/search/<?php echo urlencode($i)."/".$TEMPLATE['searchText'];?>/"><?php echo urlencode($i);?></a>|
+			<a href="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>wiki/search/<?php echo urlencode($i)."/".$TEMPLATE['searchText'];?>/"><?php echo urlencode($i);?></a>|
 		<?php }
 	}
 	if($max<$TEMPLATE['searchPaginatorNumber']){
 		?>
-			<a href="<?php echo ltrim(dirname($_SERVER['SCRIPT_NAME']), ' \\');?>/wiki/search/<?php echo $TEMPLATE['searchPaginatorNumber']."/".$TEMPLATE['searchText'];?>/" title="ende"">></a>
+			<a href="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>wiki/search/<?php echo $TEMPLATE['searchPaginatorNumber']."/".$TEMPLATE['searchText'];?>/" title="ende"">></a>
 		<?php 
 	}
 	?>

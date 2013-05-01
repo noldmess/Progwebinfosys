@@ -3,15 +3,15 @@
 	<ul class="nav nav-list">
 		<li class="nav-header">Sidebar</li>
 		<?php  foreach($TEMPLATE['index'] as $item){?>
-				<li><a href="<?php echo ltrim(dirname($_SERVER['SCRIPT_NAME']), ' \\');?>/wiki/<?php echo $item['id']."/".preg_replace( '/\s+/', '_', $item['title']);?>/"> <?php echo urldecode($item['title']);?></a></li>
+				<li><a href="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>wiki/<?php echo $item['id']."/".preg_replace( '/\s+/', '_', $item['title']);?>/"> <?php echo urldecode($item['title']);?></a></li>
 		<?php }?>
 	
 	
 	<?php if(isset($TEMPLATE['user_id']) && $TEMPLATE['user_id'] !== false){?>
-		<li><a href="<?php echo ltrim(dirname($_SERVER['SCRIPT_NAME']), ' \\');?>/wiki/new/"><i class="icon-pencil"></i>New Article</a></li>
-		<li><a href="<?php echo ltrim(dirname($_SERVER['SCRIPT_NAME']), ' \\');?>/logout/"><button class="btn btn-successs">Logout</button></a></li>
+		<li><a href="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>wiki/new/"><i class="icon-pencil"></i>New Article</a></li>
+		<li><a href="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>logout/"><button class="btn btn-successs">Logout</button></a></li>
 	<?php }else{?>
-			<li><a href="<?php echo ltrim(dirname($_SERVER['SCRIPT_NAME']), ' \\');?>/login/"><button class="btn btn-successs">Login</button></a></li>
+			<li><a href="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>login/"><button class="btn btn-successs">Login</button></a></li>
 	<?php }?>
 	</ul>
 	<?php 
@@ -32,7 +32,7 @@
 	 
 	 if($min>1){
 	 	?>
-	 			<a href="<?php echo ltrim(dirname($_SERVER['SCRIPT_NAME']), ' \\');?>/wiki/" title="ende""><</a>
+	 			<a href="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>wiki/" title="ende""><</a>
 	 		<?php 
 	 	}
 	 	for ($i=$min-1;$i<=$max;$i++){
@@ -40,12 +40,12 @@
 		?>
 			<?php echo urlencode($i);?>|
 		<?php }else{?>
-			<a href="<?php echo ltrim(dirname($_SERVER['SCRIPT_NAME']), ' \\');?>/wiki/<?php echo urlencode($i);?>/"><?php echo urlencode($i);?></a>|
+			<a href="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>wiki/<?php echo urlencode($i);?>/"><?php echo urlencode($i);?></a>|
 		<?php }
 	}
 	if($max<$TEMPLATE['paginatornumber']){
 		?>
-			<a href="<?php echo ltrim(dirname($_SERVER['SCRIPT_NAME']), ' \\');?>/wiki/<?php echo round($TEMPLATE['paginatornumber'], 0, PHP_ROUND_HALF_DOWN);?>/" title="ende"">></a>
+			<a href="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>wiki/<?php echo round($TEMPLATE['paginatornumber'], 0, PHP_ROUND_HALF_DOWN);?>/" title="ende"">></a>
 		<?php 
 	}
 	?>

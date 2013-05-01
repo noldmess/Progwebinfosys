@@ -1,4 +1,7 @@
 <?php
+require_once 'php/login.php';			
+use Wiki\Login;
+
 include 'template/top.php';
 
 if(isset($_GET['page'])){
@@ -13,7 +16,7 @@ if(isset($_GET['page'])){
 			include 'template/login.php';
 			break;
 		case 'logout':
-			Login::destructedSession();
+			Login::destroySession();
 		default:
 			include 'template/index.php';
 			break;

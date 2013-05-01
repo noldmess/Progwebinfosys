@@ -1,6 +1,6 @@
 <div class="span9">
 	<div class="hero-unit">
-		<form  class="form-horizontal" action="<?php ltrim(dirname($_SERVER['SCRIPT_NAME']), ' \\');?>/wiki/<?php if(isset($_GET['title_id'])){echo $_GET['title_id'].'/';} echo (isset($_GET['title'])?urlencode($_GET['title'])."/":"");?>" method="post" enctype="multipart/form-data">
+		<form  class="form-horizontal" action="<?php str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>wiki/<?php if(isset($_GET['title_id'])){echo $_GET['title_id'].'/';} echo (isset($_GET['title'])?urlencode($_GET['title'])."/":"");?>" method="post" enctype="multipart/form-data">
 			<fieldset>
                 <input name="id" type="hidden" value="<?php if($_GET['action']==="change"){echo $TEMPLATE['id'];}?>" />
                 <span class="help-block">Title</span>

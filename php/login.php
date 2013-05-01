@@ -47,7 +47,7 @@ class Login{
 		$_SESSION['pass']=hash('sha256',$name.$pass.$name);
 	}
 	
-	public static function destructedSession(){
+	public static function destroySession(){
 		unset($_SESSION['user']);
 		unset($_SESSION['pass']);
 	}
