@@ -53,7 +53,7 @@ class Image{
 	
 	public function upload($tmp, $id){
 		$name = $id.'.png';
-		$path = $this->folder . $name;
+		$path = './'. $this->folder . $name;
 		
 		if(!move_uploaded_file($tmp, $path)){
 			echo "Error moving image!";
@@ -62,7 +62,7 @@ class Image{
 	
 	public function deleteImage($id){
 		$name = $id.'.png';
-		$path = $this->folder . $name;
+		$path = './'. $this->folder . $name;
 		if(is_file($path)){
 			unlink($path);
 		}
