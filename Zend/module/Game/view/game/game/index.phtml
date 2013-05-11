@@ -1,0 +1,28 @@
+<?php
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php
+$form = $this->form;
+//$form->setAttribute('action', $this->url('game'));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+//echo $this->formHidden($form->get('id'));
+echo $this->formRow($form->get('user1'));
+echo $this->formRow($form->get('email1'));
+echo $this->formRow($form->get('user2'));
+echo $this->formRow($form->get('email2'));
+?>
+	<div class="control-group">
+	  <div class="btn-group" data-toggle="buttons-radio">
+	  	<img src="http://localhost/PvW/img/Zend/ Stein.png" class="btn btn-primary" name=" Stein">
+	  	<img src="http://localhost/PvW/img/Zend/Schere.png" class="btn btn-primary" name="Schere">
+	  	<img src="http://localhost/PvW/img/Zend/Papier.png" class="btn btn-primary" name="Papier"> 
+	  	<img src="http://localhost/PvW/img/Zend/Echse.png" class="btn btn-primary" name="Echse"> 
+	  	<img src="http://localhost/PvW/img/Zend/spock.png" class="btn btn-primary" name="Spock"> 
+   	 </div>
+   	</div>
+<?php
+echo $this->formRow($form->get('choice1'));
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();
