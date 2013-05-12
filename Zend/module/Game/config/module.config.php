@@ -16,6 +16,16 @@ return array(
 	// The following section is new and should be added to your file
 	'router' => array(
 			'routes' => array(
+					'home' => array(
+							'type' => 'Zend\Mvc\Router\Http\Literal',
+							'options' => array(
+									'route'    => '/',
+									'defaults' => array(
+											'controller' => 'Game\Controller\Game',
+											'action'     => 'index',
+									),
+							),
+					),
 					'game' => array(
 							'type'    => 'segment',
 							'options' => array(
