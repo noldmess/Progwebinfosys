@@ -16,7 +16,9 @@ class Game
     public $email2;
     public $choice1;
     public $choice2;
+	public $choiceArray = array('ROCK', 'PAPER', 'SCISSOR', 'SPOCK', 'LIZARD');
     public $hash;
+	public $result;
     protected $inputFilter;
     
 
@@ -31,6 +33,8 @@ class Game
         $this->user2     = (isset($data['user2'])) ? $data['user2'] : null;
         $this->email2     = (isset($data['email2'])) ? $data['email2'] : null;
         $this->choice2     = (isset($data['choice2'])) ? $data['choice2'] : null;
+		
+		$this->result	= (isset($data['result'])) ? $data['result'] : null;
         					
         $this->hash     = (isset($data['hash'])) ?$data['hash']:hash('sha256',$this->user1.$this->user2.time());
         

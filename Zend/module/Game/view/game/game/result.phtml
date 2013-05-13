@@ -1,2 +1,3 @@
-	<?php echo $game->user1." ".$game->email1." ".$game->choice1 ?> <br>
-	<?php echo $game->user2." ".$game->email2." ".$game->choice2 ?>
+	<?php echo $game->user1.", ".$game->email1.", has chosen: ".$game->choiceArray[$game->choice1-1] ?> <br>
+	<?php echo $game->user2.", ".$game->email2.", has chosen: ".$game->choiceArray[$game->choice2-1] ?> <br />
+    <?php echo $game->result ?>

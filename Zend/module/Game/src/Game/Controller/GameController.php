@@ -100,6 +100,15 @@ class GameController extends AbstractActionController
     	$hash =  $this->params()->fromRoute('hash', 0);
     	if($hash==!0){
     		$game=$this->getGameTable()->getGameHash($hash);
+			$var1 = ($game->choice1 - 1 < 0) ? 4 : $game->choice1 - 1;
+			$var2 = ($game->choice2 - 1 < 0) ? 4 : $game->choice2 - 1;
+			if($game->choice1 === $game->choice2){
+				$game->result = "The game ended in a draw.";	
+			}elseif($var2 === ($var1 + 2) % 5 || $var2 === ($var1 + 4) % 5){
+				$game->result = $game->user1." has won the game.";
+			}else{
+				$game->result = $game->user2." has won the game.";	 
+			}
     		return new ViewModel(array('game'=>$game));
     	}else{
     		return $this->redirect()->toRoute('game');
