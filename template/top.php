@@ -65,6 +65,7 @@
               <li><a href="/info/">Gruppe Info</a></li>
               <li><a href="/wiki/">Wiki</a></li>
              <li> <a href="https://github.com/noldmess/Progwebinfosys">GIT</a></li>
+             <li><a href="/Zend/public/">Zend</a></li>
             </ul>
            	<form class="navbar-form pull-right" action="/wiki/search.php" method="POST">
            	 <div class="input-prepend">
