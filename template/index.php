@@ -31,7 +31,11 @@
 			<ol>
 			<li>URL-Rewriting</li>
             <li>Imageupload bei Artikeln</li>
-            <li>Usermanagement</li>
+            <li>
+            	Usermanagement
+            	<br>
+            	Neuer User durch einloggen wird automatisch erstellt!
+            </li>
 			</ol>
 		</li>
         <li><h3>Aufgabe 6</h3>
