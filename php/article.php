@@ -1,32 +1,34 @@
 <?php
 namespace  Wiki;
 
+use Wiki\DB;
 class Article{
 	private $id;
 	private $title;
 	private $text;
 	private $parsedText;
+	private $date;
+	private $usermodified;
+	private $usercreate;
+	private $imageName;
+	private $align;
 	
 	private $links = array();
 	
- 	 public function  __construct($id,$title,$text,$parsedText=''){
+ 	 public function  __construct($id,$title,$text,$usercreate,$usermodified, $imagename='', $align, $parsedText='',$date=''){
 		$this->id=$id;
 		$this->title=$title;
 		$this->text=$text;
+		$this->usercreate=$usercreate;
+		$this->usermodified=$usermodified;
+		$this->imageName=$imagename;
+		$this->align = $align;
+		$this->date=$date;
 		if($parsedText === '' && $text !== ''){
 			$this->parsedText = $this->parse($text);
 		}else{
 			$this->parsedText=$parsedText;
 		}
-	}
-	
-	public function __toString(){
-		$text='<div class="span9"><div class="hero-unit">';
-		$text.="<h1>".$this->title."</h1>";
-		$text.="<p>".$this->parse($this->text)."</p>";
-		$text.="<a class='btn btn-danger' href='/wiki/$this->title/remove'><i class='icon-remove'></i>remove</a> <a class='btn btn-primary' href='/wiki/$this->title/change'><i class='icon-pencil'></i>change</a></div></div>";
-		
-		return $text;
 	}
 	
 	public function addLinkTitle($title){
@@ -37,16 +39,20 @@ class Article{
 	
 	public function parse($text){
 		$tmp=preg_replace( '/([^\-]*)\-{3}([^\-]*)\-{3}([^\-]*)/', '$1<b>$2</b>$3', $text);
-		
-		preg_match_all('/(\w*)\[\[(.[^\]]*)\]\](\w*)/', $tmp, $m, PREG_SET_ORDER);
-		foreach($m as $val){
-			$this->addLinkTitle($val[2]);
-		}
-		$res = preg_replace_callback('/(\w*)\[\[(.[^\]]*)\]\](\w*)/', 
-			function($matches){
-				return $matches[1].'<a href="/wiki/'.urlencode($matches[2]).'/">'.$matches[2].'</a>'.$matches[3]; 
-			}, $tmp);
+
+		$res = preg_replace_callback('/(\w*)\[\[(.[^\]]*)\]\](\w*)/', array(&$this, 'parse_links'), $tmp);
 		return $res;
+	}
+	
+	public function parse_links($matches){
+		$db=DB::getInstance();
+		$art = $db->selectTitle($matches[2]);
+		if(isset($art['id'])){
+			$this->addLinkTitle($art['id']);
+			return $matches[1].'<a href="/wiki/'.$art['id'].'/'.urlencode($matches[2]).'/">'.$matches[2].'</a>'.$matches[3]; 
+		}else{
+			return $matches[1].'<a href="/wiki/'.urlencode($matches[2]).'/">'.$matches[2].'</a>'.$matches[3]; 
+		}
 	}
 	
 	public function getLinkList(){return $this->links;}
@@ -59,5 +65,20 @@ class Article{
 	public  function getTitle(){return $this->title;}
 	public  function getText(){return $this->text;}
 	public function getID(){return $this->id;}
+	
+	public function setUserModified($usermodified){$this->usermodified = $usermodified;}
+	public function getUserModified(){return $this->usermodified;}
+	
+	public function setUserCreate($usercreate){$this->usercreate = $usercreate;}
+	public function getUserCreate(){return $this->usercreate;}
+	
+	public function setImageName($imagename){$this->imageName = $imagename;}
+	public function getImageName(){return $this->imageName;}
+	
+	public function setAlign($align){$this->align = $align;}
+	public function getAlign(){return $this->align;}
+	
+	public function setDate($date){$this->date = $date;}
+	public function getDate(){return $this->date;}
 	
 }
