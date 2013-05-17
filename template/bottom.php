@@ -1,5 +1,5 @@
      <footer>
-        <p>&copy; Aaron Messner, Markus M&uuml;ller - 2013 Time to load Page:<?php echo $TEMPLATE['time']?></p>
+        <p>&copy; Aaron Messner, Markus M&uuml;ller - 2013 <?php if(isset($TEMPLATE['time'])){echo 'Time to load Page: '.$TEMPLATE['time'];}?></p>
       </footer>
 
     </div><!--/.fluid-container-->
