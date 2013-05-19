@@ -18,6 +18,8 @@ use Zend\Mail\Transport\Smtp as SmtpTransport;
 use Zend\Mail\Transport\SmtpOptions;
 use Zend\Mail\Message;
 use Zend\Mail;
+use Zend\Session\Container;
+
 class GameController extends AbstractActionController
 {
 	protected $gameTable;
@@ -66,6 +68,11 @@ class GameController extends AbstractActionController
     	$form = new GameForm();
     	//$form->bind($game);
     	//$form->get('submit')->setAttrib('onclick', 'my_alert()');
+    	$session = new Container('base');
+    	if($session->offsetExists('email')&& $session->offsetExists('user')){
+    		$form->get('user1')->setValue($session->offsetGet('user'));
+    		$form->get('email1')->setValue($session->offsetGet('email'));
+    	}
     	$form->get('choice1')->setValue(1);
     	$form->get('submit')->setValue('New Game');
     	$request = $this->getRequest();
@@ -77,7 +84,10 @@ class GameController extends AbstractActionController
     		if ($form->isValid()) {
     			$game->exchangeArray($form->getData());
     			$this->getGameTable()->saveGame($game);
-			$transport = new SmtpTransport();
+    			
+    			$session->offsetSet('email', $game->email1);
+    			$session->offsetSet('user', $game->user);
+			/*$transport = new SmtpTransport();
 			$this->transport = new SmtpTransport();
 			$options   = new SmtpOptions(array(
 			'host' => 'smtp.uibk.ac.at',
@@ -90,7 +100,7 @@ class GameController extends AbstractActionController
 			        ->addFrom('Aaron.Messner@student.uibk.ac.at')
 			        ->setSubject('Greetings and Salutations!')
 			        ->setBody("Sorry, I'm going to be late today!");
-			$transport->send($message);
+			$transport->send($message);*/
     			return $this->redirect()->toRoute('game', array('action' => 'fight','hash'=>$game->hash));
     		}
     	}
