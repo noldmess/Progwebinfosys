@@ -2,6 +2,7 @@
 namespace Game\Form;
 
 use Zend\Form\Form;
+use Zend\Mail;
 
 class GameForm extends Form
 {
