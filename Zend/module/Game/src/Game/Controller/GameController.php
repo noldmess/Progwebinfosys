@@ -31,10 +31,35 @@ class GameController extends AbstractActionController
 		return $this->gameTable;
 	}
 	
-	
+    public function revengeAction(){
+    	$hash =  $this->params()->fromRoute('hash', 0);
+    	if($hash==!0){
+    	$gametmp=$this->getGameTable()->getGameHash($hash);
+    	$form = new GameForm();
+    	$form->get('user1')->setValue($game->user1=$gametmp->user2);
+    	$form->get('user2')->setValue($game->user1=$gametmp->user1);
+    	$form->get('email2')->setValue($game->user1=$gametmp->email2);
+    	$form->get('email2')->setValue($game->user1=$gametmp->email1);
+    	$form->get('submit')->setValue('New Game');
+    	$request = $this->getRequest();
+    	if ($request->isPost()) {
+    		$game= new Game();
+    		$form->setInputFilter($game->getInputFilter());
+    		$form->setData($request->getPost());
+    		 
+    		if ($form->isValid()) {
+    			$game->exchangeArray($form->getData());
+    			$this->getGameTable()->saveGame($game);
+    			return $this->redirect()->toRoute('game', array('action' => 'fight','hash'=>$game->hash));
+    		}
+    	}
+    	return new ViewModel(array('hallo'=>$this->getGameTable()->getGameHash($hash),'form'=>$form));
+    }
+
+
     public function indexAction()
     {
-    	
+    
     	$form = new GameForm();
     	//$form->bind($game);
     	//$form->get('submit')->setAttrib('onclick', 'my_alert()');
@@ -56,7 +81,7 @@ class GameController extends AbstractActionController
 			    'host' => 'smtp.uibk.ac.at',
 			    'port' => 587,
 			));*/
-			$transport = new SmtpTransport();
+			/*$transport = new SmtpTransport();
 			$options   = new SmtpOptions(array(
 			    'host'              => 'smtp.uibk.ac.at',
 			    'name'              => 'uibk.ac.at',
@@ -68,7 +93,7 @@ class GameController extends AbstractActionController
 			        ->addFrom('aaron.messner@student.uibk.ac.atAaron.Messner@student.uibk.ac.at')
 			        ->setSubject('Greetings and Salutations!')
 			        ->setBody("Sorry, I'm going to be late today!");
-			$transport->send($message);
+			$transport->send($message);*/
     			return $this->redirect()->toRoute('game', array('action' => 'fight','hash'=>$game->hash));
     		}
     	}
