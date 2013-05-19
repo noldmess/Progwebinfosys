@@ -50,12 +50,12 @@ class GameController extends AbstractActionController
     			$game->exchangeArray($form->getData());
     			$this->getGameTable()->saveGame($game);
     			//return $this->redirect()->toRoute('game');
-    			$transport = new SmtpTransport();
+    		/*	$transport = new SmtpTransport();
 			$options   = new SmtpOptions(array(
 			    //'name' => 'uibk.ac.at',
 			    'host' => 'smtp.uibk.ac.at',
 			    'port' => 587,
-			));
+			));*/
 			$transport = new Zend\Mail\Transport\Smtp();
 			
 			$protocol = new Zend\Mail\Protocol\Smtp('smtp.uibk.ac.at');
