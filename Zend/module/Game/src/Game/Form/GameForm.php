@@ -62,6 +62,7 @@ class GameForm extends Form
             'attributes' => array(
                 'value' => 'Go',
                 'id' => 'submitbutton',
+                'onclick' => 'alert("Hello!")',
             ),
         ));
     }
