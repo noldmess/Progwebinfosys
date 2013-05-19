@@ -1,4 +1,4 @@
 	<?php echo $game->user1.", ".$game->email1.", has chosen: ".$game->choiceArray[$game->choice1-1] ?> <br>
 	<?php echo $game->user2.", ".$game->email2.", has chosen: ".$game->choiceArray[$game->choice2-1] ?> <br />
     <?php echo $game->result ?>
-    <a href="<?php echo $this->url(array('controller' => 'game', 'action' => 'revenge','hash'=>$game->hash));?>" target="_blank">revenge</a> 
+    <a href="<?php echo $link;?>" target="_blank">revenge</a> 
