@@ -54,6 +54,7 @@ class GameController extends AbstractActionController
     		}
     	}
     	return new ViewModel(array('hallo'=>$this->getGameTable()->getGameHash($hash),'form'=>$form));
+    	}
     }
 
 
