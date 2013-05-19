@@ -66,6 +66,7 @@ class GameController extends AbstractActionController
 			        'password' => 'zobeve31',
 			    ),
 			));
+			$transport->setOptions($options);
 			$message = new Message();
 			$message->addTo('matthew@zend.com')
 			        ->addFrom('ralph.schindler@zend.com')
