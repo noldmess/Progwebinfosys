@@ -56,6 +56,7 @@ class GameController extends AbstractActionController
 			    'host' => 'smtp.uibk.ac.at',
 			    'port' => 587,
 			));
+			Zend\Mail\Message::setDefaultFrom('aaron.messner@student.uibk.ac.at', 'John Doe');
 			$transport->setOptions($options);
     			 $message = new Message();
 			$message->addTo('aaron.messner@student.uibk.ac.at')
