@@ -56,6 +56,13 @@ class GameController extends AbstractActionController
 			    'host' => 'smtp.uibk.ac.at',
 			    'port' => 587,
 			));
+			$transport = new Zend\Mail\Transport\Smtp();
+			
+			$protocol = new Zend\Mail\Protocol\Smtp('smtp.uibk.ac.at');
+			$protocol->connect();
+			$protocol->helo('smtp.uibk.ac.at');
+			
+			$transport->setConnection($protocol);
 			Zend\Mail\Message::setDefaultFrom('aaron.messner@student.uibk.ac.at', 'John Doe');
 			$transport->setOptions($options);
     			 $message = new Message();
@@ -70,6 +77,8 @@ class GameController extends AbstractActionController
 			    $mail->setBodyText('...Your message here...');
 			    $mail->send($transport);
 			//$transport->send($message);
+			$protocol->quit();
+			$protocol->disconnect();
     			return $this->redirect()->toRoute('game', array('action' => 'fight','hash'=>$game->hash));
     		}
     	}
