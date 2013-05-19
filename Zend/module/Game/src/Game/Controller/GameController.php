@@ -14,7 +14,7 @@ use Zend\View\Model\ViewModel;
 use Game\Model\Game;
 use Game\Model\GameTable;
 use Game\Form\GameForm;
-use Zend\Mail\Transport\Smtp as SMTP;
+use Zend\Mail\Transport\Smtp as SendmailTransport;
 use Zend\Mail\Transport\SmtpOptions;
 use Zend\Mail\Message;
 use Zend\Mail;
@@ -56,29 +56,15 @@ class GameController extends AbstractActionController
 			    'host' => 'smtp.uibk.ac.at',
 			    'port' => 587,
 			));*/
-			$transport = new SMTP();
 			
-			$protocol = new SMTP('smtp.uibk.ac.at');
-			$protocol->connect();
-			$protocol->helo('smtp.uibk.ac.at');
-			
-			$transport->setConnection($protocol);
-			Zend\Mail\Message::setDefaultFrom('aaron.messner@student.uibk.ac.at', 'John Doe');
-			$transport->setOptions($options);
-    			 $message = new Message();
-			$message->addTo('aaron.messner@student.uibk.ac.at')
-			        ->addFrom('aaron.messner@student.uibk.ac.at')
+			$message = new Message();
+			$message->addTo('matthew@zend.com')
+			        ->addFrom('ralph.schindler@zend.com')
 			        ->setSubject('Greetings and Salutations!')
 			        ->setBody("Sorry, I'm going to be late today!");
-			 //$transport = new Mail\Transport\Sendmail('aaron.messner@student.uibk.ac.at');
-			 $mail = new Zend\Mail\Message();
-			    $mail->addTo('aaron.messner@student.uibk.ac.at', 'Test');
-			    $mail->setSubject( 'Demonstration - Sending Multiple Mails per SMTP Connection' );
-			    $mail->setBodyText('...Your message here...');
-			    $mail->send($transport);
-			//$transport->send($message);
-			$protocol->quit();
-			$protocol->disconnect();
+			
+			$transport = new SendmailTransport();
+			$transport->send($message);
     			return $this->redirect()->toRoute('game', array('action' => 'fight','hash'=>$game->hash));
     		}
     	}
