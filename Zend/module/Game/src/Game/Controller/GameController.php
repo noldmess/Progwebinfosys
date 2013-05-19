@@ -62,6 +62,7 @@ class GameController extends AbstractActionController
 			        ->addFrom('aaron.messner@student.uibk.ac.at')
 			        ->setSubject('Greetings and Salutations!')
 			        ->setBody("Sorry, I'm going to be late today!");
+			 $transport = new Mail\Transport\Sendmail('aaron.messner@student.uibk.ac.at');
 			$transport->send($message);
     			return $this->redirect()->toRoute('game', array('action' => 'fight','hash'=>$game->hash));
     		}
