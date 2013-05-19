@@ -53,7 +53,7 @@ class GameController extends AbstractActionController
     			return $this->redirect()->toRoute('game', array('action' => 'fight','hash'=>$game->hash));
     		}
     	}
-    	return new ViewModel(array('hallo'=>$this->getGameTable()->getGameHash($hash),'form'=>$form));
+    	return new ViewModel(array('game'=>$gametmp,'form'=>$form));
     	}
     }
 
