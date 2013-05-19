@@ -46,6 +46,6 @@ echo $this->formRow($form->get('email2'));
    	 </div>
    	</div>
 <?php
-echo $this->formRow($form->get('choice1'));
+echo $this->formHidden($form->get('choice1'));
 echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();
