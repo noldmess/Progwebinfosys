@@ -10,13 +10,13 @@ function reply_click(clicked_id)
 {
   var returnval=true;
   var  form= document.forms[0];
-   if(form.user1.value==!'')
+   if(form.user1.value==='')
    	returnval=false;
-   if(form.user2.value==!'')
+   if(form.user2.value==='')
   	 returnval=false;
-  if(form.email1.value==!'')
+  if(form.email1.value==='')
   	 returnval=false;
- if(form.email2.value==!'')
+ if(form.email2.value==='')
    	returnval=false;
    return returnval;
   }
