@@ -77,26 +77,20 @@ class GameController extends AbstractActionController
     		if ($form->isValid()) {
     			$game->exchangeArray($form->getData());
     			$this->getGameTable()->saveGame($game);
-    			//return $this->redirect()->toRoute('game');
-    		/*	$transport = new SmtpTransport();
+			$transport = new SmtpTransport();
+			$this->transport = new SmtpTransport();
 			$options   = new SmtpOptions(array(
-			    //'name' => 'uibk.ac.at',
-			    'host' => 'smtp.uibk.ac.at',
-			    'port' => 587,
-			));*/
-			/*$transport = new SmtpTransport();
-			$options   = new SmtpOptions(array(
-			    'host'              => 'smtp.uibk.ac.at',
-			    'name'              => 'uibk.ac.at',
-			    'port'		=> 587,
-			));
+			'host' => 'smtp.uibk.ac.at',
+			'name' => 'smtp.uibk.ac.at',
+			 'port' => 587,
+			 ));
 			$transport->setOptions($options);
 			$message = new Message();
-			$message->addTo('aaron.messner@student.uibk.ac.atAaron.Messner@student.uibk.ac.at')
-			        ->addFrom('aaron.messner@student.uibk.ac.atAaron.Messner@student.uibk.ac.at')
+			$message->addTo('Aaron.Messner@student.uibk.ac.at')
+			        ->addFrom('Aaron.Messner@student.uibk.ac.at')
 			        ->setSubject('Greetings and Salutations!')
 			        ->setBody("Sorry, I'm going to be late today!");
-			$transport->send($message);*/
+			$transport->send($message);
     			return $this->redirect()->toRoute('game', array('action' => 'fight','hash'=>$game->hash));
     		}
     	}
