@@ -47,15 +47,20 @@ class GameController extends AbstractActionController
     			$game->exchangeArray($form->getData());
     			$this->getGameTable()->saveGame($game);
     			//return $this->redirect()->toRoute('game');
-    			$transport = new Zend_Mail_Transport_Smtp('smtp.uibk.ac.at');
-    			 $mail = new Zend_Mail();
-    			 $mail->addTo('aaron.messner@student.uibk.ac.at', 'Test');
-			    $mail->setFrom('aaron.messner@student.uibk.ac.at', 'Test');
-			    $mail->setSubject(
-			        'Demonstration - mit einer SMTP Verbindung mehrfache E-Mails senden'
-			    );
-			    $mail->setBodyText('...Hier die Nachricht...');
-			    $mail->send($transport);
+    			$transport = new SmtpTransport();
+			$options   = new SmtpOptions(array(
+			    'name' => 'smtp.uibk.ac.at',
+			    'host' => '127.0.0.1',
+			    'port' => 25,
+			));
+			$transport->setOptions($options);
+    			 $message = new Message();
+			$message->addTo('aaron.messner@student.uibk.ac.at')
+			        ->addFrom('aaron.messner@student.uibk.ac.at')
+			        ->setSubject('Greetings and Salutations!')
+			        ->setBody("Sorry, I'm going to be late today!");
+			
+			$transport->send($message);
     			return $this->redirect()->toRoute('game', array('action' => 'fight','hash'=>$game->hash));
     		}
     	}
