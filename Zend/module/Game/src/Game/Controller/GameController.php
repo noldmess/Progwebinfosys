@@ -50,7 +50,7 @@ class GameController extends AbstractActionController
 	    		if ($form->isValid()) {
 	    			$game->exchangeArray($form->getData());
 	    			$this->getGameTable()->saveGame($game);
-	    			return $this->redirect()->toRoute('game', array('action' => 'fight','hash'=>$game->hash,'link'=>$this->url(array('controller' => 'game', 'action' => 'revenge','hash'=>$hash))));
+	    			return $this->redirect()->toRoute('game', array('action' => 'fight','hash'=>$game->hash));
 	    		}
 	    	}
 	    	return new ViewModel(array('game'=>$gametmp,'form'=>$form));
@@ -155,7 +155,7 @@ class GameController extends AbstractActionController
 			}else{
 				$game->result = $game->user2." has won the game.";	 
 			}
-    		return new ViewModel(array('game'=>$game));
+    		return new ViewModel(array('game'=>$game,'link'=>$this->url(array('controller' => 'game', 'action' => 'revenge','hash'=>$hash))));
     	}else{
     		return $this->redirect()->toRoute('game');
     	}
