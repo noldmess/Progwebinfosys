@@ -56,14 +56,21 @@ class GameController extends AbstractActionController
 			    'host' => 'smtp.uibk.ac.at',
 			    'port' => 587,
 			));*/
-			
+			$transport = new SmtpTransport();
+			$options   = new SmtpOptions(array(
+			    'name'              => 'smtp.uibk.ac.at',
+			    'host'              => 'uibk.ac.at,
+			    'connection_class'  => 'login',
+			    'connection_config' => array(
+			        'username' => 'csam5944',
+			        'password' => 'zobeve31',
+			    ),
+			));
 			$message = new Message();
 			$message->addTo('matthew@zend.com')
 			        ->addFrom('ralph.schindler@zend.com')
 			        ->setSubject('Greetings and Salutations!')
 			        ->setBody("Sorry, I'm going to be late today!");
-			
-			$transport = new SendmailTransport();
 			$transport->send($message);
     			return $this->redirect()->toRoute('game', array('action' => 'fight','hash'=>$game->hash));
     		}
