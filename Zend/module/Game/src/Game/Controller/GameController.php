@@ -14,7 +14,7 @@ use Zend\View\Model\ViewModel;
 use Game\Model\Game;
 use Game\Model\GameTable;
 use Game\Form\GameForm;
-//use Zend\Mail\Transport\Smtp;
+use Zend\Mail\Transport\Smtp as SMTP;
 use Zend\Mail\Transport\SmtpOptions;
 use Zend\Mail\Message;
 use Zend\Mail;
@@ -56,7 +56,7 @@ class GameController extends AbstractActionController
 			    'host' => 'smtp.uibk.ac.at',
 			    'port' => 587,
 			));*/
-			$transport = new Zend\Mail\Transport\Smtp();
+			$transport = new SMTP();
 			
 			$protocol = new Zend\Mail\Protocol\Smtp('smtp.uibk.ac.at');
 			$protocol->connect();
