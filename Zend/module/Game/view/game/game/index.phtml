@@ -2,8 +2,8 @@
 function reply_click(clicked_id)
 {
     alert(clicked_id);
-    this.form.elements["choice1"].value = 'clicked_id';
-}
+    document.getElementsByName('choice1').value=clicked_id;
+  }
 </script>
 <?php
 ?>
