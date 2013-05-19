@@ -155,7 +155,7 @@ class GameController extends AbstractActionController
 			}else{
 				$game->result = $game->user2." has won the game.";	 
 			}
-			$link=$this->url(array('controller' => 'game', 'action' => 'revenge','hash'=>$game->hash));
+			echo $link=$this->url(array('controller' => 'game', 'action' => 'revenge','hash'=>$game->hash));
     		return new ViewModel(array('game'=>$game,'link'=>$link));
     	}else{
     		return $this->redirect()->toRoute('game');
