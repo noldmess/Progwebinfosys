@@ -53,7 +53,6 @@ class GameController extends AbstractActionController
     			$transport = new SmtpTransport();
 			$options   = new SmtpOptions(array(
 			    'name' => 'smtp.uibk.ac.at',
-			    'host' => '138.232.1.140',
 			    'port' => 587,
 			));
 			$transport->setOptions($options);
