@@ -58,7 +58,7 @@ class GameController extends AbstractActionController
 			));*/
 			$transport = new SMTP();
 			
-			$protocol = new Zend\Mail\Protocol\Smtp('smtp.uibk.ac.at');
+			$protocol = new SMTP('smtp.uibk.ac.at');
 			$protocol->connect();
 			$protocol->helo('smtp.uibk.ac.at');
 			
