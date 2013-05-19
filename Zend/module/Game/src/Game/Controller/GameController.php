@@ -60,11 +60,7 @@ class GameController extends AbstractActionController
 			$options   = new SmtpOptions(array(
 			    'name'              => 'smtp.uibk.ac.at',
 			    'host'              => 'uibk.ac.at',
-			    'connection_class'  => 'login',
-			    'connection_config' => array(
-			        'username' => 'csam5944',
-			        'password' => 'zobeve31',
-			    ),
+			    'port'		=> 587,
 			));
 			$transport->setOptions($options);
 			$message = new Message();
