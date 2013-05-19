@@ -17,7 +17,6 @@ use Game\Form\GameForm;
 use Zend\Mail\Transport\Smtp  as SmtpTransport;
 use Zend\Mail\Transport\SmtpOptions;
 use Zend\Mail\Message;
-sdfdfs
 class GameController extends AbstractActionController
 {
 	protected $gameTable;
