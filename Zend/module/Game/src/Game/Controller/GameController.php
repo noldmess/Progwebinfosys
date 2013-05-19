@@ -14,7 +14,7 @@ use Zend\View\Model\ViewModel;
 use Game\Model\Game;
 use Game\Model\GameTable;
 use Game\Form\GameForm;
-use Zend\Mail\Transport\Smtp as SendmailTransport;
+use Zend\Mail\Transport\Smtp  as SmtpTransport;
 use Zend\Mail\Message;
 
 class GameController extends AbstractActionController
