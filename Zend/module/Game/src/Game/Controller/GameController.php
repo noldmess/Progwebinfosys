@@ -34,7 +34,7 @@ class GameController extends AbstractActionController
     	
     	$form = new GameForm();
     	//$form->bind($game);
-    	$form->get('submit')->setAttrib('onclick', 'my_alert()');
+    	//$form->get('submit')->setAttrib('onclick', 'my_alert()');
     	$form->get('choice1')->setValue(1);
     	$form->get('submit')->setValue('New Game');
     	$request = $this->getRequest();
