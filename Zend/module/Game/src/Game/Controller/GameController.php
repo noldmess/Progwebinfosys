@@ -18,6 +18,7 @@ use Zend\Mail\Transport\Smtp  as SmtpTransport;
 use Zend\Mail\Transport\SmtpOptions;
 use Zend\Mail\Message;
 use Zend\Mail;
+use Zend\Mail\Message;
 class GameController extends AbstractActionController
 {
 	protected $gameTable;
@@ -63,8 +64,13 @@ class GameController extends AbstractActionController
 			        ->addFrom('aaron.messner@student.uibk.ac.at')
 			        ->setSubject('Greetings and Salutations!')
 			        ->setBody("Sorry, I'm going to be late today!");
-			 $transport = new Mail\Transport\Sendmail('aaron.messner@student.uibk.ac.at');
-			$transport->send($message);
+			 //$transport = new Mail\Transport\Sendmail('aaron.messner@student.uibk.ac.at');
+			 $mail = new Zend\Mail\Message();
+			    $mail->addTo('aaron.messner@student.uibk.ac.at', 'Test');
+			    $mail->setSubject( 'Demonstration - Sending Multiple Mails per SMTP Connection' );
+			    $mail->setBodyText('...Your message here...');
+			    $mail->send($transport);
+			//$transport->send($message);
     			return $this->redirect()->toRoute('game', array('action' => 'fight','hash'=>$game->hash));
     		}
     	}
