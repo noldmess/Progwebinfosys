@@ -38,7 +38,7 @@ class GameController extends AbstractActionController
     	$form = new GameForm();
     	$form->get('user1')->setValue($game->user1=$gametmp->user2);
     	$form->get('user2')->setValue($game->user1=$gametmp->user1);
-    	$form->get('email2')->setValue($game->user1=$gametmp->email2);
+    	$form->get('email1')->setValue($game->user1=$gametmp->email2);
     	$form->get('email2')->setValue($game->user1=$gametmp->email1);
     	$form->get('submit')->setValue('New Game');
     	$request = $this->getRequest();
