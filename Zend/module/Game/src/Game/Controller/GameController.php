@@ -86,7 +86,7 @@ class GameController extends AbstractActionController
     			$this->getGameTable()->saveGame($game);
     			
     			$session->offsetSet('email', $game->email1);
-    			$session->offsetSet('user', $game->user);
+    			$session->offsetSet('user', $game->user1);
 			/*$transport = new SmtpTransport();
 			$this->transport = new SmtpTransport();
 			$options   = new SmtpOptions(array(
