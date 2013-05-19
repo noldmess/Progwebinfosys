@@ -1,1 +1,51 @@
-<
+<script type="text/javascript">
+function reply_click(clicked_id)
+{
+    alert(clicked_id);
+  var x= document.forms[0].choice1;
+   x.value=clicked_id;
+  }
+  
+  function onsubmittest()
+{
+  var returnval=true;
+  var form= document.forms[0];
+   if(form.user1.value==='')
+    returnval=false;
+   if(form.user2.value==='')
+   returnval=false;
+  if(form.email1.value==='')
+   returnval=false;
+ if(form.email2.value==='')
+    returnval=false;
+   return returnval;
+  }
+</script>
+<?php
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php
+$form = $this->form;
+//$form->setAttribute('action', $this->url('game'));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+//echo $this->formHidden($form->get('id'));
+echo $this->formHidden($form->get('user1'));
+echo $this->formHidden($form->get('email1'));
+echo $this->formHidden($form->get('user2'));
+echo $this->formHidden($form->get('email2'));
+?>
+<div class="control-group">
+<div class="btn-group" data-toggle="buttons-radio">
+<img src="../../img/Zend/Stein.png" class="btn btn-primary" name="Stein" id="1" onClick="reply_click(this.id)">
+<img src="../../img/Zend/Papier.png" class="btn btn-primary" name="Papier" id="2" onClick="reply_click(this.id)">
+         <img src="../../img/Zend/Schere.png" class="btn btn-primary" name="Schere" id="3" onClick="reply_click(this.id)">
+<img src="../../img/Zend/spock.png" class="btn btn-primary" name="Spock" id="4" onClick="reply_click(this.id)">
+         <img src="../../img/Zend/Echse.png" class="btn btn-primary" name="Echse" id="5" onClick="reply_click(this.id)">
+    </div>
+    </div>
+<?php
+echo $this->formHidden($form->get('choice1'));
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();
