@@ -34,26 +34,28 @@ class GameController extends AbstractActionController
     public function revengeAction(){
     	$hash =  $this->params()->fromRoute('hash', 0);
     	if($hash==!0){
-    	$gametmp=$this->getGameTable()->getGameHash($hash);
-    	$form = new GameForm();
-    	$form->get('user1')->setValue($game->user1=$gametmp->user2);
-    	$form->get('user2')->setValue($game->user1=$gametmp->user1);
-    	$form->get('email1')->setValue($game->user1=$gametmp->email2);
-    	$form->get('email2')->setValue($game->user1=$gametmp->email1);
-    	$form->get('submit')->setValue('New Game');
-    	$request = $this->getRequest();
-    	if ($request->isPost()) {
-    		$game= new Game();
-    		$form->setInputFilter($game->getInputFilter());
-    		$form->setData($request->getPost());
-    		 
-    		if ($form->isValid()) {
-    			$game->exchangeArray($form->getData());
-    			$this->getGameTable()->saveGame($game);
-    			return $this->redirect()->toRoute('game', array('action' => 'fight','hash'=>$game->hash));
-    		}
-    	}
-    	return new ViewModel(array('game'=>$gametmp,'form'=>$form));
+	    	$gametmp=$this->getGameTable()->getGameHash($hash);
+	    	$form = new GameForm();
+	    	$form->get('user1')->setValue($game->user1=$gametmp->user2);
+	    	$form->get('user2')->setValue($game->user1=$gametmp->user1);
+	    	$form->get('email1')->setValue($game->user1=$gametmp->email2);
+	    	$form->get('email2')->setValue($game->user1=$gametmp->email1);
+	    	$form->get('submit')->setValue('New Game');
+	    	$request = $this->getRequest();
+	    	if ($request->isPost()) {
+	    		$game= new Game();
+	    		$form->setInputFilter($game->getInputFilter());
+	    		$form->setData($request->getPost());
+	    		 
+	    		if ($form->isValid()) {
+	    			$game->exchangeArray($form->getData());
+	    			$this->getGameTable()->saveGame($game);
+	    			return $this->redirect()->toRoute('game', array('action' => 'fight','hash'=>$game->hash));
+	    		}
+	    	}
+	    	return new ViewModel(array('game'=>$gametmp,'form'=>$form));
+    	}else{
+    		return $this->redirect()->toRoute('game', array('action' => 'fight','hash'=>$game->hash));
     	}
     }
 
