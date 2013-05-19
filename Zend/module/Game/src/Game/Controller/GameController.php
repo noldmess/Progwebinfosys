@@ -64,8 +64,8 @@ class GameController extends AbstractActionController
 			));
 			$transport->setOptions($options);
 			$message = new Message();
-			$message->addTo('matthew@zend.com')
-			        ->addFrom('ralph.schindler@zend.com')
+			$message->addTo('aaron.messner@student.uibk.ac.atAaron.Messner@student.uibk.ac.at')
+			        ->addFrom('aaron.messner@student.uibk.ac.atAaron.Messner@student.uibk.ac.at')
 			        ->setSubject('Greetings and Salutations!')
 			        ->setBody("Sorry, I'm going to be late today!");
 			$transport->send($message);
