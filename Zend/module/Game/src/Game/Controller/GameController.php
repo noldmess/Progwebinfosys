@@ -52,7 +52,8 @@ class GameController extends AbstractActionController
     			//return $this->redirect()->toRoute('game');
     			$transport = new SmtpTransport();
 			$options   = new SmtpOptions(array(
-			    'name' => 'smtp.uibk.ac.at',
+			    'name' => 'uibk.ac.at',
+			    'host' => 'smtp.uibk.ac.at',
 			    'port' => 587,
 			));
 			$transport->setOptions($options);
