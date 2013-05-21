@@ -96,10 +96,10 @@ class GameController extends AbstractActionController
 			'name' => 'smtp.uibk.ac.at',
 			 'port' => 587,
 			 ));
-			$link=$this->url()->fromRoute('game',array('action' => 'revenge','hash'=>$game->hash)); 
+			echo $link=$this->url()->fromRoute('game',array('action' => 'revenge','hash'=>$game->hash)); 
 			$transport->setOptions($options);
 			$message = new Message();
-			$message->addTo($game->user2)
+			$message->addTo($game->email2)
 			        ->addFrom('Aaron.Messner@student.uibk.ac.at')
 			        ->setSubject('ready to fight?')
 			        ->setBody($link);
