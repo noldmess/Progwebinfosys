@@ -52,7 +52,22 @@ class GameController extends AbstractActionController
 	    		if ($form->isValid()) {
 	    			$game->exchangeArray($form->getData());
 	    			$this->getGameTable()->saveGame($game);
-	    			return $this->redirect()->toRoute('game', array('action' => 'fight','hash'=>$game->hash));
+	    			$transport = new SmtpTransport();
+	    			$this->transport = new SmtpTransport();
+	    			$options   = new SmtpOptions(array(
+	    					'host' => 'smtp.uibk.ac.at',
+	    					'name' => 'smtp.uibk.ac.at',
+	    					'port' => 587,
+	    			));
+	    			$link= 'to fight click http://138.232.66.90'.$this->url()->fromRoute('game',array('action' => 'fight','hash'=>$game->hash));
+	    			$transport->setOptions($options);
+	    			$message = new Message();
+	    			$message->addTo($game->email2)
+	    			->addFrom('Aaron.Messner@student.uibk.ac.at')
+	    			->setSubject('ready to fight?')
+	    			->setBody($link);
+	    			$transport->send($message);
+	    			return $this->redirect()->toRoute('game');
 	    		}
 	    	}
 	    	return new ViewModel(array('game'=>$gametmp,'form'=>$form));
