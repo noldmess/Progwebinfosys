@@ -1,7 +1,7 @@
 <?php
 namespace Game\Model;
 
-
+use Zend\Db\Sql\Select;
 use Zend\Db\TableGateway\TableGateway;
 
 class GameTable
@@ -36,9 +36,27 @@ class GameTable
 		$rowset = $this->tableGateway->select(array('hash' => $hash));
 		$row = $rowset->current();
 		if (!$row) {
-			throw new \Exception("Could not find row $id");
+			throw new \Exception("Could not find row $hash");
 		}
 		return $row;
+	}
+	
+	public function getHighscore($limit){
+		$rowset = $this->tableGateway->select(function (Select $select) use ($limit) {
+			$select->columns(array('winner_name', 'wins' => new \Zend\Db\Sql\Expression('COUNT(*)')));
+     		$select->where('winner_name IS NOT NULL');
+     		$select->order('wins ASC')->limit($limit);
+			$select->group('winner_name');
+		});
+		
+		return $rowset;
+/*
+		$rowset = $this->tableGateway->select()
+			->from('game', array('winner_name', 'COUNT(*) as wins'))
+			->where('winner_name IS NOT NULL')
+			->order()
+			->group('winner_name');
+			*/
 	}
 
 	public function saveGame(Game $game)
@@ -51,6 +69,9 @@ class GameTable
 				'user2' => $game->user2,
 				'email2'  => $game->email2,
 				'choice2'  => $game->choice2,
+				
+				'winner' => $game->winner,
+				'winner_name' => $game->winner_name,
 				
 				'hash' =>$game->hash,
 		);

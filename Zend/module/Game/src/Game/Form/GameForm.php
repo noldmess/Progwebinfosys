@@ -20,28 +20,28 @@ class GameForm extends Form
             'name' => 'user1',
             'type' => 'Text',
             'options' => array(
-                'label' => 'User',
+                'label' => 'Your Name',
             ),
         ));
         $this->add(array(
         		'name' => 'email1',
         		'type' => 'Text',
         		'options' => array(
-        				'label' => 'Email',
+        				'label' => 'Your Email',
         		),
         ));
         $this->add(array(
         		'name' => 'user2',
         		'type' => 'Text',
         		'options' => array(
-        				'label' => 'User',
+        				'label' => 'Your Opponents Name',
         		),
         ));
         $this->add(array(
         		'name' => 'email2',
         		'type' => 'Text',
         		'options' => array(
-        				'label' => 'Email',
+        				'label' => 'Your Opponents Email',
         		),
         ));
         $this->add(array(
@@ -52,17 +52,17 @@ class GameForm extends Form
             ),
         ));
         $this->add(array(
-        		'name' => 'choice2',
-        		'type' => 'Text',
-        		'options' => array(
-        				'label' => 'choice',
-        		),
+			'name' => 'choice2',
+			'type' => 'Text',
+			'options' => array(
+					'label' => 'choice',
+			),
         ));
         $this->add(array(
             'name' => 'submit',
             'type' => 'Submit',
             'attributes' => array(
-                'value' => 'Go',
+                'value' => 'Fight',
                 'id' => 'submitbutton',
             ),
         ));

@@ -18,6 +18,9 @@ class Game
     public $choice2;
 	public $choiceArray = array('ROCK', 'PAPER', 'SCISSOR', 'SPOCK', 'LIZARD');
     public $hash;
+	public $winner;
+	public $winner_name;
+	public $wins;
 	public $result;
     protected $inputFilter;
     
@@ -35,6 +38,10 @@ class Game
         $this->choice2     = (isset($data['choice2'])) ? $data['choice2'] : null;
 		
 		$this->result	= (isset($data['result'])) ? $data['result'] : null;
+		
+        $this->winner     = (isset($data['winner'])) ? $data['winner'] : null;
+        $this->winner_name     = (isset($data['winner_name'])) ? $data['winner_name'] : null;
+		$this->wins     = (isset($data['wins'])) ? $data['wins'] : null;
         					
         $this->hash     = (isset($data['hash'])) ?$data['hash']:hash('sha256',$this->user1.$this->user2.time());
         

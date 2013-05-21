@@ -3,10 +3,23 @@ function reply_click(clicked_id)
 {
    var  x= document.forms[0].choice2;
    x.value=clicked_id;
-  }
+}
+function onsubmittest()
+{
+	var returnval=true;
+	var  form = document.forms[0];
+  	if(form.choice2.value==='' || form.choice1.value === null || form.choice1.value === undefined){
+		returnval=false;
+		var el = document.getElementById('weapons');
+		el.innerHTML='Please select a weapon!';
+	}
+   return returnval;
+}
  </script>
-	<?php echo $hallo->user1." ".$hallo->email1 ?> <br>
-	<?php echo $hallo->user2." ".$hallo->email2 ?>
+<h1>Your turn</h1>
+<?php echo "Userdata: ".$hallo->user2.", ".$hallo->email2; ?> <br>
+<?php echo "Your challenger: ".$hallo->user1; ?> <br>
+	
 
 <?php
 $form = $this->form;
@@ -16,9 +29,10 @@ $form->prepare();
 echo $this->form()->openTag($form);
 echo $this->formHidden($form->get('id'));
 ?>
+	<div id = "weapons"></div>
 	<div class="control-group">
 	  <div class="btn-group" data-toggle="buttons-radio">
-	  	<img src="../../img/Zend/Stein.png" class="btn btn-primary active" name="Stein" id="1" onClick="reply_click(this.id)">
+	  	<img src="../../img/Zend/Stein.png" class="btn btn-primary" name="Stein" id="1" onClick="reply_click(this.id)">
 	  	<img src="../../img/Zend/Papier.png" class="btn btn-primary" name="Papier"id="2" onClick="reply_click(this.id)">
         <img src="../../img/Zend/Schere.png" class="btn btn-primary" name="Schere" id="3" onClick="reply_click(this.id)">
 	  	<img src="../../img/Zend/spock.png" class="btn btn-primary" name="Spock"id="4" onClick="reply_click(this.id)">

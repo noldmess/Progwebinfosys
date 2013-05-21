@@ -15,7 +15,7 @@ return array(
                 'options' => array(
                     'route'    => '/s',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
+                        'controller' => 'Game\Controller\Game',
                         'action'     => 'index',
                     ),
                 ),
@@ -57,6 +57,9 @@ return array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
         ),
+		'factories' => array(
+        	'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+    	),
         'aliases' => array(
             'translator' => 'MvcTranslator',
         ),
@@ -92,4 +95,23 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
+	
+	'navigation' => array(
+		'default' => array(
+			array(
+				'label' => 'Home',
+				'route' => 'game',
+			),
+			array(
+				'label' => 'New Game',
+				'route' => 'game',
+				'action' => 'new',
+			),
+			array(
+				'label' => 'Highscore',
+				'route' => 'game',
+				'action' => 'highscore',
+			),
+		),
+	),
 );
