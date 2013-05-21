@@ -96,12 +96,13 @@ class GameController extends AbstractActionController
 			'name' => 'smtp.uibk.ac.at',
 			 'port' => 587,
 			 ));
+			$link='<a href="'.$this->url('game',array('action' => 'revenge','hash'=>$game->hash)).'" >revenge</a>';
 			$transport->setOptions($options);
 			$message = new Message();
 			$message->addTo($game->user2)
 			        ->addFrom('Aaron.Messner@student.uibk.ac.at')
 			        ->setSubject('ready to fight?')
-			        ->setBody('<a href="$this->url("game",array("action" => "fight","hash"=>$game->hash))" >revenge</a> ');
+			        ->setBody($link);
 			$transport->send($message);
     			//return $this->redirect()->toRoute('game', array('action' => 'fight','hash'=>$game->hash));
     		}
