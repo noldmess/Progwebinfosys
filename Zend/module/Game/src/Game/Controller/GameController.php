@@ -89,7 +89,7 @@ class GameController extends AbstractActionController
     			
     			$session->offsetSet('email', $game->email1);
     			$session->offsetSet('user', $game->user1);
-			/*$transport = new SmtpTransport();
+			$transport = new SmtpTransport();
 			$this->transport = new SmtpTransport();
 			$options   = new SmtpOptions(array(
 			'host' => 'smtp.uibk.ac.at',
@@ -102,7 +102,7 @@ class GameController extends AbstractActionController
 			        ->addFrom('Aaron.Messner@student.uibk.ac.at')
 			        ->setSubject('Greetings and Salutations!')
 			        ->setBody("Sorry, I'm going to be late today!");
-			$transport->send($message);*/
+			$transport->send($message);
     			return $this->redirect()->toRoute('game', array('action' => 'fight','hash'=>$game->hash));
     		}
     	}
