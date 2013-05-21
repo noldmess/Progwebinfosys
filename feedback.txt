@@ -1,0 +1,10 @@
+Feedbacksammlung:
++übersichtlich
++Fehlermeldungen machen aufmerksam bei Eingabe
++Felder meist sinnvoll und schlüssig bezeichnet
++schlicht und einfach
+
+-kein Matchmaking
+-offene Spiele nicht einsehbar
+-wenige Designmerkmale
+-nicht Cheat-sicher
