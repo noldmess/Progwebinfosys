@@ -8,7 +8,7 @@
  */
 
 namespace Game\Controller;
-
+use Zend\Session\SessionManager;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Game\Model\Game;
@@ -68,6 +68,8 @@ class GameController extends AbstractActionController
     	$form = new GameForm();
     	//$form->bind($game);
     	//$form->get('submit')->setAttrib('onclick', 'my_alert()');
+    	$manager = new SessionManager();
+    	Container::setDefaultManager($manager);
     	$session = new Container('base');
     	if($session->offsetExists('email')&& $session->offsetExists('user')){
     		$form->get('user1')->setValue($session->offsetGet('user'));
@@ -124,6 +126,7 @@ class GameController extends AbstractActionController
     			return $this->redirect()->toRoute('game',array("action"=>'result','hash'=>$gametmp->hash));
     		}
     		$form = new GameForm();
+    		$form->get('choice2')->setValue(1);
     		$request = $this->getRequest();
     		if ($request->isPost()) {
     			$game= new Game();

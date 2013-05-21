@@ -48,4 +48,9 @@ return array(
             'game' => __DIR__ . '/../view',
         ),
     ),
+    'session' => array(
+    		'remember_me_seconds' => 2419200,
+    		'use_cookies' => true,
+    		'cookie_httponly' => true,
+    ),
 );

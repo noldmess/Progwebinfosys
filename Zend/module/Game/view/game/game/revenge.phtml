@@ -1,25 +1,10 @@
 <script type="text/javascript">
 function reply_click(clicked_id)
 {
-    alert(clicked_id);
   var x= document.forms[0].choice1;
    x.value=clicked_id;
   }
   
-  function onsubmittest()
-{
-  var returnval=true;
-  var form= document.forms[0];
-   if(form.user1.value==='')
-    returnval=false;
-   if(form.user2.value==='')
-   returnval=false;
-  if(form.email1.value==='')
-   returnval=false;
- if(form.email2.value==='')
-    returnval=false;
-   return returnval;
-  }
 </script>
 <?php
 ?>
@@ -40,7 +25,7 @@ echo $this->formHidden($form->get('email2'));
 ?>
 <div class="control-group">
 <div class="btn-group" data-toggle="buttons-radio">
-<img src="../../img/Zend/Stein.png" class="btn btn-primary" name="Stein" id="1" onClick="reply_click(this.id)">
+<img src="../../img/Zend/Stein.png" class="btn btn-primary active" name="Stein" id="1" onClick="reply_click(this.id)">
 <img src="../../img/Zend/Papier.png" class="btn btn-primary" name="Papier" id="2" onClick="reply_click(this.id)">
          <img src="../../img/Zend/Schere.png" class="btn btn-primary" name="Schere" id="3" onClick="reply_click(this.id)">
 <img src="../../img/Zend/spock.png" class="btn btn-primary" name="Spock" id="4" onClick="reply_click(this.id)">

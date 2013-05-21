@@ -16,6 +16,8 @@ use Game\Model\GameTable;
 
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Session\SessionManager;
+use Zend\Session\Container;
 
 class Module
 {
