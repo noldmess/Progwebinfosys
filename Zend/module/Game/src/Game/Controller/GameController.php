@@ -65,7 +65,7 @@ class GameController extends AbstractActionController
 			if ($form->isValid()) {
 				$game->exchangeArray($form->getData());
 				
-				$msg = 'Your friend wants to challenge you. To accept the challenge follow the link: ';
+				$msg = 'Your friend, '.$game->user1.', wants to challenge you. To accept the challenge follow the link: ';
 				$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'fight','hash'=>$game->hash));
 				$subject = 'Challenge accepted?'; 
 				$this->sendMail($game->email2, $subject, $msg, $link);
@@ -124,7 +124,7 @@ class GameController extends AbstractActionController
     			$session->email =  $game->email1;
     			$session->user = $game->user1;
 				
-				$msg = 'Your friend wants to challenge you. To accept the challenge follow the link: ';
+				$msg = 'Your friend, '.$game->user1.', wants to challenge you. To accept the challenge follow the link: ';
 				$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'fight','hash'=>$game->hash));
 				$subject = 'Challenge accepted?'; 
 				$this->sendMail($game->email2, $subject, $msg, $link);
@@ -190,7 +190,7 @@ class GameController extends AbstractActionController
 					
 					
     				$this->getGameTable()->saveGame($game);
-					$msg = 'Your oppononent has chosen his weapon. To see the result click';
+					$msg = 'Your oppononent, '.$game->user2.', has chosen his weapon. To see the result click';
 					$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'result','hash'=>$game->hash));
 					$subject = 'See the result';
 					$this->sendMail($game->email1, $subject, $msg, $link);
