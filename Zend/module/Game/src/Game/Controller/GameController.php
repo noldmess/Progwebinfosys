@@ -23,6 +23,7 @@ use Zend\Session\Container;
 class GameController extends AbstractActionController
 {
 	protected $gameTable;
+	protected $db;
 	
 	public function getGameTable()
 	{
@@ -33,22 +34,22 @@ class GameController extends AbstractActionController
 		return $this->gameTable;
 	}
 	
+	public function getDb(){
+		if(!$this->db){
+			
+			$sm = $this->getServiceLocator();
+			$this->db = $sm->get('MongoGame');	
+			
+		}
+		
+		return $this->db;
+	}
+	
     public function revengeAction(){
   
 
 		$form = new GameForm();
-		//$manager = new SessionManager();
-		//Container::setDefaultManager($manager);
 		$session = new Container('base');
-		
-		/*
-		if($session->offsetExists('email')&& $session->offsetExists('user') && $session->offsetExists('email2')&& $session->offsetExists('user2')){
-			$form->get('user1')->setValue($session->offsetGet('user'));
-			$form->get('email1')->setValue($session->offsetGet('email'));
-			$form->get('user2')->setValue($session->offsetGet('user2'));
-			$form->get('email2')->setValue($session->offsetGet('email2'));
-		}
-		*/
 		
 		$form->get('user1')->setValue($session->user);
     	$form->get('email1')->setValue($session->email);
@@ -69,7 +70,13 @@ class GameController extends AbstractActionController
 				$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'fight','hash'=>$game->hash));
 				$subject = 'Challenge accepted?'; 
 				$this->sendMail($game->email2, $subject, $msg, $link);
+				
+				/*
 				$this->getGameTable()->saveGame($game);
+				*/
+				$document = $game->getDocument();
+				$this->getDb()->games->insert($document);
+				
 				return $this->redirect()->toRoute('game', array('action' => 'invite','hash'=>$game->hash));
 			}
 		}
@@ -86,8 +93,33 @@ class GameController extends AbstractActionController
 	public function highscoreAction(){
 		
 		$limit = 20;
-    	
- 		return new ViewModel(array('highscore'=>$this->getGameTable()->getHighscore($limit), 'limit' => $limit));
+    	$ops = array(
+			array(
+				'$group' => array(
+					"_id" => '$winner_mail',
+					"wins" => array('$sum' => 1),
+				)
+			),
+			array(
+				'$sort' => array("wins" => -1),
+			),
+			array(
+				'$limit' => $limit+1,
+			)
+		);
+		
+		$highscore = $this->getDb()->games->aggregate($ops);
+		$length = count($highscore['result']);
+		$finalHighscore = array();
+		$size = 0;
+		for($i = 0; $i<$length; $i++){
+			$id = $highscore['result'][$i]['_id'];
+			if($id !== null && $size<$limit){
+				$finalHighscore[$id] = $highscore['result'][$i]['wins'];
+				$size++;
+			}
+		}
+ 		return new ViewModel(array('highscore'=>$finalHighscore, 'limit' => $limit));
     }
 
     public function allAction()
@@ -98,15 +130,8 @@ class GameController extends AbstractActionController
 	public function newAction(){
 		$form = new GameForm();
 
-    	//$manager = new SessionManager();
-    	//Container::setDefaultManager($manager);
     	$session = new Container('base');
-		/*
-    	if($session->offsetExists('email')&& $session->offsetExists('user')){
-    		$form->get('user1')->setValue($session->offsetGet('user'));
-    		$form->get('email1')->setValue($session->offsetGet('email'));
-    	}
-		*/
+
 		$form->get('user1')->setValue($session->user);
     	$form->get('email1')->setValue($session->email);
 		
@@ -119,7 +144,14 @@ class GameController extends AbstractActionController
     		 
     		if ($form->isValid()) {
     			$game->exchangeArray($form->getData());
+
+				/*
     			$this->getGameTable()->saveGame($game);
+				*/
+				
+				$document = $game->getDocument();
+				
+				$this->getDb()->games->insert($document);
     			
     			$session->email =  $game->email1;
     			$session->user = $game->user1;
@@ -138,9 +170,14 @@ class GameController extends AbstractActionController
 	public function inviteAction(){
 		$hash =  $this->params()->fromRoute('hash', 0);
 		if($hash==!0){
-    		$gametmp=$this->getGameTable()->getGameHash($hash);
+    		//$gametmp=$this->getGameTable()->getGameHash($hash);
+			$document=$this->getDb()->games->findOne(array("hash" => $hash));
+			
+			$game = new Game();
+			
+			$game->exchangeArray($document);
 		}
-		return new ViewModel(array('game' => $gametmp));
+		return new ViewModel(array('game' => $game));
 	}
 
     public function fightAction()
@@ -148,7 +185,13 @@ class GameController extends AbstractActionController
     	
     	$hash =  $this->params()->fromRoute('hash', 0);
     	if($hash==!0){
-    		$gametmp=$this->getGameTable()->getGameHash($hash);
+			
+    		//$gametmp=$this->getGameTable()->getGameHash($hash);
+			$document=$this->getDb()->games->findOne(array("hash" => $hash));
+			
+			$gametmp = new Game();
+			$gametmp->exchangeArray($document);
+			
     		if($gametmp->choice2==!0){
     			return $this->redirect()->toRoute('game',array("action"=>'result','hash'=>$gametmp->hash));
     		}
@@ -169,6 +212,7 @@ class GameController extends AbstractActionController
     			if ($form->isValid() ){
 					
     				$game->exchangeArray($form->getData());
+					$game->id= $gametmp->id;
     				$game->user1=$gametmp->user1;
     				$game->email1=$gametmp->email1;
     				$game->choice1=$gametmp->choice1;
@@ -182,14 +226,19 @@ class GameController extends AbstractActionController
 						$game->winner = 0;	
 					}elseif($var2 === ($var1 + 2) % 5 || $var2 === ($var1 + 4) % 5){
 						$game->winner = 1;
-						$game->winner_name = $game->user1;
+						$game->winner_mail = $game->email1;
 					}else{
 						$game->winner = 2;
-						$game->winner_name = $game->user2;
+						$game->winner_mail = $game->email2;
 					}
 					
 					
-    				$this->getGameTable()->saveGame($game);
+    				//$this->getGameTable()->saveGame($game);
+					
+					$document = $game->getDocument();
+				
+					$this->getDb()->games->save($document);
+					
 					$msg = 'Your oppononent, '.$game->user2.', has chosen his weapon. To see the result click';
 					$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'result','hash'=>$game->hash));
 					$subject = 'See the result';
@@ -200,7 +249,7 @@ class GameController extends AbstractActionController
     			$form->bind($gametmp);
     		}
 
-    		return new ViewModel(array('hallo'=>$this->getGameTable()->getGameHash($hash),'form'=>$form));
+    		return new ViewModel(array('hallo'=>$gametmp,'form'=>$form));
     	}else{
     		return $this->redirect()->toRoute('game');
     	}
@@ -211,13 +260,17 @@ class GameController extends AbstractActionController
     {
     	$hash =  $this->params()->fromRoute('hash', 0);
     	if($hash==!0){
-    		$game = $this->getGameTable()->getGameHash($hash);
+    		//$game = $this->getGameTable()->getGameHash($hash);
+			
+			$document=$this->getDb()->games->findOne(array("hash" => $hash));
+			$game = new Game();
+			$game->exchangeArray($document);
 			if((int)$game->winner === 0){
 				$game->result = "The game ended in a draw.";	
 			}elseif((int)$game->winner === 1){
-				$game->result = $game->user1." has won the game.";
+				$game->result = 'Player 1 has won the game.';
 			}elseif((int)$game->winner === 2){
-				$game->result = $game->user2." has won the game.";	 
+				$game->result = 'Player 2 has won the game.';	 
 			}else{
 				$game->result = "Opponent has not chosen his weapon yet!";
 			}

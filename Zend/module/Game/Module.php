@@ -53,6 +53,10 @@ class Module
     						$resultSetPrototype->setArrayObjectPrototype(new Game());
     						return new TableGateway('game', $dbAdapter, null, $resultSetPrototype);
     					},
+						'MongoGame' => function($sm){
+							$m = new \MongoClient();
+							return $m->game;
+						},
     			),
     	);
     }

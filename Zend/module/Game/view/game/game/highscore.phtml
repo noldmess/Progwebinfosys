@@ -18,7 +18,7 @@ The top <?php echo $limit; ?> player!
     <tbody>
     	<?php
 			$i = 0;
-			foreach($highscore as $row){ 
+			foreach($highscore as $key => $value){ 
 				$i++;
 		?>
         	<tr>
@@ -26,10 +26,10 @@ The top <?php echo $limit; ?> player!
                 	<?php echo $i; ?>
                 </td>
                 <td>
-        			<?php echo $row->winner_name; ?>
+        			<?php echo $key; ?>
         		</td>
                 <td>
-					<?php echo $row->wins; ?>
+					<?php echo $value; ?>
                 </td>
         <?php 
 			};

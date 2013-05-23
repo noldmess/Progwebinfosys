@@ -28,7 +28,7 @@ class Game
     
     public function exchangeArray($data)
     {
-    	$this->id     = (isset($data['id'])) ? $data['id'] : null;
+    	$this->id     = (isset($data['_id'])) ? $data['_id'] : null;
         $this->user1     = (isset($data['user1'])) ? $data['user1'] : null;
         $this->email1     = (isset($data['email1'])) ? $data['email1'] : null;
         $this->choice1     = (isset($data['choice1'])) ? $data['choice1'] : null;
@@ -40,12 +40,50 @@ class Game
 		$this->result	= (isset($data['result'])) ? $data['result'] : null;
 		
         $this->winner     = (isset($data['winner'])) ? $data['winner'] : null;
-        $this->winner_name     = (isset($data['winner_name'])) ? $data['winner_name'] : null;
+        $this->winner_mail     = (isset($data['winner_mail'])) ? $data['winner_mail'] : null;
 		$this->wins     = (isset($data['wins'])) ? $data['wins'] : null;
         					
         $this->hash     = (isset($data['hash'])) ?$data['hash']:hash('sha256',$this->user1.$this->user2.time());
         
     }
+	
+	public function getDocument(){
+		$doc = array();
+		if($this->id !== null && $this->id !== 0){
+			$doc['_id'] = $this->id;	
+		}
+		if($this->user1 !== null){
+			$doc['user1'] = $this->user1;	
+		}
+		if($this->email1 !== null){
+			$doc['email1'] = $this->email1;	
+		}
+		if($this->choice1 !== null){
+			$doc['choice1'] = $this->choice1;	
+		}
+		if($this->user2 !== null){
+			$doc['user2'] = $this->user2;	
+		}
+		if($this->email2 !== null){
+			$doc['email2'] = $this->email2;	
+		}
+		if($this->choice2 !== null){
+			$doc['choice2'] = $this->choice2;	
+		}
+		if($this->winner !== null){
+			$doc['winner'] = $this->winner;	
+		}
+		if($this->winner_mail !== null){
+			$doc['winner_mail'] = $this->winner_mail;	
+		}
+		
+		if($this->hash !== null){
+			$doc['hash'] = $this->hash;	
+		}
+		
+		
+		return $doc;			
+	}
     
     public function setInputFilter(InputFilterInterface $inputFilter)
     {
