@@ -11,7 +11,6 @@ class GameForm extends Form
         // we want to ignore the name passed
         parent::__construct('Game');
         $this->setAttribute('method', 'post');
-        $this->setAttribute('onsubmit' , 'return onsubmittest()');
         $this->add(array(
             'name' => 'id',
             'type' => 'Hidden',
