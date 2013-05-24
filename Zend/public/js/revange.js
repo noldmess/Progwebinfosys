@@ -9,7 +9,7 @@ function reply_click(clicked_id)
 
 var Revange={
 		result:function(data,container){
-			$.post('http://localhost/PvW/Zend/public/game/resultJSON',{hash:data}, function(data) {
+			$.post('http://138.232.66.90/Zend/public/game/resultJSON',{hash:data}, function(data) {
 					$(container+ " *").remove();
 					$(container).append('<div id="succes"></div>');
 					$(container).append('<form id="Game" name="Game" method="post" action="" onsubmit="return Revange.submit()"></form>');

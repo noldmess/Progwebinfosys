@@ -2,7 +2,7 @@
 var Result={
 		result:function(hashcode,container){
 			var container=container;
-			$.post('http://localhost/PvW/Zend/public/game/resultJSON',{hash:hashcode}, function(data) {
+			$.post('http://138.232.66.90/Zend/public/game/resultJSON',{hash:hashcode}, function(data) {
 					$('h1').remove();
 					$(container).append("<h1>Result</h1>");
 					$(container).append("<p>Player 1: "+data.game.user1+""+data.game.email1+"<br  />");
