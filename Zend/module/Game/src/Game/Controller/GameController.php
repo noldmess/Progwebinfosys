@@ -161,7 +161,6 @@ class GameController extends AbstractActionController
     }
 
     public function newJSONAction(){
-    	echo "a";
     	$request = $this->getRequest();
     	$form = new GameForm();
     	if ($request->isPost()) {
@@ -225,8 +224,11 @@ class GameController extends AbstractActionController
 		$form = new GameForm();
 		$request = $this->getRequest();
 		if ($request->isPost()) {
-			$gametmp=$this->getGameTable()->getGameHash($_POST['hash']);
-			
+			$document=$this->getDb()->games->findOne(array("hash" => $hash));
+				
+			$game = new Game();
+				
+			$game->exchangeArray($document);
 			$game= new Game();
 			$form->setInputFilter($game->getInputFilter2());;
 			$form->setData($request->getPost());
