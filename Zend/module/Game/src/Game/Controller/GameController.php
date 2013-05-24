@@ -222,9 +222,9 @@ class GameController extends AbstractActionController
 		if ($request->isPost()) {
 			$document=$this->getDb()->games->findOne(array("hash" => $hash));
 				
-			$game = new Game();
+			$gametmp = new Game();
 				
-			$game->exchangeArray($document);
+			$gametmp->exchangeArray($document);
 			//$game= new Game();
 			$form->setInputFilter($game->getInputFilter2());;
 			$form->setData($request->getPost());
@@ -232,6 +232,7 @@ class GameController extends AbstractActionController
 				return $this->getResponse()->setContent(Json::encode(array("data"=>"failiar")));
 			}
 			if ($form->isValid() ){
+				$game = new Game();
 				$game->exchangeArray($form->getData());
 				$game->id=$_POST['id'];
 				$game->user1=$gametmp->user1;
