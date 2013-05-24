@@ -225,14 +225,13 @@ class GameController extends AbstractActionController
 			$gametmp = new Game();
 				
 			$gametmp->exchangeArray($document);
-			//$game= new Game();
+			$game= new Game();
 			$form->setInputFilter($game->getInputFilter2());;
 			$form->setData($request->getPost());
 			if($gametmp->choice2==!0){
 				return $this->getResponse()->setContent(Json::encode(array("data"=>"failiar")));
 			}
 			if ($form->isValid() ){
-				$game = new Game();
 				$game->exchangeArray($form->getData());
 				$game->id=$_POST['id'];
 				$game->user1=$gametmp->user1;
