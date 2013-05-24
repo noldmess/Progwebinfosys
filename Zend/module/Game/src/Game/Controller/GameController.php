@@ -220,7 +220,7 @@ class GameController extends AbstractActionController
 		$form = new GameForm();
 		$request = $this->getRequest();
 		if ($request->isPost()) {
-			$document=$this->getDb()->games->findOne(array("hash" => $hash));
+			$document=$this->getDb()->games->findOne(array("hash" => $_POST['hash']));
 				
 			$gametmp = new Game();
 				
