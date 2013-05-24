@@ -165,21 +165,23 @@ class GameController extends AbstractActionController
     	$form = new GameForm();
     	if ($request->isPost()) {
     		$game= new Game();
-    		
+    		echo "a";
     		$form->setInputFilter($game->getInputFilter());
     		$form->setData($request->getPost());
-    		 
+    		echo "a";
     		if ($form->isValid()) {
     			$game->exchangeArray($form->getData());
     			
     			// $this->getGameTable()->saveGame($game);
-    	
+    			echo "a";
     			$document = $game->getDocument();
     			//to do 
     			$this->getDb()->games->insert($document);
+    			echo "a";
     			$session = new Container('base');
     			$session->email =  $game->email1;
     			$session->user = $game->user1;
+    			echo "a";
     			$msg = 'Your friend, '.$game->user1.', wants to challenge you. To accept the challenge follow the link: ';
     			$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'fight','hash'=>$game->hash));
     			$subject = 'Challenge accepted?';
