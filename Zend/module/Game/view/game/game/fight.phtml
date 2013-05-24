@@ -1,26 +1,9 @@
-<script type="text/javascript">
-function reply_click(clicked_id)
-{
-   var  x= document.forms[0].choice2;
-   x.value=clicked_id;
-}
-function onsubmittest()
-{
-	var returnval=true;
-	var  form = document.forms[0];
-  	if(form.choice2.value==='' || form.choice1.value === null || form.choice1.value === undefined){
-		returnval=false;
-		var el = document.getElementById('weapons');
-		el.innerHTML='Please select a weapon!';
-	}
-   return returnval;
-}
- </script>
+<div id="div">
 <h1>Your turn</h1>
+<div>
 <?php echo "Userdata: ".$hallo->user2.", ".$hallo->email2; ?> <br>
 <?php echo "Your challenger: ".$hallo->user1; ?> <br>
-	
-
+</div>
 <?php
 $form = $this->form;
 $form->setAttribute('action', $this->url('game',array('action'=>'fight',"hash"=>$hallo->hash)));
@@ -41,5 +24,8 @@ echo $this->formHidden($form->get('id'));
    	</div>
 <?php
 echo $this->formHidden($form->get('choice2'));
+echo $this->formHidden($form->get('hash'));
 echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();
+?>
+</div>

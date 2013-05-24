@@ -1,10 +1,8 @@
-<h1>Result</h1>
-Player 1: <?php echo $game->user1.", ".$game->email1; ?> <br  />
-has chosen: <?php echo $game->choiceArray[$game->choice1-1]; ?> <br /> 
-
-Player 2: <?php echo $game->user2.", ".$game->email2;?> <br  />
-has chosen: <?php echo $game->choiceArray[$game->choice2-1]; ?> <br /><br />
-
-<?php echo $game->result ?>
-<br />
-<a class="btn btn-primary" href="<?php echo $this->url('game',array('action' => 'revenge'));?>">Revenge</a><br> 
+<script type="text/javascript">
+$(document).ready(function(){ 
+	var dsfsdf=$('h1');
+	Result.result($('h1').attr('id'),'#div');
+}); 
+</script>
+<h1 id="<?php echo $game->hash; ?>">Result</h1>
+<div id="div"></div>
