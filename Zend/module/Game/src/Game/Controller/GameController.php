@@ -256,7 +256,7 @@ class GameController extends AbstractActionController
 				//$this->getGameTable()->saveGame($game);
 				
 				$document = $game->getDocument();
-				echo json_decode($document);
+				echo json_encode($document);
 				$this->getDb()->games->save($document);
 					
 				$msg = 'Your oppononent, '.$game->user2.', has chosen his weapon. To see the result click';
