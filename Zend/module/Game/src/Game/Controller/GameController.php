@@ -229,7 +229,7 @@ class GameController extends AbstractActionController
 			$game = new Game();
 				
 			$game->exchangeArray($document);
-			$game= new Game();
+			//$game= new Game();
 			$form->setInputFilter($game->getInputFilter2());;
 			$form->setData($request->getPost());
 			if($gametmp->choice2==!0){
