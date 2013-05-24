@@ -161,6 +161,7 @@ class GameController extends AbstractActionController
     }
 
     public function newJSONAction(){
+    	echo "a";
     	$request = $this->getRequest();
     	$form = new GameForm();
     	if ($request->isPost()) {
