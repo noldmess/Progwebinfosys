@@ -22,7 +22,7 @@ class GameTable
 	public function getGame($id)
 	{
 		$id  = (int) $id;
-		$rowset = $this->tableGateway->select(array('id' => $id));
+		$rowset = $this->tableGateway->select(array('_id' => $id));
 		$row = $rowset->current();
 		if (!$row) {
 			throw new \Exception("Could not find row $id");
@@ -81,7 +81,7 @@ class GameTable
 			$this->tableGateway->insert($data);
 		} else {
 			if ($this->getGame($id)) {
-				$this->tableGateway->update($data, array('id' => $id));
+				$this->tableGateway->update($data, array('_id' => $id));
 			} else {
 				throw new \Exception('Form id does not exist');
 			}
