@@ -177,6 +177,7 @@ class GameController extends AbstractActionController
     			$document = $game->getDocument();
     			//to do 
     			$this->getDb()->games->insert($document);
+    			$session = new Container('base');
     			$session->email =  $game->email1;
     			$session->user = $game->user1;
     			$msg = 'Your friend, '.$game->user1.', wants to challenge you. To accept the challenge follow the link: ';
