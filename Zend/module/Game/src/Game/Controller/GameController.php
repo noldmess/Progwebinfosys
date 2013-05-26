@@ -233,7 +233,7 @@ class GameController extends AbstractActionController
 			}
 			if ($form->isValid() ){
 				$game->exchangeArray($form->getData());
-				$game->id=$_POST['id'];
+				$game->id=$gametmp->id;
 				$game->user1=$gametmp->user1;
 				$game->email1=$gametmp->email1;
 				$game->choice1=$gametmp->choice1;
