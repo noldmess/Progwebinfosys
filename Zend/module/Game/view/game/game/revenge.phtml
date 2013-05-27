@@ -17,7 +17,7 @@ function onsubmittest()
 }
   
 </script>
-
+<div id="succes"></div>
 <h1>Revenge</h1>
 <?php echo "Userdata: ".$form->get('user1')->getValue().", ".$form->get('email1')->getValue(); ?> <br>
 <?php echo "Your opponent: ".$form->get('user2')->getValue().", ".$form->get('email2')->getValue(); ?> <br>
@@ -34,6 +34,7 @@ echo $this->formHidden($form->get('email1'));
 echo $this->formHidden($form->get('user2'));
 echo $this->formHidden($form->get('email2'));
 ?>
+
 <div id="weapons"></div>
 <div class="control-group">
 <div class="btn-group" data-toggle="buttons-radio">

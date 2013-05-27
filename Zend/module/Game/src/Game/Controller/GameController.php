@@ -177,7 +177,6 @@ class GameController extends AbstractActionController
     			$session = new Container('base');
     			$session->email =  $game->email1;
     			$session->user = $game->user1;
-    			echo $game->email1;
     			$msg = 'Your friend, '.$game->user1.', wants to challenge you. To accept the challenge follow the link: ';
     			$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'fight','hash'=>$game->hash));
     			$subject = 'Challenge accepted?';
@@ -233,7 +232,7 @@ class GameController extends AbstractActionController
 			}
 			if ($form->isValid() ){
 				$game->exchangeArray($form->getData());
-				$game->id=$_POST['id'];
+				$game->id=$gametmp->id;
 				$game->user1=$gametmp->user1;
 				$game->email1=$gametmp->email1;
 				$game->choice1=$gametmp->choice1;
