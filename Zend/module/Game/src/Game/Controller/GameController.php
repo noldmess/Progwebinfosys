@@ -260,7 +260,7 @@ class GameController extends AbstractActionController
 				//echo json_encode($document);
 				$this->getDb()->games->save($document);
 					
-				$msg = 'Your oppononent, '.$game->user2.', has chosen his weapon. To see the result click';
+				$msg = 'Your opponent, '.$game->user2.', has chosen his weapon. To see the result click';
 				$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'result','hash'=>$game->hash));
 				$subject = 'See the result';
 				$this->sendMail($game->email1, $subject, $msg, $game->msg2, $link);
@@ -369,7 +369,7 @@ class GameController extends AbstractActionController
 		$message->addTo($email)
 				->addFrom('Aaron.Messner@student.uibk.ac.at')
 				->setSubject($subject)
-				->setBody($msg.' '.$link.' \nMessage from your opponent: '.$usermessage);
+				->setBody($msg.' '.$link.' Message from your opponent: '.$usermessage);
 		$transport->send($message);
 	}
 	
