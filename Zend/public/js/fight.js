@@ -20,6 +20,13 @@ var Fight={
 			}
 		return false;
 		},
+		
+		reply_click:function(clicked_id){
+			
+		   var  x= document.forms[0].choice2;
+		   x.value=clicked_id;
+
+		}
 
 	
 }
