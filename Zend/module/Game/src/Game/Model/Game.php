@@ -9,13 +9,15 @@ use Zend\InputFilter\InputFilterInterface;
 
 class Game
 {
-	public $id;
+    public $id;
     public $user1;
     public $email1;
     public $user2;
     public $email2;
     public $choice1;
     public $choice2;
+    public $msg1;
+    public $msg2;
 	public $choiceArray = array('ROCK', 'PAPER', 'SCISSOR', 'SPOCK', 'LIZARD');
     public $hash;
 	public $winner;
@@ -42,6 +44,9 @@ class Game
         $this->winner     = (isset($data['winner'])) ? $data['winner'] : null;
         $this->winner_mail     = (isset($data['winner_mail'])) ? $data['winner_mail'] : null;
 		$this->wins     = (isset($data['wins'])) ? $data['wins'] : null;
+		
+	$this->msg1     = (isset($data['msg1'])) ? $data['msg1'] : null;
+	$this->msg2     = (isset($data['msg2'])) ? $data['msg2'] : null;
         					
         $this->hash     = (isset($data['hash'])) ?$data['hash']:hash('sha256',$this->user1.$this->user2.time());
         
@@ -75,6 +80,12 @@ class Game
 		}
 		if($this->winner_mail !== null){
 			$doc['winner_mail'] = $this->winner_mail;	
+		}
+		if($this->msg1 !== null){
+			$doc['msg1'] = $this->msg1;	
+		}
+		if($this->msg2 !== null){
+			$doc['msg2'] = $this->msg2;	
 		}
 		
 		if($this->hash !== null){
