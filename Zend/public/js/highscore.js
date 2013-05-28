@@ -1,9 +1,8 @@
 
 
-
 var Highscore={
 	load:function(){
-		$.getJSON('http://138.232.66.90/Zend/public/game/highscoreJSON', function(data) {	
+		$.getJSON('/zend/game/highscoreJSON', function(data) {	
 			var count=1;
 			$.each(data, function(index, value) {
 				var tablebody=$('.table tbody');
