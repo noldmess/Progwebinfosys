@@ -66,7 +66,7 @@
               <li><a href="<?php echo  str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>info/">Gruppe Info</a></li>
               <li><a href="<?php echo  str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>wiki/">Wiki</a></li>
              <li> <a href="https://github.com/noldmess/Progwebinfosys">GIT</a></li>
-             <li><a href="/Zend/public/">Zend</a></li>
+             <li><a href="/zend/">Zend</a></li>
             </ul>
            	<form class="navbar-form pull-right" action="<?php echo  str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>wiki/search.php" method="POST">
            	 <div class="input-prepend">
