@@ -53,6 +53,7 @@ var NewGame={
 				el.innerHTML='';
 			}
 		if( returnval){
+			$('input[type="submit"]').hide();
 			$.post('Zend/public/game/newJSON',{choice1: form.choice1.value,
 					email1:form.email1.value,
 					email2:form.email2.value,
@@ -61,11 +62,13 @@ var NewGame={
 					user2: form.user2.value	},
 					function(data) {
 					if(data.data==='sucess'){
-						$('#succes').append("email sand");
+						$('#succes').append("<h1>Email sand</h1>");
 						document.forms[0].email2.value="";
 						document.forms[0].user2.value="";
+						$('input[type="submit"]').show();
 					}
 				}, "json");
+				
 			}
 		return false;
 		}
