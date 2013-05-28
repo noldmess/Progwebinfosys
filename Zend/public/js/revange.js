@@ -13,7 +13,7 @@ var Revange={
 					$(container+ " *").remove();
 					$(container).append('<div id="succes"></div>');
 					$(container).append('<h1>Revenge</h1> Userdata: '+data.game.user1+", "+data.game.email1+' <br>');
-					$(container).append('Your opponent: 'data.game.user2+", "+data.game.email2+'<br>');
+					$(container).append('Your opponent: '+data.game.user2+", "+data.game.email2+'<br>');
 					$(container).append('<form id="Game" name="Game" method="post" action="" onsubmit="return Revange.submit()"></form>');
 					var ffd=$(container+" form");
 					$(container+" form").append('<input type="hidden" value="'+data.game.user1+'" name="user1"></input>');
