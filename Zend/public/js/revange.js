@@ -82,6 +82,7 @@ var Revange={
 				el.innerHTML='';
 			}
 			if( returnval){
+				$('input[type="submit"]').hide();
 				$.post('http://138.232.66.90/Zend/public/game/newJSON',{choice1: form.choice1.value,
 						email1:form.email1.value,
 						email2:form.email2.value,
@@ -90,7 +91,9 @@ var Revange={
 						user2: form.user2.value	},
 						function(data) {
 						if(data.data==='sucess'){
-							$('#succes').append("email sand");
+								$('#succes').remove();
+								$('#succes').append("<h1>Email sand</h1>");
+								$('input[type="submit"]').show();
 						}
 					}, "json");
 				}
