@@ -22,11 +22,11 @@ var Revange={
 					$(container+" form").append('<input type="hidden" value="'+data.game.email2+'" name="email2"></input>');
 					$(container+" form").append('<label><span>Send a message to your opponent</span><textarea name="msg1" cols="50" rows="4"></textarea></label>');
 					$(container+" form").append('<div id = "weapons"></div><div class="control-group"><div class="btn-group" data-toggle="buttons-radio"></div></div>');
-					$("div.btn-group").append('<img id="1" class="btn btn-primary" onclick="reply_click(this.id)" name="Stein" src="../../img/Zend/Stein.png"></img>');
-					$("div.btn-group").append('<img id="2" class="btn btn-primary" onclick="reply_click(this.id)" name="Papier" src="../../img/Zend/Papier.png"></img>');
-					$("div.btn-group").append('<img id="3" class="btn btn-primary" onclick="reply_click(this.id)" name="Schere" src="../../img/Zend/Schere.png"></img>');
-					$("div.btn-group").append('<img id="4" class="btn btn-primary" onclick="reply_click(this.id)" name="Spock" src="../../img/Zend/spock.png"></img>');
-					$("div.btn-group").append('<img id="5" class="btn btn-primary" onclick="reply_click(this.id)" name="Echse" src="../../img/Zend/Echse.png"></img>');
+					$("div.btn-group").append('<img id="1" class="btn btn-primary" onclick="NewGame.reply_click(this.id)" name="Stein" src="../../img/Zend/Stein.png"></img>');
+					$("div.btn-group").append('<img id="2" class="btn btn-primary" onclick="NewGame.reply_click(this.id)" name="Papier" src="../../img/Zend/Papier.png"></img>');
+					$("div.btn-group").append('<img id="3" class="btn btn-primary" onclick="NewGame.reply_click(this.id)" name="Schere" src="../../img/Zend/Schere.png"></img>');
+					$("div.btn-group").append('<img id="4" class="btn btn-primary" onclick="NewGame.reply_click(this.id)" name="Spock" src="../../img/Zend/spock.png"></img>');
+					$("div.btn-group").append('<img id="5" class="btn btn-primary" onclick="NewGame.reply_click(this.id)" name="Echse" src="../../img/Zend/Echse.png"></img>');
 					$(container+" form").append('<input type="hidden" value="" name="choice1"></input>');
 					$(container+" form").append('<input id="submitbutton" type="submit" value="New Game" name="submit"></input>');
 			
