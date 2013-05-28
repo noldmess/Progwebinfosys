@@ -4,6 +4,7 @@ var Result={
 			$.post('/Zend/public/game/resultJSON',{hash:hashcode}, function(data) {
 					$('h1').remove();
 					$(container).append("<h1>Result</h1>");
+					$(container).append("<p>Message from player 2:<br>"+data.game.msg2+"</p>");
 					$(container).append("<p>Player 1: "+data.game.user1+""+data.game.email1+"</p>");
 					$(container).append("<p>Player 1: "+data.game.choice1+" </p>");
 					$(container).append("<p>Player 2: "+data.game.user2+""+data.game.email2+" </p>");
