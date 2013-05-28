@@ -86,7 +86,7 @@ var Revange={
 			}
 			if( returnval){
 				$('input[type="submit"]').hide();
-				$.post('/Zend/public/game/newJSON',{choice1: form.choice1.value,
+				$.post('/zend/game/newJSON',{choice1: form.choice1.value,
 						email1:form.email1.value,
 						email2:form.email2.value,
 						submit:	"New GAME",
