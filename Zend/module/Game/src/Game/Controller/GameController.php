@@ -168,9 +168,9 @@ class GameController extends AbstractActionController
     		$form->setInputFilter($game->getInputFilter());
     		$form->setData($request->getPost());
     		if ($form->isValid()) {
-    			var_dump($form->getData());
+    			
     			$game->exchangeArray($form->getData());
-    			var_dump($game);
+    			
     			// $this->getGameTable()->saveGame($game);
     			$document = $game->getDocument();
     			//to do 
