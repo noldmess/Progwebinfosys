@@ -96,7 +96,8 @@ var Revange={
 						function(data) {
 						if(data.data==='sucess'){
 								$('#succes *').remove();
-								$('#succes').append("<h1>Email sand</h1>");
+								$('#succes').append("<h1>Email sent</h1>");
+								$('#succes').append("<h2>Inviting opponent...</h2> An invitation to your game has been sent to:<br />" +document.forms[0].user2.value+", "+document.forms[0].email2.value);
 								$('input[type="submit"]').show();
 						}
 					}, "json");
