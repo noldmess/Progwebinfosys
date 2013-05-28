@@ -1,7 +1,7 @@
 var Result={
 		result:function(hashcode,container){
 			var container=container;
-			$.post('/Zend/public/game/resultJSON',{hash:hashcode}, function(data) {
+			$.post('/zend/game/resultJSON',{hash:hashcode}, function(data) {
 					$('h1').remove();
 					$(container).append("<h1>Result</h1>");
 					$(container).append("<p>Message from player 2:<br>"+data.game.msg2+"</p>");
