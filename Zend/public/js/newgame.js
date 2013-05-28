@@ -1,4 +1,3 @@
-
 var NewGame={
 	
 		submit:function(){
@@ -54,7 +53,7 @@ var NewGame={
 				el.innerHTML='';
 			}
 		if( returnval){
-			$.post('http://138.232.66.90/Zend/public/game/newJSON',{choice1: form.choice1.value,
+			$.post('Zend/public/game/newJSON',{choice1: form.choice1.value,
 					email1:form.email1.value,
 					email2:form.email2.value,
 					submit:	"New GAME",
