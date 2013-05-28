@@ -9,7 +9,7 @@ function reply_click(clicked_id)
 
 var Revange={
 		result:function(data,container){
-			$.post('/Zend/public/game/resultJSON',{hash:data}, function(data) {
+			$.post('/zend/game/resultJSON',{hash:data}, function(data) {
 					$(container+ " *").remove();
 					$(container).append('<div id="succes"></div>');
 					$(container).append('<h1>Revenge</h1> Userdata: '+data.game.user1+", "+data.game.email1+' <br>');
