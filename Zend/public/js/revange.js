@@ -9,7 +9,7 @@ function reply_click(clicked_id)
 
 var Revange={
 		result:function(data,container){
-			$.post('http://138.232.66.90/Zend/public/game/resultJSON',{hash:data}, function(data) {
+			$.post('/Zend/public/game/resultJSON',{hash:data}, function(data) {
 					$(container+ " *").remove();
 					$(container).append('<div id="succes"></div>');
 					$(container).append('<form id="Game" name="Game" method="post" action="" onsubmit="return Revange.submit()"></form>');
@@ -83,7 +83,7 @@ var Revange={
 			}
 			if( returnval){
 				$('input[type="submit"]').hide();
-				$.post('http://138.232.66.90/Zend/public/game/newJSON',{choice1: form.choice1.value,
+				$.post('/Zend/public/game/newJSON',{choice1: form.choice1.value,
 						email1:form.email1.value,
 						email2:form.email2.value,
 						submit:	"New GAME",
