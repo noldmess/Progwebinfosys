@@ -91,7 +91,7 @@ var Revange={
 						user2: form.user2.value	},
 						function(data) {
 						if(data.data==='sucess'){
-								$('#succes').remove();
+								$('#succes *').remove();
 								$('#succes').append("<h1>Email sand</h1>");
 								$('input[type="submit"]').show();
 						}
