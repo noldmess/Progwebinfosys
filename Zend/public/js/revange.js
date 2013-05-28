@@ -18,6 +18,7 @@ var Revange={
 					$(container+" form").append('<input type="hidden" value="'+data.game.user2+'" name="user2"></input>');
 					$(container+" form").append('<input type="hidden" value="'+data.game.email1+'" name="email1"></input>');
 					$(container+" form").append('<input type="hidden" value="'+data.game.email1+'" name="email2"></input>');
+					$(container+" form").append('<label><span>Send a message to your opponent</span><textarea name="msg1" cols="50" rows="4"></textarea></label>');
 					$(container+" form").append('<div id = "weapons"></div><div class="control-group"><div class="btn-group" data-toggle="buttons-radio"></div></div>');
 					$("div.btn-group").append('<img id="1" class="btn btn-primary" onclick="reply_click(this.id)" name="Stein" src="../../img/Zend/Stein.png"></img>');
 					$("div.btn-group").append('<img id="2" class="btn btn-primary" onclick="reply_click(this.id)" name="Papier" src="../../img/Zend/Papier.png"></img>');
