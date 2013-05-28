@@ -192,6 +192,15 @@ class Game
             )));
             
             $inputFilter->add($factory->createInput(array(
+                'name'     => 'msg1',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+            )));
+            
+            $inputFilter->add($factory->createInput(array(
             		'name'     => 'choice1',
             		'required' => true,
             		'filters'  => array(
@@ -243,7 +252,18 @@ class Game
     										'max' => 5,
     								),
     						),
-    				))));
+    				)
+    			)
+    		));
+    		
+    		$inputFilter->add($factory->createInput(array(
+                'name'     => 'msg2',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+            	)));
     
     		$this->inputFilter = $inputFilter;
     	}
