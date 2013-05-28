@@ -1,4 +1,3 @@
-
 var Fight={
 	
 		submit:function(){
@@ -13,8 +12,8 @@ var Fight={
 				el.innerHTML='';
 			}
 		if( returnval){
-			$.post('http://138.232.66.90/Zend/public/game/fightJSON',{choice2: form.choice2.value,id: form.id.value,
-					hash:form.hash.value}, function(data) {
+			$.post('/Zend/public/game/fightJSON',{choice2: form.choice2.value,id: form.id.value,
+					hash:form.hash.value, msg2: form.msg2.value}, function(data) {
 					$('#div *').remove();
 					Result.result(form.hash.value,'#div');	
 				}, "json");
