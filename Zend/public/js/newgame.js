@@ -59,7 +59,8 @@ var NewGame={
 					email2:form.email2.value,
 					submit:	"New GAME",
 					user1: form.user1.value,
-					user2: form.user2.value	},
+					user2: form.user2.value,
+					msg1: form.msg1.value},
 					function(data) {
 					if(data.data==='sucess'){
 						$('#succes *').remove();
