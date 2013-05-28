@@ -369,7 +369,7 @@ class GameController extends AbstractActionController
 		$message->addTo($email)
 				->addFrom('Aaron.Messner@student.uibk.ac.at')
 				->setSubject($subject)
-				->setBody($msg.' '.$link);
+				->setBody($msg.' '.$link.' \nMessage from your opponent: '.$usermessage);
 		$transport->send($message);
 	}
 	
