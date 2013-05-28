@@ -69,7 +69,7 @@ class GameController extends AbstractActionController
 				$msg = 'Your friend, '.$game->user1.', wants to challenge you. To accept the challenge follow the link: ';
 				$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'fight','hash'=>$game->hash));
 				$subject = 'Challenge accepted?'; 
-				$this->sendMail($game->email2, $subject, $msg, $link);
+				$this->sendMail($game->email2, $subject, $msg, $game->msg1, $link);
 				
 				/*
 				$this->getGameTable()->saveGame($game);
@@ -180,7 +180,7 @@ class GameController extends AbstractActionController
     			$msg = 'Your friend, '.$game->user1.', wants to challenge you. To accept the challenge follow the link: ';
     			$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'fight','hash'=>$game->hash));
     			$subject = 'Challenge accepted?';
-    			$this->sendMail($game->email2, $subject, $msg, $link);
+    			$this->sendMail($game->email2, $subject, $msg, $game->msg1, $link);
     			$user=array("user1"=> $game->user1,"email1"=>$game->email1,"email2"=>$game->email2,"user2"=> $game->user2);
     			return $this->getResponse()->setContent(Json::encode(array("data"=>"sucess","user"=>$user)));
     		}
@@ -238,6 +238,7 @@ class GameController extends AbstractActionController
 				$game->choice1=$gametmp->choice1;
 				$game->user2=$gametmp->user2;
 				$game->email2=$gametmp->email2;
+				$game->msg1=$gametmp->msg1;
 				$game->hash=$gametmp->hash;
 					
 				$var1 = ($game->choice1 - 1 < 0) ? 4 : $game->choice1 - 1;
@@ -261,7 +262,7 @@ class GameController extends AbstractActionController
 				$msg = 'Your oppononent, '.$game->user2.', has chosen his weapon. To see the result click';
 				$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'result','hash'=>$game->hash));
 				$subject = 'See the result';
-				$this->sendMail($game->email1, $subject, $msg, $link);
+				$this->sendMail($game->email1, $subject, $msg, $game->msg2, $link);
 				$game=$this->result($game);
 				$user=array("user1"=> $game->user1,"email1"=>$game->email1,"email2"=>$game->email2,"user2"=> $game->user2);
 				return $this->getResponse()->setContent(Json::encode(array("data"=>"sucess","user"=>$user,"result"=>$game->result)));
@@ -334,7 +335,7 @@ class GameController extends AbstractActionController
     		$game = new Game();
     		$game->exchangeArray($document);
     		$game=$this->result($game);
-    		$game=array("user1"=> $game->user1,"email1"=>$game->email1,"email2"=>$game->email2,"user2"=> $game->user2,"result"=>$game->result,"choice1"=>$game->choiceArray[$game->choice1-1],"choice2"=>$game->choiceArray[$game->choice2-1]);
+    		$game=array("user1"=> $game->user1,"email1"=>$game->email1,"email2"=>$game->email2,"user2"=> $game->user2,"result"=>$game->result,"choice1"=>$game->choiceArray[$game->choice1-1],"choice2"=>$game->choiceArray[$game->choice2-1], "msg2"=>$game->msg2);
     		return $this->getResponse()->setContent(Json::encode(array("data"=>"sucess","game"=>$game)));
     	}else{
     		return $this->redirect()->toRoute('game');
@@ -355,7 +356,7 @@ class GameController extends AbstractActionController
     	return  $game;
     }
 	
-	public function sendMail($email, $subject, $msg, $link){
+	public function sendMail($email, $subject, $msg, $usermessage, $link){
 		$transport = new SmtpTransport();
 		$options   = new SmtpOptions(array(
 		'host' => 'smtp.uibk.ac.at',
