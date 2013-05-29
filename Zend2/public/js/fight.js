@@ -12,7 +12,7 @@ var Fight={
 				el.innerHTML='';
 			}
 		if( returnval){
-			$.post('/zend/game/fightJSON',{choice2: form.choice2.value,id: form.id.value,
+			$.post('/zend2/game/fightJSON',{choice2: form.choice2.value,id: form.id.value,
 					hash:form.hash.value, msg2: form.msg2.value}, function(data) {
 					$('#div *').remove();
 					Result.result(form.hash.value,'#div');	

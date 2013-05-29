@@ -2,7 +2,7 @@
 
 var Highscore={
 	load:function(){
-		$.getJSON('/zend/game/highscoreJSON', function(data) {	
+		$.getJSON('/zend2/game/highscoreJSON', function(data) {	
 			var count=1;
 			$.each(data, function(index, value) {
 				var tablebody=$('.table tbody');
