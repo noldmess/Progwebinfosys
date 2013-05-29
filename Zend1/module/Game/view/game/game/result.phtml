@@ -1,0 +1,10 @@
+<h1>Result</h1>
+Player 1: <?php echo $game->user1.", ".$game->email1; ?> <br  />
+has chosen: <?php echo $game->choiceArray[$game->choice1-1]; ?> <br /> 
+
+Player 2: <?php echo $game->user2.", ".$game->email2;?> <br  />
+has chosen: <?php echo $game->choiceArray[$game->choice2-1]; ?> <br /><br />
+
+<?php echo $game->result ?>
+<br />
+<a class="btn btn-primary" href="<?php echo $this->url('game',array('action' => 'revenge'));?>">Revenge</a><br> 
