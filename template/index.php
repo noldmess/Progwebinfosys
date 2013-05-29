@@ -44,5 +44,28 @@
             <li>Rock-paper-scissors-lizard-Spock implementieren</li>
 			</ol>
 		</li>
+       		<li><h3>Aufgabe 7</h3>
+			<ol>
+				<li>ZF DB-Abstraktion</li>
+				<li>Email Versand, ZF, SMTP: smtp.uibk.ac.at</li>
+				<li>Revanche starten nach Spiel</li>
+				<li>Highscore Liste auf Startseite</li>
+				<li>Formular&uuml;berpr&uuml;fung mit JavaScript ohne JS-lib!</li>
+				<li>Usability: Erkl&auml;rungen, Waffen-Auswahl &uuml;ber Bilder, CSS/Design</li>
+				<li>Wiedererkennung per Cookie -> Vorausf&uuml;llen der eigenen Daten</li>
+				<li>Testspiele: 10 Personen -> Feedback sammeln und dokumentieren</li>
+			</ol>
+		</li>
+		<li><h3>Aufgabe 8</h3>
+			<ol>
+				<li>Single Page Application (kein Reload der Seite) mit jQuery</li>
+				<li>HTML wird nicht mehr vom Server dynamisch generiert</li>
+				<li>Anzeige der Highscores mit automatischen Reload (alle 30 Sekunden) in der Single Page Application</li>
+				<li>Gesamte Kommunikation mit dem Server &uuml;ber AJAX (jQuery)</li>
+				<li>Installation MongoDB am Server</li>
+				<li>Adaptierung Speicherung der Spiele von MySQL nach MongoDB</li>
+				<li>Eingabe von Textnachrichten: beide Spieler k&ouml;nnen bei jedem Zug eine Textnachricht f&uuml;r den anderen Spieler setzen. Die zwei Nachrichten sollen jeweils zusammen mit dem Spiel in der DB gespeichert werden.</li>
+			</ol>
+		</li>
 	</ol>
 	</div>
