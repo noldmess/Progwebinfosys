@@ -89,7 +89,7 @@ class DB{
 	 
 	 public function search($title){
 	 	$list=array();
-		echo $title;
+
 	 	$result=$this->mysqli->query("Select title from article_old where title like '%$title%' ") ;
 	 	if($result===FAlSE){
 	 		echo ("Error insert");
@@ -104,6 +104,7 @@ class DB{
 	 
 	 public function searchLimit($title,$min,$max){
 	 	$list=array();
+		
 	 	$result=$this->mysqli->query("Select title from article_old where title like '%$title%' LIMIT $min,$max ") ;
 	 	if($result===FAlSE){
 	 		echo ("Error insert");
