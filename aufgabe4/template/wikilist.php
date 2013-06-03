@@ -3,10 +3,10 @@
 	<ul class="nav nav-list">
 		<li class="nav-header">Sidebar</li>
 		<?php foreach($TEMPLATE['index'] as $item){?>
-			<li><a href="<?php echo urlencode($item);?>/"> <?php echo urldecode($item);?></a></li>
+			<li><a href="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/wiki/<?php echo urlencode($item);?>/"> <?php echo urldecode($item);?></a></li>
 		<?php }?>
 	
-	<li><a href="new/"><i class="icon-pencil"></i>New Article</a></li>
+	<li><a href="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/wiki/new/"><i class="icon-pencil"></i>New Article</a></li>
 	</ul>
 	<?php 
 	 $max=abs($TEMPLATE['paginatorstart'])+4;
@@ -26,19 +26,19 @@
 	 
 	 if($min>1){
 	 	?>
-	 			<a href="/aufgabe4/wiki/" title="ende"><</a>
+	 			<a href="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/wiki/" title="ende"><</a>
 	 		<?php 
 	 	}
 	 	for ($i=$min-1;$i<=$max;$i++){
 		if($TEMPLATE['paginatorstart']==$i){
 			echo urlencode($i);?>|
 		<?php }else{?>
-			<a href="/aufgabe4/wiki/<?php echo urlencode($i);?>/"><?php echo urlencode($i);?></a>|
+			<a href="/<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/wiki/<?php echo urlencode($i);?>/"><?php echo urlencode($i);?></a>|
 		<?php }
 	}
 	if($max<$TEMPLATE['paginatornumber']){
 		?>
-			<a href="/aufgabe4/wiki/<?php echo round($TEMPLATE['paginatornumber'], 0, PHP_ROUND_HALF_DOWN);?>/" title="ende"">></a>
+			<a href="/<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/wiki/<?php echo round($TEMPLATE['paginatornumber'], 0, PHP_ROUND_HALF_DOWN);?>/" title="ende"">></a>
 		<?php 
 	}
 	?>

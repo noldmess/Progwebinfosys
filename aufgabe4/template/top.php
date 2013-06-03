@@ -38,19 +38,19 @@
   </head>
 
   <body>
-	<script src="js/jquery.js"></script>
-    <script src="js/bootstrap-transition.js"></script>
-    <script src="js/bootstrap-alert.js"></script>
-    <script src="js/bootstrap-modal.js"></script>
-    <script src="js/bootstrap-dropdown.js"></script>
-    <script src="js/bootstrap-scrollspy.js"></script>
-    <script src="js/bootstrap-tab.js"></script>
-    <script src="js/bootstrap-tooltip.js"></script>
-    <script src="js/bootstrap-popover.js"></script>
-    <script src="js/bootstrap-button.js"></script>
-    <script src="js/bootstrap-collapse.js"></script>
-    <script src="js/bootstrap-carousel.js"></script>
-    <script src="js/bootstrap-typeahead.js"></script>
+	<script src="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/js/jquery.js"></script>
+    <script src="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/js/bootstrap-transition.js"></script>
+    <script src="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/js/bootstrap-alert.js"></script>
+    <script src="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/js/bootstrap-modal.js"></script>
+    <script src="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/js/bootstrap-dropdown.js"></script>
+    <script src="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/js/bootstrap-scrollspy.js"></script>
+    <script src="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/js/bootstrap-tab.js"></script>
+    <script src="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/js/bootstrap-tooltip.js"></script>
+    <script src="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/js/bootstrap-popover.js"></script>
+    <script src="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/js/bootstrap-button.js"></script>
+    <script src="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/js/bootstrap-collapse.js"></script>
+    <script src="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/js/bootstrap-carousel.js"></script>
+    <script src="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/js/bootstrap-typeahead.js"></script>
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
@@ -62,8 +62,8 @@
           <a class="brand" href="/">Gruppe 2</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a href="/aufgabe4/info/">Gruppe Info</a></li>
-              <li><a href="/aufgabe4/wiki/">Wiki</a></li>
+              <li><a href="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/info/">Gruppe Info</a></li>
+              <li><a href="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/wiki/">Wiki</a></li>
              <li> <a href="https://github.com/noldmess/Progwebinfosys">GIT</a></li>
             </ul>
            	<form class="navbar-form pull-right" action="wiki/search.php" method="POST">
