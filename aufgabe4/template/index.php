@@ -22,7 +22,7 @@
 			<ol>
 			<li>Paginator bei Suche als auch restlichen Liste</li>
             <li>Generator: <a href="wiki/generator/1000/">generate 1000</a> <br />
-            	usage: 138.232.66.90/wiki/generator/x/ -> x steht für die Anzahl der zu erzeugenden Artikeln
+            	usage: 138.232.66.90/aufgabe4/wiki/generator/x/ -> x steht für die Anzahl der zu erzeugenden Artikeln
             </li>
             <li>Linklisten</li>
 			</ol>
