@@ -5,7 +5,7 @@
 		<?php foreach($TEMPLATE['index'] as $item){?>
 			<li><a href="/wiki/<?php echo urlencode($item);?>/"> <?php echo urldecode($item);?></a></li>
 		<?php }?>
-	<li><a href="/wiki/new/"><i class="icon-pencil"></i>New Article</a></li>
+	<li><a href="wiki/new/"><i class="icon-pencil"></i>New Article</a></li>
 	</ul>
 	</div>
 	<!--/.well -->

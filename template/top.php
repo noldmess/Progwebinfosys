@@ -64,7 +64,7 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li><a href="<?php echo  str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>info/">Gruppe Info</a></li>
-              <li><a href="<?php echo  str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>wiki/">Wiki</a></li>
+             <!--<li><a href="<?php echo  str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>wiki/">Wiki</a></li>-->
              <li> <a href="https://github.com/noldmess/Progwebinfosys">GIT</a></li>
              <li><a href="/zend1/">Zend-Game</a></li>
              <li><a href="/zend2/">Zend-Game(SPA 1)</a></li>
