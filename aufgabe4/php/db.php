@@ -89,12 +89,13 @@ class DB{
 	 
 	 public function search($title){
 	 	$list=array();
+		echo $title;
 	 	$result=$this->mysqli->query("Select title from article_old where title like '%$title%' ") ;
 	 	if($result===FAlSE){
 	 		echo ("Error insert");
 	 		return false;
 	 	}else{
-	 	while ($row = $result->fetch_object()){
+	 		while ($row = $result->fetch_object()){
         		$list[] = $row->title;
     		}
 	 	}
