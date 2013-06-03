@@ -24,7 +24,7 @@ class Article{
 	
 	public function parse($text){
 			 $tmp=preg_replace( '/([^\-]*)\-{3}([^\-]*)\-{3}([^\-]*)/', '$1<b>$2</b>$3', $text);
-			 return preg_replace( '/(\w*)\[\[(.[^\]]*)\]\](\w*)/', '$1<a href="'.str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME'])).'/wiki/$2/">$2</a>$3', $tmp);
+			 return preg_replace( '/(\w*)\[\[(.[^\]]*)\]\](\w*)/', '$1<a href="/aufgabe3/wiki/$2/">$2</a>$3', $tmp);
 	}
 	
 	
