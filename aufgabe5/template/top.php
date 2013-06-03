@@ -67,7 +67,7 @@
               <li><a href="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/wiki/">Wiki</a></li>
              <li> <a href="https://github.com/noldmess/Progwebinfosys">GIT</a></li>
             </ul>
-           	<form class="navbar-form pull-right" action="wiki/search.php" method="POST">
+           	<form class="navbar-form pull-right" action="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/wiki/search/" method="POST">
            	 <div class="input-prepend">
 				<span class="add-on"><i class="icon-search"></i></span>
 				<input class="span2" id="inputIcon" type="search" name="searchtitle">

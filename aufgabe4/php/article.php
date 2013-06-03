@@ -44,7 +44,7 @@ class Article{
 		}
 		$res = preg_replace_callback('/(\w*)\[\[(.[^\]]*)\]\](\w*)/', 
 			function($matches){
-				return $matches[1].'<a href="/wiki/'.urlencode($matches[2]).'/">'.$matches[2].'</a>'.$matches[3]; 
+				return $matches[1].'<a href="'.str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME'])).'/wiki/'.urlencode($matches[2]).'/">'.$matches[2].'</a>'.$matches[3]; 
 			}, $tmp);
 		return $res;
 	}

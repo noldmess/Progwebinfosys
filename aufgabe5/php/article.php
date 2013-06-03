@@ -49,9 +49,9 @@ class Article{
 		$art = $db->selectTitle($matches[2]);
 		if(isset($art['id'])){
 			$this->addLinkTitle($art['id']);
-			return $matches[1].'<a href="/wiki/'.$art['id'].'/'.urlencode($matches[2]).'/">'.$matches[2].'</a>'.$matches[3]; 
+			return $matches[1].'<a href="'.str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME'])).'/wiki/'.$art['id'].'/'.urlencode($matches[2]).'/">'.$matches[2].'</a>'.$matches[3]; 
 		}else{
-			return $matches[1].'<a href="/wiki/'.urlencode($matches[2]).'/">'.$matches[2].'</a>'.$matches[3]; 
+			return $matches[1].'<a href="'.str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME'])).'/wiki/'.urlencode($matches[2]).'/">'.$matches[2].'</a>'.$matches[3]; 
 		}
 	}
 	
