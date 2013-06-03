@@ -12,7 +12,7 @@
 				$first = false;
 				echo "<br>Linked by:";
 			}?>
-			<li><a href="<?php echo $item['id']."/".preg_replace('/\s+/', '_', $item['title']);?>/"> <?php echo $item['title'];?></a></li>
+			<li><a href="../../<?php echo $item['id']."/".preg_replace('/\s+/', '_', $item['title']);?>/"> <?php echo $item['title'];?></a></li>
 		<?php }?> 
         <br>
 		<p>Creator: <?php echo $TEMPLATE['UserCreate']?><br />

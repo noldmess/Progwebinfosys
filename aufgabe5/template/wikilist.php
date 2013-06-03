@@ -32,20 +32,20 @@
 	 
 	 if($min>1){
 	 	?>
-	 			<a href="wiki/" title="ende""><</a>
-	 		<?php 
-	 	}
-	 	for ($i=$min-1;$i<=$max;$i++){
+	 			<a href="/aufgabe5/wiki/" title="ende"><</a>
+	 	<?php 
+	 }
+	 for ($i=$min-1;$i<=$max;$i++){
 		if($TEMPLATE['paginatorstart']==$i){
 		?>
 			<?php echo urlencode($i);?>|
 		<?php }else{?>
-			<a href="<?php echo urlencode($i);?>/"><?php echo urlencode($i);?></a>|
+			<a href="/aufgabe5/wiki/<?php echo urlencode($i);?>/"><?php echo urlencode($i);?></a>|
 		<?php }
 	}
 	if($max<$TEMPLATE['paginatornumber']){
 		?>
-			<a href="<?php echo round($TEMPLATE['paginatornumber'], 0, PHP_ROUND_HALF_DOWN);?>/" title="ende"">></a>
+			<a href="/aufgabe5/wiki/<?php echo round($TEMPLATE['paginatornumber'], 0, PHP_ROUND_HALF_DOWN);?>/" title="ende">></a>
 		<?php 
 	}
 	?>

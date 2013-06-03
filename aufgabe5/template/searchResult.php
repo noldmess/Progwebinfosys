@@ -11,7 +11,7 @@
 				}else{
 					foreach($TEMPLATE['searchList'] as $item){
 			?>
-					<li><a href="<?php echo $item['id']."/".preg_replace( '/\s+/', '_', $item['title']);?>/"> <?php echo $item['title'];?></a></li>
+					<li><a href="/aufgabe5/wiki/<?php echo $item['id']."/".preg_replace( '/\s+/', '_', $item['title']);?>/"> <?php echo $item['title'];?></a></li>
 			<?php 
 					}
 				}
@@ -31,20 +31,19 @@
 	 }
 	 if($min>1){
 	 	?>
-	 			<a href="search/0/<?php echo $TEMPLATE['searchText'];?>/" title="ende""><</a>
+	 		<a href="/aufgabe5/wiki/search/0/<?php echo $TEMPLATE['searchText'];?>/" title="ende"><</a>
 	 		<?php 
-	 	}
-	 	for ($i=$min;$i<=$max;$i++){
+	 }
+	 for ($i=$min;$i<=$max;$i++){
 		if($TEMPLATE['searchPaginatorStart']==$i){
-		?>
-			<?php echo $i;?>|
+			echo $i;?>|
 		<?php }else{?>
-			<a href="search/<?php echo urlencode($i)."/".$TEMPLATE['searchText'];?>/"><?php echo urlencode($i);?></a>|
+			<a href="/aufgabe5/wiki/search/<?php echo urlencode($i)."/".$TEMPLATE['searchText'];?>/"><?php echo urlencode($i);?></a>|
 		<?php }
 	}
 	if($max<$TEMPLATE['searchPaginatorNumber']){
 		?>
-			<a href="search/<?php echo $TEMPLATE['searchPaginatorNumber']."/".$TEMPLATE['searchText'];?>/" title="ende"">></a>
+			<a href="/aufgabe5/wiki/search/<?php echo $TEMPLATE['searchPaginatorNumber']."/".$TEMPLATE['searchText'];?>/" title="ende">></a>
 		<?php 
 	}
 	?>
