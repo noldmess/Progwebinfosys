@@ -33,12 +33,12 @@
 		if($TEMPLATE['paginatorstart']==$i){
 			echo urlencode($i);?>|
 		<?php }else{?>
-			<a href="/<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/wiki/<?php echo urlencode($i);?>/"><?php echo urlencode($i);?></a>|
+			<a href="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/wiki/<?php echo urlencode($i);?>/"><?php echo urlencode($i);?></a>|
 		<?php }
 	}
 	if($max<$TEMPLATE['paginatornumber']){
 		?>
-			<a href="/<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/wiki/<?php echo round($TEMPLATE['paginatornumber'], 0, PHP_ROUND_HALF_DOWN);?>/" title="ende"">></a>
+			<a href="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/wiki/<?php echo round($TEMPLATE['paginatornumber'], 0, PHP_ROUND_HALF_DOWN);?>/" title="ende"">></a>
 		<?php 
 	}
 	?>
