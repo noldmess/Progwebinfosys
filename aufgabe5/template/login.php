@@ -2,7 +2,7 @@
       <div class="row">
         <div class="login-form">
           <h2>Login</h2>
-          <form action="wiki/" method="Post">
+          <form action="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/wiki/" method="Post">
             <fieldset>
               <div class="clearfix">
                 <input type="text" placeholder="Username" name="username">
