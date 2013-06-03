@@ -50,8 +50,8 @@
           <a class="brand" href="/">Gruppe 2</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a href="/info/">Gruppe Info</a></li>
-              <li><a href="/wiki/">Wiki</a></li>
+              <li><a href="info/">Gruppe Info</a></li>
+              <li><a href="wiki/">Wiki</a></li>
             </ul>
            	<form class="navbar-form pull-right" action="/index.php?page=wiki" method="GET">
            	 <div class="input-prepend">
