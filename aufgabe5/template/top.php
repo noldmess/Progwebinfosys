@@ -63,8 +63,8 @@
           <a class="brand" href="">Gruppe 2</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a href="info/">Gruppe Info</a></li>
-              <li><a href="wiki/">Wiki</a></li>
+              <li><a href="../info/">Gruppe Info</a></li>
+              <li><a href="../wiki/">Wiki</a></li>
              <li> <a href="https://github.com/noldmess/Progwebinfosys">GIT</a></li>
             </ul>
            	<form class="navbar-form pull-right" action="wiki/search.php" method="POST">
