@@ -1,0 +1,87 @@
+body{
+    background-image:url(../image/background.png);
+    background-repeat:repeat-x;
+}
+
+*{
+	margin: 0px;
+}
+
+#main{
+	min-height:500px;
+	margin-top:10px;
+	margin-left: auto ;
+	margin-right: auto ;
+    background-color:#ffffff;
+    box-shadow: 2px 2px 2px rgb(102, 102, 102);
+    -moz-border-radius-topleft: 15px;  /* Firefox bis Version 3.6 */
+   -webkit-border-top-left-radius: 15px;  /* Safari, Chrome (vor WebKit Version 533) */
+    border-top-left-radius: 15px;  /* Firefox 4; Browser mit CSS3 Unterstützung */
+   -moz-border-radius-topright: 15px;  /* Firefox bis Version 3.6 */
+   -webkit-border-top-right-radius: 15px;  /* Safari, Chrome (vor WebKit Version 533) */
+    border-top-right-radius: 15px;  /* Firefox 4; Browser mit CSS3 Unterstützung */
+    width:740px;
+}
+
+
+
+#heade{
+	margin: 0px;
+	background:rgb(95, 142, 220);
+	 -moz-border-radius-topleft: 15px;  /* Firefox bis Version 3.6 */
+   -webkit-border-top-left-radius: 15px;  /* Safari, Chrome (vor WebKit Version 533) */
+    border-top-left-radius: 15px;  /* Firefox 4; Browser mit CSS3 Unterstützung */
+   -moz-border-radius-topright: 15px;  /* Firefox bis Version 3.6 */
+   -webkit-border-top-right-radius: 15px;  /* Safari, Chrome (vor WebKit Version 533) */
+    border-top-right-radius: 15px;  /* Firefox 4; Browser mit CSS3 Unterstützung */
+	text-align:center;
+	padding: 5px 10px 5px;
+}
+
+#content{
+	height: 450px;
+}
+
+#content div.text{
+	padding: 5px 10px 5px;
+}
+
+#content  div.user{
+	text-align: center;
+}
+
+
+
+#impressum{
+	background:rgb(95, 142, 220);
+	text-align: center;
+}
+
+
+
+#navigation{
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	background:rgb(95, 142, 220);
+	text-align:left;
+	font-family: fantasy;
+}
+#navigation ul li{
+	padding:5px;
+	display: inline;
+	list-style:none;
+	text-align:center;
+	
+
+}
+
+#navigation ul li a{
+	color:black;
+	text-decoration:none;
+}
+
+#navigation ul li:hover{
+background-color: white;
+}
+
+
