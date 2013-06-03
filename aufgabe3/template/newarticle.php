@@ -1,6 +1,6 @@
 <div class="span9">
 	<div class="hero-unit">
-		<form  class="form-horizontal" action="wiki/<?php echo (isset($_GET['title'])?urlencode($_GET['title'])."/":""); ?>" method="post">
+		<form  class="form-horizontal" action="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>/wiki/" method="post">
 			<fieldset>
 				<label>Title</label>
                     <input name="id" type="hidden" value="<?php if($_GET['action']==="change"){echo $TEMPLATE['id'];}?>" />
