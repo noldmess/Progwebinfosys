@@ -14,6 +14,7 @@
 
         <!-- Scripts -->
         <?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+         				->prependFile($this->basePath() . '/js/bootstrap.min.js')
          				->prependFile($this->basePath() . '/js/highscore.js')
          				->prependFile($this->basePath() . '/js/fight.js')
          				->prependFile($this->basePath() . '/js/revange.js')
@@ -21,7 +22,7 @@
          				->prependFile($this->basePath() . '/js/pageController.js')					->prependFile($this->basePath() . '/js/newgame.js')
         				->prependFile($this->basePath() . '/js/jquery.cookie.js')
                                         ->prependFile($this->basePath() . '/js/jquery.min.js')
-                                        ->prependFile($this->basePath() . '/js/bootstrap.min.js')?>
+                                        ?>
 
     </head>
     <body>
