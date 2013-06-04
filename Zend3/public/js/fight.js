@@ -45,7 +45,7 @@ var Fight={
 								window.history.pushState({path:"/zend3/game/new"},"","/zend3/game/new#result/"+hash+"/player/2");
 								$('#fight').hide();
 								Result.result(hash,2); 
-							}, 3000);)
+							}, 3000);
 							
 						}, "json");
 					
