@@ -32,10 +32,12 @@ var Fight={
 					var hash=$('#fight form input[name="hash"]').attr("value");
 					$.post('/zend3/game/fightJSON',{choice2: $('#fight form input[name="choice2"]').attr("value"),id: $('#fight form').attr("id"),
 						hash:$('#fight form input[name="hash"]').attr("value"), msg2: $('#fight form textarea').val()}, function(data) {
+							window.history.pushState({path:"/zend3/game/new"},"","/zend3/game/new#result/"+hash+"/player/2");
+							$('#fight').hide();
+							Result.result(hash,2);
 						}, "json");
-					$('#fight').hide();
-					window.history.pushState({path:"/zend3/game/new"},"","/zend3/game/new#result/"+hash+"/player/2");
-					Result.result(hash,2);
+					
+
 			}
 		return false;
 		},
