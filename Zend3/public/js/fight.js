@@ -34,7 +34,7 @@ var Fight={
 						hash:$('#fight form input[name="hash"]').attr("value"), msg2: $('#fight form textarea').val()}, function(data) {
 						}, "json");
 					$('#fight').hide();
-					window.history.pushState({path:"/zend3/game/new"},"","/zend3/game/new#resolt/"+hash+"/player/2");
+					window.history.pushState({path:"/zend3/game/new"},"","/zend3/game/new#result/"+hash+"/player/2");
 					Result.result(hash,2);
 			}
 		return false;
