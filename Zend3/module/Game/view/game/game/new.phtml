@@ -14,6 +14,17 @@ $(document).ready(function(){
 	        $(this).removeClass("loading"); 
 	    }    
 	});
+	
+	var user1 = $.cookie('user1);
+	var email1 = $.cookie('email1);
+	if(user1 !== undefined){
+		document.forms[0].user1.value=user1;
+	}
+	if(email1 !== undefined){
+		document.forms[0].email1.value=email1;
+	}
+	
+	
 
 });
 </script>
