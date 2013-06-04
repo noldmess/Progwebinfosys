@@ -74,6 +74,10 @@ var NewGame={
 						document.forms[0].user2.value="";
 						$('input[type="submit"]').show();
 						$('html, body').animate( { scrollTop: 0 }, 'slow' );
+						setTimeout(function(){ 
+							$('#succes').hide();
+						}, 3000);)
+
 					}
 				}, "json");
 				
