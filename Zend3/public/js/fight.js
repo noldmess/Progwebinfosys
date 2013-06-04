@@ -11,6 +11,9 @@ var Fight={
 					$('#user1').append(data.game.user1+", "+data.game.email1);
 					$('#user1msg').append(data.game.msg1);
 					$('#user2').append(data.game.user2+", "+data.game.email2);
+					
+					$.cookie('user1', data.game.user2, { expires: 7, path: '/' });
+					$.cookie('email1', data.game.email2, { expires: 7, path: '/' });
 				}else{
 					$('#fight').hide();
 					$('#new').show();
