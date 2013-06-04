@@ -255,7 +255,7 @@ class GameController extends AbstractActionController
 					$game->winner_mail = $game->email2;
 				}
 			
-				$this->getGameTable()->saveGame($game);
+				//$this->getGameTable()->saveGame($game);
 				$document = $game->getDocument();
 				//echo json_encode($document);
 				$this->getDb()->games->save($document);
