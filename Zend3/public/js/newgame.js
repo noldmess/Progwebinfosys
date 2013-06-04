@@ -1,5 +1,6 @@
 var NewGame={
 	
+		
 		submit:function(){
 			var returnval=true;
 			var  form = document.forms[0];
@@ -54,7 +55,7 @@ var NewGame={
 			}
 		if( returnval){
 			$('input[type="submit"]').hide();
-			$.post('/zend3/game/newJSON',{choice1: form.choice1.value,
+			$.post('zend3/game/newJSON',{choice1: form.choice1.value,
 					email1:form.email1.value,
 					email2:form.email2.value,
 					submit:	"New GAME",
@@ -73,7 +74,7 @@ var NewGame={
 				}, "json");
 				
 			}
-		return false;
+		return true;
 		},
 		
 		reply_click:function(clicked_id){
