@@ -236,12 +236,12 @@ class GameController extends AbstractActionController
 				$game->exchangeArray($form->getData());
 				$game->id=$gametmp->id;
 				$game->user1=$gametmp->user1;
-				$game->email1=$gametmp->email1;
+				echo $game->email1=$gametmp->email1;
 				$game->choice1=$gametmp->choice1;
 				$game->user2=$gametmp->user2;
 				$game->email2=$gametmp->email2;
 				$game->msg1=$gametmp->msg1;
-				echo $game->hash=$gametmp->hash;
+				$game->hash=$gametmp->hash;
 					
 				$var1 = ($game->choice1 - 1 < 0) ? 4 : $game->choice1 - 1;
 				$var2 = ($game->choice2 - 1 < 0) ? 4 : $game->choice2 - 1;
