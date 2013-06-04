@@ -1,0 +1,9 @@
+Feedbacksammlung:
++"Waffenwahl" ist gekennzeichnet mit "wer gewinnt gegen wen" Farben (warum nicht auch beim Drüberfahren mit der Maus?)
++Fehlermeldungen machen aufmerksam bei Eingabe
++Felder meist sinnvoll und schlüssig bezeichnet (Aber nicht sehr schön aufbereitet)
++schlicht und einfach
++Hinweis dass Mail gesendet wurde, trotzdem aber nicht unbedingt beste Lösung über Mails
++wenig Farben
++Anleitung vorhanden, auch wenn nur auf Englisch
++Bilder sind nicht alle sofort selbsterklärend (welches ist die Echse, welches Spock??)
