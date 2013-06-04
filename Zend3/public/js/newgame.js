@@ -74,7 +74,7 @@ var NewGame={
 				}, "json");
 				
 			}
-		return true;
+		return false;
 		},
 		
 		reply_click:function(clicked_id){
