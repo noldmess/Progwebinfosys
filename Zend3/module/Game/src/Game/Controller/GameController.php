@@ -36,7 +36,6 @@ class GameController extends AbstractActionController
 	
 	public function getDb(){
 		if(!$this->db){
-			
 			$sm = $this->getServiceLocator();
 			$this->db = $sm->get('MongoGame');	
 			
@@ -275,7 +274,10 @@ class GameController extends AbstractActionController
 	public function getfightJSONAction()
 	{
 	
-    		$game = $this->getGameTable()->getGameHash($_POST['hash']);
+    		$document=$this->getDb()->games->findOne(array("hash" => $_POST['hash']));
+				
+			$game = new Game();
+			$game->exchangeArray($document);
 			$game=array("user1"=> $game->user1,"email1"=>$game->email1,"email2"=>$game->email2,"user2"=> $game->user2, "msg1"=>$game->msg1);
 			return $this->getResponse()->setContent(Json::encode(array("data"=>"sucess","game"=>$game)));	 
     
