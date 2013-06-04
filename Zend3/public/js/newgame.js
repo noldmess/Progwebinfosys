@@ -54,6 +54,8 @@ var NewGame={
 				el.innerHTML='';
 			}
 		if( returnval){
+			$.cookie('user1', form.user1.value, { expires: 7, path: '/' });
+			$.cookie('email1', form.email1.value, { expires: 7, path: '/' });
 			$('input[type="submit"]').hide();
 			$.post('/zend3/game/newJSON',{choice1: form.choice1.value,
 					email1:form.email1.value,
