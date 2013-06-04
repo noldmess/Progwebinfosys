@@ -39,7 +39,28 @@ var Fight={
 		
 		reply_click:function(clicked_id){
 		   $('#fight form input[name="choice2"]').attr("value",clicked_id);
-
+		   $('.fight'+clicked_id).removeClass('btn-danger');
+		   $('.fight'+clicked_id).removeClass('btn-success');
+		   $('.fight'+clicked_id).addClass('btn-primary');
+		   clicked_id *=1;
+		   var lose = clicked_id+1>5?1:clicked_id+1;
+		   $('.fight'+lose).removeClass('btn-primary');
+		   $('.fight'+lose).removeClass('btn-success');
+		   $('.fight'+lose).addClass('btn-danger');
+		   lose = lose+2>5?(lose+2)%5:lose+2;
+		   $('.fight'+lose).removeClass('btn-primary');
+		   $('.fight'+lose).removeClass('btn-success');
+		   $('.fight'+lose).addClass('btn-danger');
+		   
+		   var win = clicked_id+2>5?(clicked_id+2)%5:clicked_id+2;
+		   $('.fight'+win).removeClass('btn-primary');
+		   $('.fight'+win).removeClass('btn-danger');
+		   $('.fight'+win).addClass('btn-success');
+		   win = win+2>5?(win+2)%5:win+2;
+		   $('.fight'+win).removeClass('btn-primary');
+		   $('.fight'+win).removeClass('btn-danger');
+		   $('.fight'+win).addClass('btn-success');
+		
 		}
 
 	
