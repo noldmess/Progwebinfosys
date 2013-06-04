@@ -35,9 +35,17 @@ var Fight={
 					var hash=$('#fight form input[name="hash"]').attr("value");
 					$.post('/zend3/game/fightJSON',{choice2: $('#fight form input[name="choice2"]').attr("value"),id: $('#fight form').attr("id"),
 						hash:$('#fight form input[name="hash"]').attr("value"), msg2: $('#fight form textarea').val()}, function(data) {
-							window.history.pushState({path:"/zend3/game/new"},"","/zend3/game/new#result/"+hash+"/player/2");
-							$('#fight').hide();
-							Result.result(hash,2);
+							$('#succes').empty();
+							$('#succes').append("<h1>Email sent</h1>");
+							$('#succes').append("<h2>Reminding opponent...</h2> An email to see the result has been sent to your challenger<br />";
+							$('#succes').css({'border-style': 'solid', 'border-width': '3px', 'border-color': 'green', 'padding': '10px'});
+							$('html, body').animate( { scrollTop: 0 }, 'slow' );
+							setTimeout(function(){ 
+								window.history.pushState({path:"/zend3/game/new"},"","/zend3/game/new#result/"+hash+"/player/2");
+								$('#fight').hide();
+								Result.result(hash,2); 
+							}, 3000);)
+							
 						}, "json");
 					
 
