@@ -11,7 +11,7 @@ var Revange={
 		start:function(hashcode){
 			$.post('/zend3/game/resultJSON',{hash:hashcode,player:2}, function(data) {
 				if(data.game.result===2){
-				 $('#new] form input[name="user1"]').attr("value",data.game.user1);
+				 $('#new form input[name="user1"]').attr("value",data.game.user1);
 				 $('#new form input[name="email1"]').attr("value",data.game.email1);
 				 $('#new form input[name="user2"]').attr("value",data.game.user2);
 				 $('#new form input[name="email2"]').attr("value",data.game.email2);
