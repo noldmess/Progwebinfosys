@@ -19,7 +19,7 @@ var Revange={
 					 $('#new form input[name="user1"]').attr("value",data.game.user2);
 					 $('#new form input[name="email1"]').attr("value",data.game.email2);
 					 $('#new form input[name="user2"]').attr("value",data.game.user1);
-					 $('#new form input[name="email2"]').attr("value",data.game.user1);
+					 $('#new form input[name="email2"]').attr("value",data.game.email1);
 				}
 				 
 				}
