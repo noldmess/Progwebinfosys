@@ -167,13 +167,13 @@ class GameController extends AbstractActionController
     		$form->setInputFilter($game->getInputFilter());
     		$form->setData($request->getPost());
     		if ($form->isValid()) {
-    			
+
     			$game->exchangeArray($form->getData());
-    			
+    			 
     			// $this->getGameTable()->saveGame($game);
     			$document = $game->getDocument();
+    			//to do
     			$this->getDb()->games->insert($document);
-    			//to do 
     			$session = new Container('base');
     			$session->email =  $game->email1;
     			$session->user = $game->user1;
@@ -276,8 +276,8 @@ class GameController extends AbstractActionController
 	{
 	
     		$document=$this->getDb()->games->findOne(array("hash" => $_POST['hash']));
-				
 			$game = new Game();
+			echo "sdfdfsdf.".$game->user1;
 			$game->exchangeArray($document);
 			$game=array("user1"=> $game->user1,"email1"=>$game->email1,"email2"=>$game->email2,"user2"=> $game->user2, "msg1"=>$game->msg1);
 			return $this->getResponse()->setContent(Json::encode(array("data"=>"sucess","game"=>$game)));	 
