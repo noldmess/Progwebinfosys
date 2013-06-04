@@ -8,18 +8,18 @@ function reply_click(clicked_id)
   }
 
 var Revange={
-		start:function(hashcode){
-			$.post('/zend3/game/resultJSON',{hash:hashcode,player:2}, function(data) {
-				if(data.game.result===2){
+		start:function(hashcode, player){
+			$.post('/zend3/game/resultJSON',{hash:hashcode, player:player}, function(data) {
+				if(player*1 === 2){
+				 $('#new form input[name="user1"]').attr("value",data.game.user2);
+				 $('#new form input[name="email1"]').attr("value",data.game.email2);
+				 $('#new form input[name="user2"]').attr("value",data.game.user1);
+				 $('#new form input[name="email2"]').attr("value",data.game.email1);
+				}else{
 				 $('#new form input[name="user1"]').attr("value",data.game.user1);
 				 $('#new form input[name="email1"]').attr("value",data.game.email1);
 				 $('#new form input[name="user2"]').attr("value",data.game.user2);
 				 $('#new form input[name="email2"]').attr("value",data.game.email2);
-				}else{
-					 $('#new form input[name="user1"]').attr("value",data.game.user2);
-					 $('#new form input[name="email1"]').attr("value",data.game.email2);
-					 $('#new form input[name="user2"]').attr("value",data.game.user1);
-					 $('#new form input[name="email2"]').attr("value",data.game.email1);
 				}
 				 
 				}
