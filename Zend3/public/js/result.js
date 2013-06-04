@@ -30,10 +30,12 @@ var Result={
 					$.cookie('user1', data.game.user2, { expires: 7, path: '/' });
 					$.cookie('email1', data.game.email2, { expires: 7, path: '/' });	
 				}
-				$('#resultbotten').attr("href","#revange/"+data.game.hash+"/player/"+player);
+				
 				if(data.player!=data.game.result){
-					$('#resultbotten').show();	
+					$('#resultbotten').attr("href","#revange/"+data.game.hash+"/player/"+player);
+					$('#resultbotten').show();
 				}else{
+					$('#resultnew').attr("href","#revange/"+data.game.hash+"/player/"+player);
 					$('#resultnew').show();
 				}
 				}, "json");
