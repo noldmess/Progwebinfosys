@@ -47,7 +47,7 @@
             <li>Rock-paper-scissors-lizard-Spock implementieren</li>
 			</ol>
 		</li>
-       		<li><h3>Aufgabe 7</h3>
+       		<li><h3><a href="/zend1/">Aufgabe 7</a></h3>
 			<ol>
 				<li>ZF DB-Abstraktion</li>
 				<li>Email Versand, ZF, SMTP: smtp.uibk.ac.at</li>
@@ -59,7 +59,7 @@
 				<li>Testspiele: 10 Personen -> Feedback sammeln und dokumentieren</li>
 			</ol>
 		</li>
-		<li><h3>Aufgabe 8</h3>
+		<li><h3><a href="/zend2/">Aufgabe 8</a></h3>
 			<ol>
 				<li>Single Page Application (kein Reload der Seite) mit jQuery</li>
 				<li>HTML wird nicht mehr vom Server dynamisch generiert</li>
@@ -68,6 +68,28 @@
 				<li>Installation MongoDB am Server</li>
 				<li>Adaptierung Speicherung der Spiele von MySQL nach MongoDB</li>
 				<li>Eingabe von Textnachrichten: beide Spieler k&ouml;nnen bei jedem Zug eine Textnachricht f&uuml;r den anderen Spieler setzen. Die zwei Nachrichten sollen jeweils zusammen mit dem Spiel in der DB gespeichert werden.</li>
+			</ol>
+		</li>
+		<li><h3><a href="/zend3/">Aufgabe 9</a></h3>
+			<ol>
+				<li>Single Page App mit einer index.html fürs Game + Homeseite + Highscoreseite</li>
+				<li>Client-Routen über Anchor #</li>
+				<li>Usabilityverbesserungen, im besonderen:
+					<ol>
+						<li>
+							Feedback bei AJAX (Loading, Sending, etc...)
+						</li>
+						<li>
+							Beschreibung zu Spiel Ablauf (Emails + Web)
+							</li>
+						<li>
+							Einfache Sprache
+						</li>
+					</ol>
+				</li>
+				<li>
+					User-Tests (min. 5 Benutzer_innen, Feedback protokollieren) <a href="/feedback2.txt">Feedback</a>
+				</li>
 			</ol>
 		</li>
 	</ol>
