@@ -37,7 +37,7 @@ var Fight={
 						hash:$('#fight form input[name="hash"]').attr("value"), msg2: $('#fight form textarea').val()}, function(data) {
 							$('#succes').empty();
 							$('#succes').append("<h1>Email sent</h1>");
-							$('#succes').append("<h2>Reminding opponent...</h2> An email to see the result has been sent to your challenger<br />";
+							$('#succes').append("<h2>Reminding opponent...</h2> An email to see the result has been sent to your challenger<br />");
 							$('#succes').css({'border-style': 'solid', 'border-width': '3px', 'border-color': 'green', 'padding': '10px'});
 							$('html, body').animate( { scrollTop: 0 }, 'slow' );
 							setTimeout(function(){
