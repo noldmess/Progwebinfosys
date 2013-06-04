@@ -70,6 +70,7 @@ var NewGame={
 						$('#succes').append("<h1>Email sent</h1>");
 						$('#succes').append("<h2>Inviting opponent...</h2> An invitation to your game has been sent to:<br />" +document.forms[0].user2.value+", "+document.forms[0].email2.value);
 						$('#succes').css({'border-style': 'solid', 'border-width': '3px', 'border-color': 'green', 'padding': '10px'});
+						$('#succes').show();
 						document.forms[0].email2.value="";
 						document.forms[0].user2.value="";
 						$('input[type="submit"]').show();
