@@ -277,7 +277,6 @@ class GameController extends AbstractActionController
 	
     		$document=$this->getDb()->games->findOne(array("hash" => $_POST['hash']));
 			$game = new Game();
-			echo "sdfdfsdf.".$game->user1;
 			$game->exchangeArray($document);
 			$game=array("user1"=> $game->user1,"email1"=>$game->email1,"email2"=>$game->email2,"user2"=> $game->user2, "msg1"=>$game->msg1);
 			return $this->getResponse()->setContent(Json::encode(array("data"=>"sucess","game"=>$game)));	 
