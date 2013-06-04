@@ -20,9 +20,10 @@ var Result={
 				$('#resultnew').hide();
 				if(data.player!=data.game.result){
 					$('#resultbotten').show();
-					$('#resultbotten').attr("href","#revange/"+data.game.hash);
+					$('#resultbotten').attr("href","#revange/"+data.game.hash+"/player/"+player);
 				}else{
 					$('#resultnew').show();
+					$('#resultnew').attr("href","#revange/"+data.game.hash+"/player/"+player);
 				}
 				}, "json");
 		}
