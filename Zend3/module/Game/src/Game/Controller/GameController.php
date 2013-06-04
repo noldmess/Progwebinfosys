@@ -287,8 +287,8 @@ class GameController extends AbstractActionController
     	$hash =  $this->params()->fromRoute('hash', 0);
     	if($hash==!0){
     		$gametmp = new Game();
-    		$gametmp=$this->getGameTable()->getGameHash($hash);
-			//$document=$this->getDb()->games->findOne(array("hash" => $hash));
+    		//$gametmp=$this->getGameTable()->getGameHash($hash);
+			$document=$this->getDb()->games->findOne(array("hash" => $hash));
 			
 			//
 			$gametmp->exchangeArray($document);
