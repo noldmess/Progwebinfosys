@@ -10,6 +10,8 @@ $(document).ready(function(){
 </script>
 <div id="succes"></div>
 <div id="new" class="one">
+	<h1>New Game</h1>
+	Please enter your data and the data of your chosen opponent in the fields below, then choose a weapon. Green colored weapons mean you will defeat them with your chosen one, red colored mean they will defeat you. For further information visit the <a href="/zend3/game/">Introduction</a> site!
 	<form action="" method="post" name="Game" onsubmit="return NewGame.submit()" id="Game"><div><label></label>
 	<label><span>Your Name</span><input name="user1" value="" type="text"></label></div>
 	<div><label></label>
@@ -21,22 +23,27 @@ $(document).ready(function(){
 	<label><span>Send a message to your opponent</span><textarea name="msg1" cols="50" rows="4"></textarea></label>	<div id="weapons"></div>
 		<div class="control-group">
 		  <div class="btn-group" data-toggle="buttons-radio">
-		  	<img src="../../img/Zend/Stein.png" class="btn btn-primary" name="Stein" id="1" onclick="NewGame.reply_click(this.id)">
-		  	<img src="../../img/Zend/Papier.png" class="btn btn-primary" name="Papier" id="2" onclick="NewGame.reply_click(this.id)">
-	        <img src="../../img/Zend/Schere.png" class="btn btn-primary" name="Schere" id="3" onclick="NewGame.reply_click(this.id)">
-		  	<img src="../../img/Zend/spock.png" class="btn btn-primary" name="Spock" id="4" onclick="NewGame.reply_click(this.id)">
-	        <img src="../../img/Zend/Echse.png" class="btn btn-primary" name="Echse" id="5" onclick="NewGame.reply_click(this.id)"> 
+		  	<img src="../../img/Zend/Stein.png" class="btn btn-primary new1" name="Stein" id="1" onclick="NewGame.reply_click(this.id)">
+		  	<img src="../../img/Zend/Papier.png" class="btn btn-primary new2" name="Papier" id="2" onclick="NewGame.reply_click(this.id)">
+	        <img src="../../img/Zend/Schere.png" class="btn btn-primary new3" name="Schere" id="3" onclick="NewGame.reply_click(this.id)">
+		  	<img src="../../img/Zend/spock.png" class="btn btn-primary new4" name="Spock" id="4" onclick="NewGame.reply_click(this.id)">
+	        <img src="../../img/Zend/Echse.png" class="btn btn-primary new5" name="Echse" id="5" onclick="NewGame.reply_click(this.id)"> 
 	   	 </div>
 	   	</div>
 	<input name="choice1" value="" type="hidden"><input name="submit" id="submitbutton" value="New Game" type="submit"></form>   
 </div>
 <div id="fight" class="one">
-<h1>Your turn</h1>
+	<h1>Your turn</h1>
+	You have been challenged to a round of rock-paper-scissor-spock-lizard. <br>
+	
+	Your data:<br>
 	<p id="user2"></p>
 	Your challenger:<br>
 	<p id="user1"></p>
 	His/Her message:<br>
 	<p id="user1msg"></p>
+
+	Please select a weapon and fight your opponent. If you select a weapon red colored images mean that they will defeat you, green means you will defeat them! Choose wisely...</br>For further information visit the <a href="/zend3/game/">Introduction</a> site!
 	<form action="" method="post" name="Game" onsubmit="return Fight.submit()" id="Game"><input name="id" value="" type="hidden">
 	<label>
 		<span>Send a message to your challenger</span>
@@ -45,11 +52,11 @@ $(document).ready(function(){
 	<div id="weapons"></div>
 		<div class="control-group">
 		  <div class="btn-group" data-toggle="buttons-radio">
-		  	<img src="../../img/Zend/Stein.png" class="btn btn-primary" name="Stein" id="1" onclick="Fight.reply_click(this.id)">
-		  	<img src="../../img/Zend/Papier.png" class="btn btn-primary" name="Papier" id="2" onclick="Fight.reply_click(this.id)">
-	        <img src="../../img/Zend/Schere.png" class="btn btn-primary" name="Schere" id="3" onclick="Fight.reply_click(this.id)">
-		  	<img src="../../img/Zend/spock.png" class="btn btn-primary" name="Spock" id="4" onclick="Fight.reply_click(this.id)">
-	        <img src="../../img/Zend/Echse.png" class="btn btn-primary" name="Echse" id="5" onclick="Fight.reply_click(this.id)"> 
+		  	<img src="../../img/Zend/Stein.png" class="btn btn-primary fight1" name="Stein" id="1" onclick="Fight.reply_click(this.id)">
+		  	<img src="../../img/Zend/Papier.png" class="btn btn-primary fight2" name="Papier" id="2" onclick="Fight.reply_click(this.id)">
+	        <img src="../../img/Zend/Schere.png" class="btn btn-primary fight3" name="Schere" id="3" onclick="Fight.reply_click(this.id)">
+		  	<img src="../../img/Zend/spock.png" class="btn btn-primary fight4" name="Spock" id="4" onclick="Fight.reply_click(this.id)">
+	        <img src="../../img/Zend/Echse.png" class="btn btn-primary fight5" name="Echse" id="5" onclick="Fight.reply_click(this.id)"> 
 	       </div>
 	   	</div>
 	   	 <input type="hidden" value="" name="choice2"></input>
@@ -85,7 +92,8 @@ Your opponent: qwfd, Aaron.Messner@student.uibk.ac.at<br>
 </div>
 <div id="result" class="one">
 <h1>Result</h1>
-
+Message from Player 2:
+<p id="resultuser2msg"></p>
 <p id="resultuser1"></p>
 <p id="resultchoice1"> </p>
 <p id="resultuser2"></p>
