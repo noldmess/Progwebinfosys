@@ -260,7 +260,7 @@ class GameController extends AbstractActionController
 				//echo json_encode($document);
 				$this->getDb()->games->save($document);
 				$msg = 'Your opponent, '.$game->user2.', has chosen his weapon. To see the result click';
-				$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'new'))."#resolt/". $game->hash."/player/1";
+				$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'new'))."#result/". $game->hash."/player/1";
 				$subject = 'See the result';
 				$this->sendMail($game->email1, $subject, $msg, $game->msg2, $link);
 				$game=$this->result($game);
