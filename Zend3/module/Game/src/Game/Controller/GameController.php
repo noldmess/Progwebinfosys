@@ -241,7 +241,7 @@ class GameController extends AbstractActionController
 				$game->user2=$gametmp->user2;
 				$game->email2=$gametmp->email2;
 				$game->msg1=$gametmp->msg1;
-				$game->hash=$gametmp->hash;
+				echo $game->hash=$gametmp->hash;
 					
 				$var1 = ($game->choice1 - 1 < 0) ? 4 : $game->choice1 - 1;
 				$var2 = ($game->choice2 - 1 < 0) ? 4 : $game->choice2 - 1;
@@ -259,7 +259,6 @@ class GameController extends AbstractActionController
 				$document = $game->getDocument();
 				//echo json_encode($document);
 				$this->getDb()->games->save($document);
-				return $this->getResponse()->setContent(Json::encode(array("data"=>"sucess","user"=>$user,"result"=>$game->result)));
 				$msg = 'Your opponent, '.$game->user2.', has chosen his weapon. To see the result click';
 				$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'new'))."#fight/". $game->hash."/player/1";
 				$subject = 'See the result';
