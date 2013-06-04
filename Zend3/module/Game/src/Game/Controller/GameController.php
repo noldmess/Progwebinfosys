@@ -177,7 +177,7 @@ class GameController extends AbstractActionController
     			$session = new Container('base');
     			$session->email =  $game->email1;
     			$session->user = $game->user1;
-    			$document=$this->getDb()->games->findOne(array("hash" => $_POST['hash']));
+    			$document=$this->getDb()->games->findOne(array("hash" => $game->hash));
     			
     			$gametmp = new Game();
     			$gametmp->exchangeArray($document);
