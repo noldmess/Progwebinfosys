@@ -171,8 +171,8 @@ class GameController extends AbstractActionController
     			
     			$game->exchangeArray($form->getData());
     			
-    			 $this->getGameTable()->saveGame($game);
-    			//$document = $game->getDocument();
+    			// $this->getGameTable()->saveGame($game);
+    			$document = $game->getDocument();
     			//to do 
     			$session = new Container('base');
     			$session->email =  $game->email1;
