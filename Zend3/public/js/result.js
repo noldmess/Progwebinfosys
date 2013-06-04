@@ -3,7 +3,7 @@ var Result={
 			help=player;
 			$('#result').show();
 			var container=container;
-			$.post('zend3/game/resultJSON',{hash:hashcode,player:player}, function(data) {
+			$.post('/zend3/game/resultJSON',{hash:hashcode,player:player}, function(data) {
 				$('#resultuser1').append("Player 1:"+data.game.user1+" "+data.game.email1);
 				$('#resultuser1msg').append(data.game.msg1);
 				$('#resultuser2').append("Player 2:"+data.game.user2+" "+data.game.email2);

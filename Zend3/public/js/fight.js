@@ -1,6 +1,6 @@
 var Fight={
 		load:function(hash){
-			$.post('zend3/game/getfightJSON',{hash:hash},
+			$.post('/zend3/game/getfightJSON',{hash:hash},
 				function(data) {
 				if(data.data==='sucess'){
 					//var  form = document.forms[0].form.hash.value=hash;
@@ -27,7 +27,7 @@ var Fight={
 			}
 		if( returnval){
 					var hash=$('#fight form input[name="hash"]').attr("value");
-					$.post('zend3/game/fightJSON',{choice2: $('#fight form input[name="choice2"]').attr("value"),id: $('#fight form').attr("id"),
+					$.post('/zend3/game/fightJSON',{choice2: $('#fight form input[name="choice2"]').attr("value"),id: $('#fight form').attr("id"),
 						hash:$('#fight form input[name="hash"]').attr("value"), msg2: $('#fight form textarea').val()}, function(data) {
 						}, "json");
 					$('#fight').hide();
