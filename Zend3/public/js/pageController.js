@@ -1,4 +1,3 @@
-
 var Conrtoller={
 		test:function(){
 			hash=window.location.hash;
@@ -28,8 +27,12 @@ var Conrtoller={
 					}
 					break;
 				case 4:
-					if(partsArray[0]==="resolt" && partsArray[2]==="player"){
+					if(partsArray[0]==="result" && partsArray[2]==="player"){
 						Result.result(partsArray[1],partsArray[3]);
+						break;
+					}else if(partsArray[0]==="revange" && partsArray[2]==="player"){
+						Revange.start(partsArray[1], partsArray[3]);
+						$('#new').show();
 						break;
 					}
 				default:
