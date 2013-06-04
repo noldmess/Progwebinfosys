@@ -8,29 +8,22 @@ function reply_click(clicked_id)
   }
 
 var Revange={
-		result:function(data,container){
-			$.post('/zend3/game/resultJSON',{hash:data}, function(data) {
-					$(container+ " *").remove();
-					$(container).append('<div id="succes"></div>');
-					$(container).append('<h1>Revenge</h1> Userdata: '+data.game.user1+", "+data.game.email1+' <br>');
-					$(container).append('Your opponent: '+data.game.user2+", "+data.game.email2+'<br>');
-					$(container).append('<form id="Game" name="Game" method="post" action="" onsubmit="return Revange.submit()"></form>');
-					var ffd=$(container+" form");
-					$(container+" form").append('<input type="hidden" value="'+data.game.user1+'" name="user1"></input>');
-					$(container+" form").append('<input type="hidden" value="'+data.game.user2+'" name="user2"></input>');
-					$(container+" form").append('<input type="hidden" value="'+data.game.email1+'" name="email1"></input>');
-					$(container+" form").append('<input type="hidden" value="'+data.game.email2+'" name="email2"></input>');
-					$(container+" form").append('<label><span>Send a message to your opponent</span><textarea name="msg1" cols="50" rows="4"></textarea></label>');
-					$(container+" form").append('<div id = "weapons"></div><div class="control-group"><div class="btn-group" data-toggle="buttons-radio"></div></div>');
-					$("div.btn-group").append('<img id="1" class="btn btn-primary" onclick="NewGame.reply_click(this.id)" name="Stein" src="../../img/Zend/Stein.png"></img>');
-					$("div.btn-group").append('<img id="2" class="btn btn-primary" onclick="NewGame.reply_click(this.id)" name="Papier" src="../../img/Zend/Papier.png"></img>');
-					$("div.btn-group").append('<img id="3" class="btn btn-primary" onclick="NewGame.reply_click(this.id)" name="Schere" src="../../img/Zend/Schere.png"></img>');
-					$("div.btn-group").append('<img id="4" class="btn btn-primary" onclick="NewGame.reply_click(this.id)" name="Spock" src="../../img/Zend/spock.png"></img>');
-					$("div.btn-group").append('<img id="5" class="btn btn-primary" onclick="NewGame.reply_click(this.id)" name="Echse" src="../../img/Zend/Echse.png"></img>');
-					$(container+" form").append('<input type="hidden" value="" name="choice1"></input>');
-					$(container+" form").append('<input id="submitbutton" type="submit" value="New Game" name="submit"></input>');
-			
-			}, "json");
+		start:function(hashcode){
+			$.post('/zend3/game/resultJSON',{hash:hashcode,player:2}, function(data) {
+				if(data.game.result===2){
+				 $('#new form input[name="user1"]').attr("value",data.game.user1);
+				 $('#new form input[name="email1"]').attr("value",data.game.email1);
+				 $('#new form input[name="user2"]').attr("value",data.game.user2);
+				 $('#new form input[name="email2"]').attr("value",data.game.email2);
+				}else{
+					 $('#new form input[name="user1"]').attr("value",data.game.user2);
+					 $('#new form input[name="email1"]').attr("value",data.game.email2);
+					 $('#new form input[name="user2"]').attr("value",data.game.user1);
+					 $('#new form input[name="email2"]').attr("value",data.game.email1);
+				}
+				 
+				}
+				, "json");
 		},
 		submit:function(){
 			var returnval=true;

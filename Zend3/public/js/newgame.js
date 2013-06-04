@@ -1,5 +1,6 @@
 var NewGame={
 	
+		
 		submit:function(){
 			var returnval=true;
 			var  form = document.forms[0];
@@ -63,12 +64,14 @@ var NewGame={
 					msg1: form.msg1.value},
 					function(data) {
 					if(data.data==='sucess'){
-						$('#succes *').remove();
+						$('#succes').empty();
 						$('#succes').append("<h1>Email sent</h1>");
 						$('#succes').append("<h2>Inviting opponent...</h2> An invitation to your game has been sent to:<br />" +document.forms[0].user2.value+", "+document.forms[0].email2.value);
+						$('#succes').css({'border-style': 'solid', 'border-width': '3px', 'border-color': 'green', 'padding': '10px'});
 						document.forms[0].email2.value="";
 						document.forms[0].user2.value="";
 						$('input[type="submit"]').show();
+						$('html, body').animate( { scrollTop: 0 }, 'slow' );
 					}
 				}, "json");
 				
@@ -80,6 +83,28 @@ var NewGame={
 			
 		   var  x= document.forms[0].choice1;
 		   x.value=clicked_id;
+		   
+		   $('.new'+clicked_id).removeClass('btn-danger');
+		   $('.new'+clicked_id).removeClass('btn-success');
+		   $('.new'+clicked_id).addClass('btn-primary');
+		   clicked_id *=1;
+		   var lose = clicked_id+1>5?1:clicked_id+1;
+		   $('.new'+lose).removeClass('btn-primary');
+		   $('.new'+lose).removeClass('btn-success');
+		   $('.new'+lose).addClass('btn-danger');
+		   lose = lose+2>5?(lose+2)%5:lose+2;
+		   $('.new'+lose).removeClass('btn-primary');
+		   $('.new'+lose).removeClass('btn-success');
+		   $('.new'+lose).addClass('btn-danger');
+		   
+		   var win = clicked_id+2>5?(clicked_id+2)%5:clicked_id+2;
+		   $('.new'+win).removeClass('btn-primary');
+		   $('.new'+win).removeClass('btn-danger');
+		   $('.new'+win).addClass('btn-success');
+		   win = win+2>5?(win+2)%5:win+2;
+		   $('.new'+win).removeClass('btn-primary');
+		   $('.new'+win).removeClass('btn-danger');
+		   $('.new'+win).addClass('btn-success');
 
 		}
 }

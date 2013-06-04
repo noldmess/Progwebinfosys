@@ -36,7 +36,6 @@ class GameController extends AbstractActionController
 	
 	public function getDb(){
 		if(!$this->db){
-			
 			$sm = $this->getServiceLocator();
 			$this->db = $sm->get('MongoGame');	
 			
@@ -168,12 +167,13 @@ class GameController extends AbstractActionController
     		$form->setInputFilter($game->getInputFilter());
     		$form->setData($request->getPost());
     		if ($form->isValid()) {
-    			
+
     			$game->exchangeArray($form->getData());
-    			
-    			 $this->getGameTable()->saveGame($game);
-    			//$document = $game->getDocument();
-    			//to do 
+    			 
+    			// $this->getGameTable()->saveGame($game);
+    			$document = $game->getDocument();
+    			//to do
+    			$this->getDb()->games->insert($document);
     			$session = new Container('base');
     			$session->email =  $game->email1;
     			$session->user = $game->user1;
@@ -236,7 +236,7 @@ class GameController extends AbstractActionController
 				$game->exchangeArray($form->getData());
 				$game->id=$gametmp->id;
 				$game->user1=$gametmp->user1;
-				$game->email1=$gametmp->email1;
+				echo $game->email1=$gametmp->email1;
 				$game->choice1=$gametmp->choice1;
 				$game->user2=$gametmp->user2;
 				$game->email2=$gametmp->email2;
@@ -255,13 +255,12 @@ class GameController extends AbstractActionController
 					$game->winner_mail = $game->email2;
 				}
 			
-				$this->getGameTable()->saveGame($game);
+				//$this->getGameTable()->saveGame($game);
 				$document = $game->getDocument();
 				//echo json_encode($document);
 				$this->getDb()->games->save($document);
-					
 				$msg = 'Your opponent, '.$game->user2.', has chosen his weapon. To see the result click';
-				$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'new'))."#fight/". $game->hash."/player/1";
+				$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'new'))."#resolt/". $game->hash."/player/1";
 				$subject = 'See the result';
 				$this->sendMail($game->email1, $subject, $msg, $game->msg2, $link);
 				$game=$this->result($game);
@@ -276,7 +275,9 @@ class GameController extends AbstractActionController
 	public function getfightJSONAction()
 	{
 	
-    		$game = $this->getGameTable()->getGameHash($_POST['hash']);
+    		$document=$this->getDb()->games->findOne(array("hash" => $_POST['hash']));
+			$game = new Game();
+			$game->exchangeArray($document);
 			$game=array("user1"=> $game->user1,"email1"=>$game->email1,"email2"=>$game->email2,"user2"=> $game->user2, "msg1"=>$game->msg1);
 			return $this->getResponse()->setContent(Json::encode(array("data"=>"sucess","game"=>$game)));	 
     
@@ -288,8 +289,8 @@ class GameController extends AbstractActionController
     	$hash =  $this->params()->fromRoute('hash', 0);
     	if($hash==!0){
     		$gametmp = new Game();
-    		$gametmp=$this->getGameTable()->getGameHash($hash);
-			//$document=$this->getDb()->games->findOne(array("hash" => $hash));
+    		//$gametmp=$this->getGameTable()->getGameHash($hash);
+			$document=$this->getDb()->games->findOne(array("hash" => $hash));
 			
 			//
 			$gametmp->exchangeArray($document);
