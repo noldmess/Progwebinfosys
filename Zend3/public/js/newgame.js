@@ -83,6 +83,28 @@ var NewGame={
 			
 		   var  x= document.forms[0].choice1;
 		   x.value=clicked_id;
+		   
+		   $('.new'+clicked_id).removeClass('btn-danger');
+		   $('.new'+clicked_id).removeClass('btn-success');
+		   $('.new'+clicked_id).addClass('btn-primary');
+		   clicked_id *=1;
+		   var lose = clicked_id+1>5?1:clicked_id+1;
+		   $('.new'+lose).removeClass('btn-primary');
+		   $('.new'+lose).removeClass('btn-success');
+		   $('.new'+lose).addClass('btn-danger');
+		   lose = lose+2>5?(lose+2)%5:lose+2;
+		   $('.new'+lose).removeClass('btn-primary');
+		   $('.new'+lose).removeClass('btn-success');
+		   $('.new'+lose).addClass('btn-danger');
+		   
+		   var win = clicked_id+2>5?(clicked_id+2)%5:clicked_id+2;
+		   $('.new'+win).removeClass('btn-primary');
+		   $('.new'+win).removeClass('btn-danger');
+		   $('.new'+win).addClass('btn-success');
+		   win = win+2>5?(win+2)%5:win+2;
+		   $('.new'+win).removeClass('btn-primary');
+		   $('.new'+win).removeClass('btn-danger');
+		   $('.new'+win).addClass('btn-success');
 
 		}
 }
