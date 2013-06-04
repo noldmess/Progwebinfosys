@@ -171,18 +171,19 @@ class GameController extends AbstractActionController
     			
     			$game->exchangeArray($form->getData());
     			
-    			// $this->getGameTable()->saveGame($game);
-    			$document = $game->getDocument();
+    			 $this->getGameTable()->saveGame($game);
+    			//$document = $game->getDocument();
     			//to do 
-    			$this->getDb()->games->insert($document);
     			$session = new Container('base');
     			$session->email =  $game->email1;
     			$session->user = $game->user1;
     			$msg = 'Your friend, '.$game->user1.', wants to challenge you. To accept the challenge follow the link: ';
-    			$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'fight','hash'=>$game->hash));
+    			$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'new'))."#fight/". $game->hash;
     			$subject = 'Challenge accepted?';
     			$this->sendMail($game->email2, $subject, $msg, $game->msg1, $link);
     			$user=array("user1"=> $game->user1,"email1"=>$game->email1,"email2"=>$game->email2,"user2"=> $game->user2);
+    			
+    			//$user=array("user1"=>"asd","email1"=>"Aaron.Messner@student.uibk.ac.at","email2"=>"Aaron.Messner@student.uibk.ac.at","user2"=>"sdfgsd");
     			return $this->getResponse()->setContent(Json::encode(array("data"=>"sucess","user"=>$user)));
     		}
     	}
@@ -220,10 +221,10 @@ class GameController extends AbstractActionController
 		$form = new GameForm();
 		$request = $this->getRequest();
 		if ($request->isPost()) {
+			//$gametmp=$this->getGameTable()->getGameHash($_POST['hash']);
 			$document=$this->getDb()->games->findOne(array("hash" => $_POST['hash']));
 				
 			$gametmp = new Game();
-				
 			$gametmp->exchangeArray($document);
 			$game= new Game();
 			$form->setInputFilter($game->getInputFilter2());;
@@ -244,7 +245,7 @@ class GameController extends AbstractActionController
 					
 				$var1 = ($game->choice1 - 1 < 0) ? 4 : $game->choice1 - 1;
 				$var2 = ($game->choice2 - 1 < 0) ? 4 : $game->choice2 - 1;
-				if($game->choice1 === $game->choice2){
+				if($var1  === $var2 ){
 					$game->winner = 0;
 				}elseif($var2 === ($var1 + 2) % 5 || $var2 === ($var1 + 4) % 5){
 					$game->winner = 1;
@@ -253,32 +254,42 @@ class GameController extends AbstractActionController
 					$game->winner = 2;
 					$game->winner_mail = $game->email2;
 				}
-				
-				//$this->getGameTable()->saveGame($game);
-				
+			
+				$this->getGameTable()->saveGame($game);
 				$document = $game->getDocument();
 				//echo json_encode($document);
 				$this->getDb()->games->save($document);
 					
 				$msg = 'Your opponent, '.$game->user2.', has chosen his weapon. To see the result click';
-				$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'result','hash'=>$game->hash));
+				$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'new'))."#fight/". $game->hash."/player/1";
 				$subject = 'See the result';
 				$this->sendMail($game->email1, $subject, $msg, $game->msg2, $link);
 				$game=$this->result($game);
 				$user=array("user1"=> $game->user1,"email1"=>$game->email1,"email2"=>$game->email2,"user2"=> $game->user2);
 				return $this->getResponse()->setContent(Json::encode(array("data"=>"sucess","user"=>$user,"result"=>$game->result)));
+				//return $this->getResponse()->setContent(Json::encode(array("data"=>"sucess","user"=>"sdfsdfdf","result"=>"dsfadsfds")));
 				//return $this->redirect()->toRoute('game',array("action"=>'result','hash'=>$gametmp->hash));
 			}
 		}
 	}
+	
+	public function getfightJSONAction()
+	{
+	
+    		$game = $this->getGameTable()->getGameHash($_POST['hash']);
+			$game=array("user1"=> $game->user1,"email1"=>$game->email1,"email2"=>$game->email2,"user2"=> $game->user2, "msg1"=>$game->msg1);
+			return $this->getResponse()->setContent(Json::encode(array("data"=>"sucess","game"=>$game)));	 
+    
+	}
+	
 	 public function fightAction()
     {	
     	
     	$hash =  $this->params()->fromRoute('hash', 0);
     	if($hash==!0){
     		$gametmp = new Game();
-    		//$gametmp=$this->getGameTable()->getGameHash($hash);
-			$document=$this->getDb()->games->findOne(array("hash" => $hash));
+    		$gametmp=$this->getGameTable()->getGameHash($hash);
+			//$document=$this->getDb()->games->findOne(array("hash" => $hash));
 			
 			//
 			$gametmp->exchangeArray($document);
@@ -336,8 +347,9 @@ class GameController extends AbstractActionController
     		$game = new Game();
     		$game->exchangeArray($document);
     		$game=$this->result($game);
-    		$game=array("user1"=> $game->user1,"email1"=>$game->email1,"email2"=>$game->email2,"user2"=> $game->user2,"result"=>$game->result,"choice1"=>$game->choiceArray[$game->choice1-1],"choice2"=>$game->choiceArray[$game->choice2-1], "msg2"=>$game->msg2);
-    		return $this->getResponse()->setContent(Json::encode(array("data"=>"sucess","game"=>$game)));
+    		$p=(int)$_POST['player'];
+    		$game=array("hash"=> $game->hash,"user1"=> $game->user1,"email1"=>$game->email1,"email2"=>$game->email2,"user2"=> $game->user2,"result"=>$game->result,"choice1"=>$game->choiceArray[$game->choice1-1],"choice2"=>$game->choiceArray[$game->choice2-1], "msg2"=>$game->msg2);
+    		return $this->getResponse()->setContent(Json::encode(array("data"=>"sucess","game"=>$game,"player"=>$p)));
     	}else{
     		return $this->redirect()->toRoute('game');
     	}
@@ -346,11 +358,11 @@ class GameController extends AbstractActionController
     
     public function result($game){
     	if((int)$game->winner === 0){
-    		$game->result = "The game ended in a draw.";
+    		$game->result = 0;
     	}elseif((int)$game->winner === 1){
-    		$game->result = 'Player 1 has won the game.';
+    		$game->result = 1;
     	}elseif((int)$game->winner === 2){
-    		$game->result = 'Player 2 has won the game.';
+    		$game->result = 2;
     	}else{
     		$game->result = "Opponent has not chosen his weapon yet!";
     	}

@@ -1,121 +1,96 @@
 <script type="text/javascript">
-function reply_click(clicked_id)
-{
-   var  x= document.forms[0].choice1;
-   x.value=clicked_id;
-  }
-  
-function onsubmittest()
-{
-	var returnval=true;
-	var  form = document.forms[0];
-  	if(form.user1.value===''){
-		returnval=false;
-		form.user1.parentNode.parentNode.setAttribute('class','control-group error');
-		var s=form.user1.parentNode.parentNode.childNodes[0];
-		s.innerHTML='Your username is missing';
-	}else{
-		form.user1.parentNode.setAttribute('class','');
-		form.user1.parentNode.parentNode.childNodes[0]='';
-	}
-	if(form.user2.value===''){
-		returnval=false;
-		form.user2.parentNode.parentNode.setAttribute('class','control-group error');
-		var s=form.user2.parentNode.parentNode.childNodes[0];
-		s.innerHTML='Your opponents username missing';
-	}else{
-		form.user2.parentNode.setAttribute('class','');
-		form.user2.parentNode.parentNode.childNodes[0]='';
-	}
-  	if(form.email1.value==='' || !checkEmailFormat(form.email1.value)){
-		returnval=false;
-	   	form.email1.parentNode.parentNode.setAttribute('class','control-group error');
-	   	var s=form.email1.parentNode.parentNode.childNodes[0];
-	   	s.innerHTML='Your email is missing';
-	}else{
-		form.email1.parentNode.setAttribute('class','');
-		form.email1.parentNode.parentNode.childNodes[0]='';
-	}
-	if(form.email2.value===''  || !checkEmailFormat(form.email2.value)){
-		returnval=false;
-		form.email2.parentNode.parentNode.setAttribute('class','control-group error');
-		var s=form.email2.parentNode.parentNode.childNodes[0];
-		s.innerHTML='Your opponents email is missing';
-	}else{
-		form.email2.parentNode.setAttribute('class','');
-		form.email2.parentNode.parentNode.childNodes[0]='';
-	}
-  	if(form.choice1.value==='' || form.choice1.value === null || form.choice1.value === undefined){
-		returnval=false;
-		var el = document.getElementById('weapons');
-		el.innerHTML='Please select a weapon!';
-	}
-   return returnval;
-}
+$(document).ready(function(){
 
+	$(window).on('hashchange', function() {
+		Conrtoller.test();
+		});
+	Conrtoller.test();
 
-  function checkEmailFormat(email){
-
-	  if(email.indexOf("@") === -1){
-	  return false;
-	  }
-	  else{
-	  email = email.substring(email.indexOf("@") + 1);
-	  if(email.indexOf(".") === -1){
-	  return false;
-	  }
-	  return true;
-	  }
-  };
+});
 </script>
 <div id="succes"></div>
-<h1>New Game</h1>
+<div id="new" class="one">
+	<form action="" method="post" name="Game" onsubmit="return NewGame.submit()" id="Game"><div><label></label>
+	<label><span>Your Name</span><input name="user1" value="" type="text"></label></div>
+	<div><label></label>
+	<label><span>Your Email</span><input name="email1" value="" type="text"></label></div>
+	<div><label></label>
+	<label><span>Your Opponents Name</span><input name="user2" value="" type="text"></label></div>
+	<div><label></label>
+	<label><span>Your Opponents Email</span><input name="email2" value="" type="text"></label></div>
+	<label><span>Send a message to your opponent</span><textarea name="msg1" cols="50" rows="4"></textarea></label>	<div id="weapons"></div>
+		<div class="control-group">
+		  <div class="btn-group" data-toggle="buttons-radio">
+		  	<img src="../../img/Zend/Stein.png" class="btn btn-primary" name="Stein" id="1" onclick="NewGame.reply_click(this.id)">
+		  	<img src="../../img/Zend/Papier.png" class="btn btn-primary" name="Papier" id="2" onclick="NewGame.reply_click(this.id)">
+	        <img src="../../img/Zend/Schere.png" class="btn btn-primary" name="Schere" id="3" onclick="NewGame.reply_click(this.id)">
+		  	<img src="../../img/Zend/spock.png" class="btn btn-primary" name="Spock" id="4" onclick="NewGame.reply_click(this.id)">
+	        <img src="../../img/Zend/Echse.png" class="btn btn-primary" name="Echse" id="5" onclick="NewGame.reply_click(this.id)"> 
+	   	 </div>
+	   	</div>
+	<input name="choice1" value="" type="hidden"><input name="submit" id="submitbutton" value="New Game" type="submit"></form>   
+</div>
+<div id="fight" class="one">
+<h1>Your turn</h1>
+	<p id="user2"></p>
+	Your challenger:<br>
+	<p id="user1"></p>
+	His/Her message:<br>
+	<p id="user1msg"></p>
+	<form action="" method="post" name="Game" onsubmit="return Fight.submit()" id="Game"><input name="id" value="" type="hidden">
+	<label>
+		<span>Send a message to your challenger</span>
+		<textarea name="msg2" cols="50" rows="4"></textarea>
+	</label>
+	<div id="weapons"></div>
+		<div class="control-group">
+		  <div class="btn-group" data-toggle="buttons-radio">
+		  	<img src="../../img/Zend/Stein.png" class="btn btn-primary" name="Stein" id="1" onclick="Fight.reply_click(this.id)">
+		  	<img src="../../img/Zend/Papier.png" class="btn btn-primary" name="Papier" id="2" onclick="Fight.reply_click(this.id)">
+	        <img src="../../img/Zend/Schere.png" class="btn btn-primary" name="Schere" id="3" onclick="Fight.reply_click(this.id)">
+		  	<img src="../../img/Zend/spock.png" class="btn btn-primary" name="Spock" id="4" onclick="Fight.reply_click(this.id)">
+	        <img src="../../img/Zend/Echse.png" class="btn btn-primary" name="Echse" id="5" onclick="Fight.reply_click(this.id)"> 
+	       </div>
+	   	</div>
+	   	 <input type="hidden" value="" name="choice2"></input>
+	   	 <input type="hidden" value="" name="hash"></input>
+	   	 <input id="submitbutton" type="submit" value="Fight" name="submit"></input>
+	</form>
+	</div>
+<div id="revenge" class="one">
+<h1>Revenge</h1>
+Userdata: asd, Aaron.Messner@student.uibk.ac.at <br>
+Your opponent: qwfd, Aaron.Messner@student.uibk.ac.at<br>
+	<form id="Game" name="Game" method="post" action="" onsubmit="return Revange.submit()">
+	<input value="asd" name="user1" type="hidden">
+	<input value="qwfd" name="user2" type="hidden">
+	<input value="Aaron.Messner@student.uibk.ac.at" name="email1" type="hidden">
+	<input value="Aaron.Messner@student.uibk.ac.at" name="email2" type="hidden">
+	<label>
+		<span>Send a message to your opponent</span>
+		<textarea name="msg1" cols="50" rows="4"></textarea>
+	</label>
+	<div id="weapons"></div>
+			<div class="control-group">
+			  <div class="btn-group" data-toggle="buttons-radio">
+			  	<img src="../../img/Zend/Stein.png" class="btn btn-primary" name="Stein" id="1" onclick="Fight.reply_click(this.id)">
+			  	<img src="../../img/Zend/Papier.png" class="btn btn-primary" name="Papier" id="2" onclick="Fight.reply_click(this.id)">
+		        <img src="../../img/Zend/Schere.png" class="btn btn-primary" name="Schere" id="3" onclick="Fight.reply_click(this.id)">
+			  	<img src="../../img/Zend/spock.png" class="btn btn-primary" name="Spock" id="4" onclick="Fight.reply_click(this.id)">
+		        <img src="../../img/Zend/Echse.png" class="btn btn-primary" name="Echse" id="5" onclick="Fight.reply_click(this.id)"> 
+		       </div>
+		   	</div>
+		   	<input id="submitbutton" type="submit" name="submit" value="New Game" style="display: inline;"></input>
+	</form>
+</div>
+<div id="result" class="one">
+<h1>Result</h1>
 
-Fill in the fields, chose a weapon and start the game!
-
-<?php
-$form = $this->form;
-//$form->setAttribute('action', $this->url('game'));
-$form->prepare();
-
-echo $this->form()->openTag($form);
-//echo $this->formHidden($form->get('id'));
-?>
-<div><label></label>
-<?php 
-echo $this->formRow($form->get('user1'));
-?>
+<p id="resultuser1"></p>
+<p id="resultchoice1"> </p>
+<p id="resultuser2"></p>
+<p id="resultchoice2"> </p>
+<p id="resulttxt"></p>
+<a id="resultbotten" class="btn btn-primary" href="">Revenge</a>
+<a id="resultnew" class="btn btn-primary" href="#new">New Game</a>
 </div>
-<div><label></label>
-<?php 
-echo $this->formRow($form->get('email1'));
-?>
-</div>
-<div><label></label>
-<?php
-echo $this->formRow($form->get('user2'));
-?>
-</div>
-<div><label></label>
-<?php 
-echo $this->formRow($form->get('email2'));
-?>
-</div>
-<?php 
-echo $this->formRow($form->get('msg1'));
-?>
-	<div id = "weapons"></div>
-	<div class="control-group">
-	  <div class="btn-group" data-toggle="buttons-radio">
-	  	<img src="../../img/Zend/Stein.png" class="btn btn-primary" name="Stein"  id="1" onClick="NewGame.reply_click(this.id)">
-	  	<img src="../../img/Zend/Papier.png" class="btn btn-primary" name="Papier" id="2" onClick="NewGame.reply_click(this.id)">
-        <img src="../../img/Zend/Schere.png" class="btn btn-primary" name="Schere" id="3" onClick="NewGame.reply_click(this.id)">
-	  	<img src="../../img/Zend/spock.png" class="btn btn-primary" name="Spock" id="4" onClick="NewGame.reply_click(this.id)">
-        <img src="../../img/Zend/Echse.png" class="btn btn-primary" name="Echse" id="5" onClick="NewGame.reply_click(this.id)"> 
-   	 </div>
-   	</div>
-<?php
-echo $this->formHidden($form->get('choice1'));
-echo $this->formSubmit($form->get('submit'));
-echo $this->form()->closeTag();
-?>
