@@ -177,11 +177,6 @@ class GameController extends AbstractActionController
     			$session = new Container('base');
     			$session->email =  $game->email1;
     			$session->user = $game->user1;
-    			$document=$this->getDb()->games->findOne(array("hash" => $game->hash));
-    			
-    			$gametmp = new Game();
-    			$gametmp->exchangeArray($document);
-    			echo $gametmp->user1."sdfasf";
     			$msg = 'Your friend, '.$game->user1.', wants to challenge you. To accept the challenge follow the link: ';
     			$link= $this->getBaseUrl().$this->url()->fromRoute('game',array('action' => 'new'))."#fight/". $game->hash;
     			$subject = 'Challenge accepted?';
