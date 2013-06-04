@@ -76,7 +76,7 @@ var NewGame={
 						$('html, body').animate( { scrollTop: 0 }, 'slow' );
 						setTimeout(function(){ 
 							$('#succes').hide();
-						}, 3000);)
+						}, 3000);
 
 					}
 				}, "json");
