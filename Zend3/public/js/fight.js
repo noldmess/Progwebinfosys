@@ -5,9 +5,12 @@ var Fight={
 				if(data.data==='sucess'){
 					//var  form = document.forms[0].form.hash.value=hash;
 					$('#fight form input[name="hash"]').attr("value",hash);
-					$('#user1').append(data.game.user1+" "+data.game.email1);
+					$('#user1').empty();
+					$('#user2').empty();
+					$('#user1msg').empty();
+					$('#user1').append(data.game.user1+", "+data.game.email1);
 					$('#user1msg').append(data.game.msg1);
-					$('#user2').append(data.game.user2+" "+data.game.email2);
+					$('#user2').append(data.game.user2+", "+data.game.email2);
 				}else{
 					$('#fight').hide();
 					$('#new').show();
