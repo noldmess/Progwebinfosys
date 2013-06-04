@@ -15,15 +15,26 @@ var Result={
 				$('#resultuser2').append("Player 2:"+data.game.user2+", "+data.game.email2);
 				$('#resultchoice1').append("Player 1: "+data.game.choice1);
 				$('#resultchoice2').append("Player 2: "+data.game.choice2);
-				$('#resulttxt').append("Result : Player "+data.game.result+" has won the game.");
+				if(data.game.result == 0){
+					$('#resulttxt').append("Result : The game ended in a draw.");	
+				}else{
+					$('#resulttxt').append("Result : Player "+data.game.result+" has won the game.");	
+				}
+				
 				$('#resultbotten').hide();
 				$('#resultnew').hide();
+				if(player == 1){
+					$.cookie('user1', data.game.user1, { expires: 7, path: '/' });
+					$.cookie('email1', data.game.email1, { expires: 7, path: '/' });	
+				}else{
+					$.cookie('user1', data.game.user2, { expires: 7, path: '/' });
+					$.cookie('email1', data.game.email2, { expires: 7, path: '/' });	
+				}
+				$('#resultbotten').attr("href","#revange/"+data.game.hash+"/player/"+player);
 				if(data.player!=data.game.result){
-					$('#resultbotten').show();
-					$('#resultbotten').attr("href","#revange/"+data.game.hash+"/player/"+player);
+					$('#resultbotten').show();	
 				}else{
 					$('#resultnew').show();
-					$('#resultnew').attr("href","#revange/"+data.game.hash+"/player/"+player);
 				}
 				}, "json");
 		}
