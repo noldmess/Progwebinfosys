@@ -1,0 +1,8 @@
+{
+    "name": "chatMessnerMueller"
+  , "version": "0.1.0"
+  , "dependencies": {
+      "express": "3.0.x"
+    , "socket.io": ""
+  }
+}

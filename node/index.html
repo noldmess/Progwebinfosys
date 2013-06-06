@@ -1,0 +1,55 @@
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/jquery.js"></script>
+<script>
+	var socket = io.connect('http://localhost:8080');
+
+	// on connection to server, ask for user's name with an anonymous callback
+	socket.on('connect', function(){
+		// call the server-side function 'adduser' and send one parameter (value of prompt)
+		socket.emit('newUser');
+	});
+
+	// listener, whenever the server emits 'updatechat', this updates the chat body
+	socket.on('updateChat', function (username, data) {
+		$('#conversation').append('<b>'+username + ':</b> ' + data + '<br>');
+	});
+
+	// listener, whenever the server emits 'updateusers', this updates the username list
+	socket.on('updateUsers', function(data) {
+		$('#users').empty();
+		$.each(data, function(key, value) {
+			$('#users').append('<div>' + value.name + '</div>');
+		});
+	});
+
+	// on load of page
+	$(function(){
+		// when the client clicks SEND MESSAGE
+		$('#datasend').click( function() {
+			var message = $('#data').val();
+			// tell server to execute 'sendchat' and send along one parameter
+			socket.emit('sendMsg', message);
+			$('#data').focus();
+			$('#data').val('');
+		});
+
+		// when the client hits ENTER on their keyboard
+		$('#data').keypress(function(e) {
+			if(e.which == 13) {
+				e.preventDefault();
+				$(this).blur();
+				$('#datasend').focus().click();
+			}
+		});
+	});
+
+</script>
+<div style="float:left;width:100px;border-right:1px solid black;height:300px;padding:10px;overflow:scroll-y;">
+	<b>USERS</b>
+	<div id="users"></div>
+</div>
+<div style="float:left;width:300px;height:250px;overflow:scroll-y;padding:10px;">
+	<div id="conversation"></div>
+	<textarea id="data" rows="5" columns="200" ></textarea>
+	<input type="button" id="datasend" value="Send Message" />
+</div>
