@@ -33,113 +33,40 @@ io.sockets.on('connection', function (socket) {
 
 	//Wenn nachricht von user geschickt wird
 	socket.on('sendMsg', function (data) {
-		var msg;
 		
 		// auf Befehle überprüfen, ansonsten normale Chatnachricht
+		
 		if(data.indexOf("/help") === 0){
-			msg = '<br>';
-			for(var key in commands){
-				msg+=commands[key];
-			}
-			socket.emit('updateChat', 'Hilfe', msg);
-
+			
+			handleHelp(socket);
+			
 		}else if(data.indexOf('/name:') === 0){
 			
-			var newName = data.split(':')[1];
-			if(usernames[newName] !== undefined){
-				socket.emit('updateChat', 'SERVER', 'Benutzername bereits vergeben!');
-			}else if(newName !== undefined && newName !== ''){
-				var oldUser = usernames[socket.username];
-				delete usernames[socket.username];
-				oldUser.name=newName;
-				usernames[newName] = oldUser;
-				socket.emit('updateChat', 'SERVER', 'Dein neuer Benutzername ist '+newName);
-				socket.broadcast.emit('','SERVER', socket.username +' hat sich umbenannt in '+newName);
-				socket.username=newName;
-				io.sockets.emit('updateUsers', usernames);
-				
-			}else{
-				
-				socket.emit('updateChat', 'SERVER', 'Bitte gib einen neuen Benutzernamen an!');
-			}
+			handleName(socket,data);
+			
 		}else if(data.indexOf('/quit') === 0){
 			
-			delete usernames[socket.username];
-			
-			io.sockets.emit('updateUsers', usernames);
-			socket.broadcast.emit('updateChat', 'SERVER', socket.username + ' hat den Chat verlassen!');
-			socket.disconnect('unauthorized');
+			handleQuit(socket);
 			
 		}else if(data.indexOf('/topic:') === 0){
 			
-			//auf Superuser überprüfen
-			if(usernames[socket.username].superUser === true){
-				
-				var newTopic = data.split(':')[1];
-				
-				// überprüfen ob ein Topic angegeben wurde
-				if(newTopic !== undefined && newTopic !== ''){
-					chatTopic = newTopic;
-					socket.emit('updateChat', 'Topic', 'Chattopic ver&auml;ndert auf '+chatTopic);
-				}else{
-					socket.emit('updateChat', 'SERVER', 'Bitte eine Chattopic angeben!');
-				}
-				
-			}else{
-				socket.emit('updateChat', 'SERVER', 'Du ben&ouml;tigst den Status eines Superusers um diesen Befehl auszuf&uuml;hren');
-			}
+			handleTopicAdvanced(socket,data);
+			
 		}else if(data.indexOf('/topic') === 0){
 			
-			socket.emit('updateChat', 'Topic', chatTopic);
-			
+			handleTopic(socket);
+
 		}else if(data.indexOf('/super:') === 0){
-			//auf Superuser überprüfen
-			if(usernames[socket.username].superUser === true){
-				
-				var superUser = data.split(':')[1];
-				
-				// überprüfen ob ein richtiger User angegeben wurde
-				if(superUser !== undefined && superUser !== '' && usernames[superUser]!== undefined){
-					usernames[superUser].superUser = true;
-					socket.emit('updateChat', 'SERVER', 'User '+superUser+' besitzt nun den Status eines Superusers!');
-					io.sockets.socket(usernames[superUser].socketID).emit('updateChat', 'SERVER', 'Du wurdes von '+ socket.username + ' zum Superuser ernannt!');
-				}else{
-					socket.emit('updateChat', 'SERVER', 'Bitte einen existierenden User angeben!');
-				}
-				
-			}else{
-				socket.emit('updateChat', 'SERVER', 'Du ben&ouml;tigst den Status eines Superusers um diesen Befehl auszuf&uuml;hren');
-			}
+			
+			handleSuper(socket, data);
+
 		}else if(data.indexOf('/kick:') === 0){
-			//auf Superuser überprüfen
-			if(usernames[socket.username].superUser === true){
-				
-				var kickUser = data.split(':')[1];
-				
-				// überprüfen ob ein richtiger User angegeben wurde
-				if(kickUser !== undefined && kickUser !== '' && usernames[kickUser] !== undefined){
-					
-					var socketID = usernames[kickUser].socketID;
-					
-					delete usernames[kickUser];
-					
-					io.sockets.emit('updateUsers', usernames);
-					
-					socket.emit('updateChat', 'SERVEr', 'User '+ kickUser + 'gekickt!');
-					
-					socket.broadcast.emit('updateChat', 'SERVER', kickUser + ' wurde von '+ socket.username +' aus den Chat gekickt!');
-					
-					io.sockets.socket(socketID).disconnect('unauthorized');
-				}else{
-					socket.emit('updateChat', 'SERVER', 'Bitte einen existierenden User angeben!');
-				}
-				
-			}else{
-				socket.emit('updateChat', 'SERVER', 'Du ben&ouml;tigst den Status eines Superusers um diesen Befehl auszuf&uuml;hren');
-			}
+			
+			handleKick(socket,data);
+
 		}else{
 			
-			// allen Clients mitteilen, sie sollen ihren chat updaten
+			// allen Clients mitteilen, sie sollen ihren chat updaten, da normale Nachricht
 			io.sockets.emit('updateChat', socket.username, data);
 		}
 	});
@@ -159,7 +86,7 @@ io.sockets.on('connection', function (socket) {
 		
 		socket.emit('updateChat', 'SERVER', 'Du hast den Chat mit Namen "'+username+'" betreten!<br> Gib /help ein, um m&ouml;gliche Optionen einzusehen!');
 		
-		socket.broadcast.emit('updateChat', 'SERVER', username + ' hat den Chat betreten!');
+		socket.broadcast.emit('updateChat', 'SERVER', '"'+username + '" hat den Chat betreten!');
 		
 		io.sockets.emit('updateUsers', usernames);
 	});
@@ -168,8 +95,130 @@ io.sockets.on('connection', function (socket) {
 	// wenn ein User den Browser schließt
 	socket.on('disconnect', function(){
 		delete usernames[socket.username];
-		
+
 		io.sockets.emit('updateUsers', usernames);
-		socket.broadcast.emit('updateChat', 'SERVER', socket.username + ' hat den Chat verlassen!');
+		socket.broadcast.emit('updateChat', 'SERVER', '"'+socket.username + '" hat den Chat verlassen!');
 	});
 });
+
+/**
+ * Bearbeitet den /help-Befehl
+ */
+var handleHelp = function(socket){
+	var msg = '<br>';
+	for(var key in commands){
+		msg+=commands[key];
+	}
+	socket.emit('updateChat', 'Hilfe', msg);
+};
+
+/**
+ * Bearbeitet den /name:myname-Befehl
+ */
+var handleName = function(socket, data){
+	var newName = data.split(':')[1];
+	if(usernames[newName] !== undefined){
+		socket.emit('updateChat', 'SERVER', 'Benutzername bereits vergeben!');
+	}else if(newName !== undefined && newName !== ''){
+		var oldUser = usernames[socket.username];
+		delete usernames[socket.username];
+		oldUser.name=newName;
+		usernames[newName] = oldUser;
+		socket.emit('updateChat', 'SERVER', 'Dein neuer Benutzername ist "'+newName+'"!');
+		socket.broadcast.emit('updateChat','SERVER', '"'+socket.username +'" hat sich umbenannt in "'+newName+'"!');
+		socket.username=newName;
+		io.sockets.emit('updateUsers', usernames);
+		
+	}else{
+		
+		socket.emit('updateChat', 'SERVER', 'Bitte gib einen neuen Benutzernamen an!');
+	}
+};
+
+/**
+ * Bearbeitet den /quit-Befehl
+ */
+var handleQuit = function(socket, data){
+	socket.disconnect();
+};
+
+/**
+ * Bearbeitet den /super:myname-Befehl
+ */
+var handleSuper = function(socket, data){
+	//auf Superuser überprüfen
+	if(usernames[socket.username].superUser === true){
+		
+		var superUser = data.split(':')[1];
+		
+		// überprüfen ob ein richtiger User angegeben wurde
+		if(superUser !== undefined && superUser !== '' && usernames[superUser]!== undefined){
+			usernames[superUser].superUser = true;
+			socket.emit('updateChat', 'SERVER', 'User "'+superUser+'" besitzt nun den Status eines Superusers!');
+			io.sockets.socket(usernames[superUser].socketID).emit('updateChat', 'SERVER', 'Du wurdest von "'+ socket.username + '" zum Superuser ernannt!');
+		}else{
+			socket.emit('updateChat', 'SERVER', 'Bitte einen existierenden User angeben!');
+		}
+		
+	}else{
+		socket.emit('updateChat', 'SERVER', 'Du ben&ouml;tigst den Status eines Superusers um diesen Befehl auszuf&uuml;hren');
+	}
+};
+
+/**
+ * Bearbeitet den /topic-Befehl
+ */
+var handleTopic = function(socket){
+	socket.emit('updateChat', 'Topic', chatTopic);
+};
+
+/**
+ * Bearbeitet den /topic:mytopic-Befehl
+ */
+var handleTopicAdvanced = function(socket, data){
+	//auf Superuser überprüfen
+	if(usernames[socket.username].superUser === true){
+		
+		var newTopic = data.split(':')[1];
+		
+		// überprüfen ob ein Topic angegeben wurde
+		if(newTopic !== undefined && newTopic !== ''){
+			chatTopic = newTopic;
+			socket.emit('updateChat', 'Topic', 'Chattopic ver&auml;ndert auf "'+chatTopic+'"!');
+			socket.broadcast.emit('updateChat','Topic', '"'+socket.username +'" hat das Chattopic auf "'+newTopic+'" gesetzt!');
+		}else{
+			socket.emit('updateChat', 'SERVER', 'Bitte eine Chattopic angeben!');
+		}
+		
+	}else{
+		socket.emit('updateChat', 'SERVER', 'Du ben&ouml;tigst den Status eines Superusers um diesen Befehl auszuf&uuml;hren');
+	}
+};
+
+/**
+ * Bearbeitet den /kick-Befehl
+ */
+var handleKick = function(socket, data){
+	//auf Superuser überprüfen
+	if(usernames[socket.username].superUser === true){
+		
+		var kickUser = data.split(':')[1];
+		
+		// überprüfen ob ein richtiger User angegeben wurde
+		if(kickUser !== undefined && kickUser !== '' && usernames[kickUser] !== undefined){
+			
+			var socketID = usernames[kickUser].socketID;
+			
+			io.sockets.socket(socketID).disconnect();
+			
+			socket.broadcast.emit('updateChat', 'SERVER', '"' +kickUser + '" wurde von "'+ socket.username +'" aus den Chat gekickt!');
+			
+			socket.emit('updateChat', 'SERVER', 'User "'+ kickUser + '" wurde von Dir gekickt!');
+		}else{
+			socket.emit('updateChat', 'SERVER', 'Bitte einen existierenden User angeben!');
+		}
+		
+	}else{
+		socket.emit('updateChat', 'SERVER', 'Du ben&ouml;tigst den Status eines Superusers um diesen Befehl auszuf&uuml;hren');
+	}
+};
