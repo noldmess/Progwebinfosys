@@ -25,13 +25,13 @@ var chatTopic = "!_42_!";
  * Alle Befehle welche dem User zur Verfügung stehen
  */
 var commands = {};
-commands['help'] = '/help - zeigt alle m&ouml;glichen Befehle mit Erkl&Auml;rung an<br>';
-commands['name'] = '/name:myname - &Auml;ndert den Namen des aktuellen Benutzers auf myname<br>';
-commands['super'] = '/super:myname - der Benutzer myname erh&auml;lt Superrechte<br>';
-commands['kick'] = '/kick:myname - Kickt den Benutzer myname aus dem Chatserver und schliesst damit die Verbindung<br>';
+commands['help'] = '/help - zeigt alle m&ouml;glichen Befehle mit Erkl&auml;rung an<br>';
+commands['name'] = '/name:myname - &Auml;ndert den Namen des aktuellen Benutzers auf "myname"<br>';
+commands['super'] = '/super:myname - der Benutzer "myname" erh&auml;lt Superrechte<br>';
+commands['kick'] = '/kick:myname - Kickt den Benutzer "myname" aus dem Chatserver und schliesst damit die Verbindung<br>';
 commands['quit'] = '/quit - Beendet die Verbindung zum Server<br>';
 //commands['users'] = '/users - Zeigt alle Benutzernamen an, die derzeit mit dem Chatserver verbunden sind<br>';
-commands['topic:'] = '/topic:mytopic - &Auml;ndert das Chattopic auf mytopic<br>';
+commands['topic:'] = '/topic:mytopic - &Auml;ndert das Chattopic auf "mytopic"<br>';
 commands['topic'] = '/topic - zeigt das aktuelle Chattopic an<br>';
 commands['usage'] = 'F&uuml;r folgende Befehle sind Superrechte n&ouml;tig: super, kick, topic:<br>';
 
@@ -84,7 +84,7 @@ io.sockets.on('connection', function (socket) {
 		 * Username am Beginn eine Konkatenation von 'user' + die ID des Sockets mit dem er verbunden ist.
 		 * Sollte dieser Name bereits vergeben sein, wird anstelle der ID eine Zufallszahl zwischen 1 und 10000 verwendet.
 		 */
-		var username = 'user'+socket.id;
+		var username = 'user'+socket.id.slice(0,5);
 		while(usernames[username]!== undefined){
 			username = 'user'+Math.ceil(Math.random()*10000);
 		}
@@ -104,7 +104,7 @@ io.sockets.on('connection', function (socket) {
 		 */
 		if(countUser === 1){
 			usernames[username].superUser = true;
-			msg += '<br>Du bist nun Superuser!';
+			msg += '<br>Du bist ein Superuser!';
 		}
 		
 		/*
