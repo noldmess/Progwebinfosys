@@ -1,7 +1,7 @@
  
    <div class="hero-unit">
  
-	<ol>
+	<ol style="list-style-type:none;">
 		<li><h3>Aufgabe 1</h3>
 			<ol>
 			<li>Server einrichten</li>
@@ -75,7 +75,7 @@
 				<li>Single Page App mit einer index.html fürs Game + Homeseite + Highscoreseite</li>
 				<li>Client-Routen über Anchor #</li>
 				<li>Usabilityverbesserungen, im besonderen:
-					<ol>
+					<ul>
 						<li>
 							Feedback bei AJAX (Loading, Sending, etc...)
 						</li>
@@ -85,7 +85,7 @@
 						<li>
 							Einfache Sprache
 						</li>
-					</ol>
+					</ul>
 				</li>
 				<li>
 					User-Tests (min. 5 Benutzer_innen, Feedback protokollieren) <a href="/feedback2.txt">Feedback</a>
@@ -99,7 +99,7 @@
 				<li>Benutzer werden direkt beim Besuch der Webseite mit dem Chatserver verbunden und mit einem automatisch generierten Benutzername beim Chatserver angemeldet</li>
 				<li>Danach haben sie die M&ouml;glichkeit Nachrichten einzugeben, die an alle angemeldeten Benutzer weitergeleitet werden</li>
 				<li>Folgende Kommandos sollen - neben dem Versand von Nachrichten - realisiert werden:</li>
-					<ol>
+					<ul>
 						<li>/name:myname - &Auml;ndert den Namen des aktuellen Benutzers auf myname</li>
 						<li>/super:myname - der Benutzer myname erh&auml;lt Superrechte</li>
 						<li>/kick:myname - Kickt den Benutzer myname aus dem Chatserver und schliesst damit die Verbindung</li>
@@ -108,7 +108,7 @@
 						<li>/topic:mytopic - &Auml;ndert das Chattopic auf mytopic</li>
 						<li>/topic - zeigt das aktuelle Chattopic an</li>
 						<li>F&uuml;r folgende Befehle sind Superrechte n&ouml;tig: super, kick, topic:</li>
-					</ol>
+					</ul>
 			</ol>
 		</li>         
 	</ol>
