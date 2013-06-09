@@ -39,7 +39,7 @@
   </head>
 
   <body>
-	<script src="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>js/jquery.js"></script>
+    <script src="<?php echo str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>js/jquery.js"></script>
     <script src="<?php echo  str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>js/bootstrap-transition.js"></script>
     <script src="<?php echo  str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>js/bootstrap-alert.js"></script>
     <script src="<?php echo  str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>js/bootstrap-modal.js"></script>
@@ -53,10 +53,11 @@
     <script src="<?php echo  str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>js/bootstrap-carousel.js"></script>
     <script src="<?php echo  str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>js/bootstrap-typeahead.js"></script>
     <script>
-function setHrefPort() {
-document.getElementById('node').href = window.location.protocol + "//" + window.location.hostname + ":8080/";
-}
-</script>
+    
+	$( document ).ready(function() {
+		('#node').attr('href', window.location.protocol + "//" + window.location.hostname + ":8080/");
+	});
+    </script>
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
