@@ -97,7 +97,7 @@
 				<li>Chat Server unter Verwendung von Node.js und Socket.IO</li>
 				<li>Web-basiert, Kommunikation zwischen JS Client (jQuery) und Server (Node.js) &uuml;ber Websockets (Socket.IO)</li>
 				<li>Benutzer werden direkt beim Besuch der Webseite mit dem Chatserver verbunden und mit einem automatisch generierten Benutzername beim Chatserver angemeldet</li>
-				<li>Danach haben sie die MÃ¶glichkeit Nachrichten einzugeben, die an alle angemeldeten Benutzer weitergeleitet werden</li>
+				<li>Danach haben sie die M&ouml;glichkeit Nachrichten einzugeben, die an alle angemeldeten Benutzer weitergeleitet werden</li>
 				<li>Folgende Kommandos sollen - neben dem Versand von Nachrichten - realisiert werden:</li>
 					<ol>
 						<li>/name:myname - &Auml;ndert den Namen des aktuellen Benutzers auf myname</li>
