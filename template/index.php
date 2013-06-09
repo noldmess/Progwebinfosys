@@ -92,7 +92,7 @@
 				</li>
 			</ol>
 		</li>
-		<li><h3><a name="node" href="/">Aufgabe 10</a></h3>
+		<li><h3><a class="node" href="/">Aufgabe 10</a></h3>
 			<ol>
 				<li>Chat Server unter Verwendung von Node.js und Socket.IO</li>
 				<li>Web-basiert, Kommunikation zwischen JS Client (jQuery) und Server (Node.js) &uuml;ber Websockets (Socket.IO)</li>
