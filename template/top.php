@@ -52,6 +52,11 @@
     <script src="<?php echo  str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>js/bootstrap-collapse.js"></script>
     <script src="<?php echo  str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>js/bootstrap-carousel.js"></script>
     <script src="<?php echo  str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>js/bootstrap-typeahead.js"></script>
+    <script>
+function setHrefPort() {
+document.getElementById('node').href = window.location.protocol + "//" + window.location.hostname + ":8080/";
+}
+</script>
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
@@ -69,6 +74,7 @@
              <li><a href="/zend1/">Zend-Game</a></li>
              <li><a href="/zend2/">Zend-Game(SPA 1)</a></li>
              <li><a href="/zend3/">Zend-Game(SPA 2)</a></li>
+             <li><a id ="node" href="/">Chat</a></li>
             </ul>
            	<form class="navbar-form pull-right" action="<?php echo  str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>wiki/search.php" method="POST">
            	 <div class="input-prepend">
