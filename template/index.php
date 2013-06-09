@@ -81,7 +81,7 @@
 						</li>
 						<li>
 							Beschreibung zu Spiel Ablauf (Emails + Web)
-							</li>
+						</li>
 						<li>
 							Einfache Sprache
 						</li>
@@ -92,5 +92,24 @@
 				</li>
 			</ol>
 		</li>
+		<li><h3><a name="node" href="/">Aufgabe 10</a></h3>
+			<ol>
+				<li>Chat Server unter Verwendung von Node.js und Socket.IO</li>
+				<li>Web-basiert, Kommunikation zwischen JS Client (jQuery) und Server (Node.js) &uuml;ber Websockets (Socket.IO)</li>
+				<li>Benutzer werden direkt beim Besuch der Webseite mit dem Chatserver verbunden und mit einem automatisch generierten Benutzername beim Chatserver angemeldet</li>
+				<li>Danach haben sie die MÃ¶glichkeit Nachrichten einzugeben, die an alle angemeldeten Benutzer weitergeleitet werden</li>
+				<li>Folgende Kommandos sollen - neben dem Versand von Nachrichten - realisiert werden:</li>
+					<ol>
+						<li>/name:myname - &Auml;ndert den Namen des aktuellen Benutzers auf myname</li>
+						<li>/super:myname - der Benutzer myname erh&auml;lt Superrechte</li>
+						<li>/kick:myname - Kickt den Benutzer myname aus dem Chatserver und schliesst damit die Verbindung</li>
+						<li>/quit - Beendet die Verbindung zum Server</li>
+						<li>/users - Zeigt alle Benutzernamen an, die derzeit mit dem Chatserver verbunden sind (Wurde als konstantes Fenster realisiert)</li>
+						<li>/topic:mytopic - &Auml;ndert das Chattopic auf mytopic</li>
+						<li>/topic - zeigt das aktuelle Chattopic an</li>
+						<li>F&uuml;r folgende Befehle sind Superrechte n&ouml;tig: super, kick, topic:</li>
+					</ol>
+			</ol>
+		</li>         
 	</ol>
 	</div>
