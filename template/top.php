@@ -75,7 +75,7 @@
              <li><a href="/zend1/">Zend-Game</a></li>
              <li><a href="/zend2/">Zend-Game(SPA 1)</a></li>
              <li><a href="/zend3/">Zend-Game(SPA 2)</a></li>
-             <li><a name="node" href="/">Chat</a></li>
+             <li><a class="node" href="/">Chat</a></li>
             </ul>
            	<form class="navbar-form pull-right" action="<?php echo  str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>wiki/search.php" method="POST">
            	 <div class="input-prepend">
