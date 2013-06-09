@@ -55,7 +55,7 @@
     <script>
     
 	$( document ).ready(function() {
-		('.node').attr('href', window.location.protocol + "//" + window.location.hostname + ":8080/");
+		$('.node').attr('href', window.location.protocol + "//" + window.location.hostname + ":8080/");
 	});
     </script>
     <div class="navbar navbar-inverse navbar-fixed-top">
