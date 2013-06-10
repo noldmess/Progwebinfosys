@@ -136,15 +136,23 @@
 
 </script>
 <div class="row-fluid">
-<div style="float:left;width:200px;border-right:1px solid black;height:450px;padding:10px;overflow-y:scroll;">
-	<div id="user"></div>
-	<b>USERS</b>
-	<div id="users"></div>
+	<div class="span3">
+		<div class="well sidebar-nav">
+			<div style="float:left;width:200px;border-right:1px solid black;height:450px;padding:10px;overflow-y:scroll;">
+				<div id="user"></div>
+				<b>USERS</b>
+				<div id="users"></div>
+		</div>
+	</div>
 </div>
-<div style="float:left;width:300px;height:450px;padding:10px;">
-	<div id="conversation" style="height:350px;overflow-y:scroll;"></div>
-	<textarea id="data" rows="5" columns="200" ></textarea>
-	<input type="button" id="datasend" value="Senden" />
+<div class="span9">
+	<div class="hero-unit">
+		<div style="float:left;width:300px;height:450px;padding:10px;">
+			<div id="conversation" style="height:350px;overflow-y:scroll;"></div>
+			<textarea id="data" rows="5" columns="200" ></textarea>
+			<input type="button" id="datasend" value="Senden" />
+		</div>
+	</div>
 </div>
 <div id="quit" style="display:none;"></div>
 </div>
