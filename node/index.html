@@ -56,10 +56,10 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
              <!--<li><a href="<?php echo  str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>wiki/">Wiki</a></li>-->
-             <li> <a href="https://github.com/noldmess/Progwebinfosys">GIT</a></li>
-             <li><a href="http://138.232.66.90//zend1/">Zend-Game</a></li>
-             <li><a href="http://138.232.66.90//zend2/">Zend-Game(SPA 1)</a></li>
-             <li><a href="http://138.232.66.90//zend3/">Zend-Game(SPA 2)</a></li>
+             <li> <a href="https:/github.com/noldmess/Progwebinfosys">GIT</a></li>
+             <li><a href="http:/138.232.66.90//zend1/">Zend-Game</a></li>
+             <li><a href="http:/138.232.66.90//zend2/">Zend-Game(SPA 1)</a></li>
+             <li><a href="http:/138.232.66.90//zend3/">Zend-Game(SPA 2)</a></li>
              <li><a class="node" href="/">Chat</a></li>
             </ul>
           </div><!--/.nav-collapse -->
@@ -135,6 +135,7 @@
 	});
 
 </script>
+<div class="row-fluid">
 <div style="float:left;width:200px;border-right:1px solid black;height:450px;padding:10px;overflow-y:scroll;">
 	<div id="user"></div>
 	<b>USERS</b>
@@ -146,6 +147,7 @@
 	<input type="button" id="datasend" value="Senden" />
 </div>
 <div id="quit" style="display:none;"></div>
+</div>
 <footer>
         <p>&copy; Aaron Messner, Markus M&uuml;ller - 2013 <?php if(isset($TEMPLATE['time'])){echo 'Time to load Page: '.$TEMPLATE['time'];}?></p>
 </footer>
