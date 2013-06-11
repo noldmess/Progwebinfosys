@@ -106,9 +106,10 @@
 	// Befehl /kick: aus den Chat ausschlie�t
 	socket.on('quitConnection', function(data){
 		$('#quit').empty();
-		$('#messeger').hide();
-		$('#userlist').hide();
+		$('#messager').hide();
+		$('#span3').hide();
 		$('#quit').append(data);
+		$('#quit').show();
 		
 	});
 
