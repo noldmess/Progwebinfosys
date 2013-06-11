@@ -52,6 +52,12 @@
 		$('#conversation').append('<b>'+username + ':</b> ' + data + '<br>');
 		$('#conversation').scrollTop($('#conversation')[0].scrollHeight);
 	});
+	
+	// wenn der Server 'updateChat' aufruft, wird der Chat mit den uebergebenen erweitert. 
+	socket.on('clearChat', function (username, data) {
+		$('#conversation').empty();
+		$('#conversation').scrollTop($('#conversation')[0].scrollHeight);
+	});
 
 	// wenn der Server 'updateUsers' aufruft, wird die Liste der angemeldeten User erneuert
 	socket.on('updateUsers', function(data) {
