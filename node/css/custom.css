@@ -7,8 +7,18 @@ footer{
   padding: 0 10px;
 }
 
+#users{
+  height: 500px;
+  overflow-y:scroll;
+}
+
+#conversation{
+  height:350px;
+  overflow-y:scroll;
+}
+
 hr.user-line{
-  margin: 0;
+  margin: 5px 0;
 }
 
 textarea.messagebox{
