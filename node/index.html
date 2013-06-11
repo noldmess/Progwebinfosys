@@ -64,7 +64,7 @@
 	// wenn der Server 'setName' aufruft, wird der Name des aktuellen Users gesetzt
 	socket.on('setName', function(name){
 		$('#user').empty();
-		$('#user').append('Angemeldet als: '+name);
+		$('#user').append('<b>Angemeldet als: '+name+'</b>');
 	});
 	
 	// wird vom Server aufgerufen wenn der User den Befehl /quit verwendet oder ein anderer User diesen mit dem 
@@ -145,7 +145,7 @@
 		<div id="userlist">
 				<div id="user"></div>
 				<hr class="user-line">
-				<b>USERS</b>
+				<b>Benutzer Online:</b>
 				<div id="users"></div>
 		</div>
 	</div>
