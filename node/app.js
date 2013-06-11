@@ -187,7 +187,7 @@ var handleName = function(socket, data){
  * Bearbeitet den /clear-Befehl
  */
 var handleClear = function(socket){
-	socket.emit('clear');
+	socket.emit('clearChat');
 };
  
 
