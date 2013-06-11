@@ -149,6 +149,7 @@
 		<div class="well sidebar-nav">
 		<div id="userlist">
 				<div id="user"></div>
+				<hr id="user-line">
 				<b>USERS</b>
 				<div id="users"></div>
 		</div>
@@ -159,8 +160,8 @@
 		<div id="messager">
 			<div id="conversation" style="height:350px;overflow-y:scroll;"></div>
 			    <form class="form-inline">
-			    <textarea id="data" rows="1"  cols="100"></textarea>
-				<input type="button" id="datasend" value="Senden" />
+			    <textarea id="data" rows="1"  cols="100" class="messagebox"></textarea>
+				<input type="button" id="datasend" class="datasend" value="Senden" />
 				
 			    </form>
 		</div>
@@ -170,7 +171,7 @@
 </div>
 </div><!--/.fluid-container-->
 <footer>
-        <p>&copy; Aaron Messner, Markus M&uuml;ller - 2013 <?php if(isset($TEMPLATE['time'])){echo 'Time to load Page: '.$TEMPLATE['time'];}?></p>
+        <p>&copy; Aaron Messner, Markus M&uuml;ller - 2013</p>
 </footer>
 
 
