@@ -30,6 +30,7 @@ commands['name'] = '/name:myname - &Auml;ndert den Namen des aktuellen Benutzers
 commands['super'] = '/super:myname - der Benutzer "myname" erh&auml;lt Superrechte<br>';
 commands['kick'] = '/kick:myname - Kickt den Benutzer "myname" aus dem Chatserver und schliesst damit die Verbindung<br>';
 commands['quit'] = '/quit - Beendet die Verbindung zum Server<br>';
+commands['clear'] = '/clear - L&ouml;scht die Chathistory<br>';
 //commands['users'] = '/users - Zeigt alle Benutzernamen an, die derzeit mit dem Chatserver verbunden sind<br>';
 commands['topic:'] = '/topic:mytopic - &Auml;ndert das Chattopic auf "mytopic"<br>';
 commands['topic'] = '/topic - zeigt das aktuelle Chattopic an<br>';
@@ -40,7 +41,7 @@ io.sockets.on('connection', function (socket) {
 	//Wenn nachricht von user geschickt wird
 	socket.on('sendMsg', function (data) {
 		
-		// auf Befehle �berpr�fen, ansonsten normale Chatnachricht
+		// auf Befehle ueberpruefen ansonsten normale Chatnachricht
 		
 		if(data.indexOf("/help") === 0){
 			
