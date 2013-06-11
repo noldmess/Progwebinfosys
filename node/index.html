@@ -106,10 +106,8 @@
 	// Befehl /kick: aus den Chat ausschlie�t
 	socket.on('quitConnection', function(data){
 		$('#quit').empty();
-		/*
-		* TODO 
-		* Do muasch olls ondre ausblenden und es div 'quit' inblenden mit dr nochricht wos in data steat!!!!
-		*/
+		$('#messeger').hide();
+		
 	});
 
 	// on load of page
@@ -147,14 +145,14 @@
 </div>
 <div class="span9">
 	<div class="hero-unit">
-		<!--<div style="float:left;width:300px;height:450px;padding:10px;">-->
+		<div id="messager">
 			<div id="conversation" style="height:350px;overflow-y:scroll;"></div>
 			<textarea id="data" rows="5"  rows="3"></textarea>
 			<input type="button" id="datasend" value="Senden" />
-		<!--</div>-->
+		</div>
+		<div id="quit" style="display:none;"></div>
 	</div>
 </div>
-<div id="quit" style="display:none;"></div>
 </div>
 <footer>
         <p>&copy; Aaron Messner, Markus M&uuml;ller - 2013 <?php if(isset($TEMPLATE['time'])){echo 'Time to load Page: '.$TEMPLATE['time'];}?></p>
