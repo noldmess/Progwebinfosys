@@ -107,6 +107,8 @@
 	socket.on('quitConnection', function(data){
 		$('#quit').empty();
 		$('#messeger').hide();
+		$('#userlist').hide();
+		$('#quit')..append(data);
 		
 	});
 
@@ -136,11 +138,11 @@
 <div class="row-fluid">
 	<div class="span3">
 		<div class="well sidebar-nav">
-		<!--	<div style="float:left;width:200px;border-right:1px solid black;height:450px;padding:10px;overflow-y:scroll;">-->
+		<div id="userlist">
 				<div id="user"></div>
 				<b>USERS</b>
 				<div id="users"></div>
-		<!--</div>-->
+		</div>
 	</div>
 </div>
 <div class="span9">
