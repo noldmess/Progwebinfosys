@@ -47,7 +47,7 @@
 		socket.emit('newUser');
 	});
 
-	// wenn der Server 'updateChat' aufruft, wird der Chat mit den �bergebenen erweitert. 
+	// wenn der Server 'updateChat' aufruft, wird der Chat mit den uebergebenen erweitert. 
 	socket.on('updateChat', function (username, data) {
 		$('#conversation').append('<b>'+username + ':</b> ' + data + '<br>');
 		$('#conversation').scrollTop($('#conversation')[0].scrollHeight);
@@ -68,7 +68,7 @@
 	});
 	
 	// wird vom Server aufgerufen wenn der User den Befehl /quit verwendet oder ein anderer User diesen mit dem 
-	// Befehl /kick: aus den Chat ausschlie�t
+	// Befehl /kick: aus den Chat ausschliesst
 	socket.on('quitConnection', function(data){
 		$('#quit').empty();
 		$('#messager').hide();
@@ -90,7 +90,7 @@
 			$('#data').val('');
 		});
 
-		// Listener auf die Tastatur f�r die Enter Taste, Klick auf 'Senden'-Button wird simuliert
+		// Listener auf die Tastatur fuer die Enter Taste, Klick auf 'Senden'-Button wird simuliert
 		$('#data').keypress(function(e) {
 			if(e.which == 13) {
 				e.preventDefault();
@@ -117,7 +117,6 @@
           </button>
           <div class="nav-collapse collapse">
             <ul class="nav">
-             <!--<li><a href="<?php echo  str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME']));?>wiki/">Wiki</a></li>-->
              <li> <a href="https:/github.com/noldmess/Progwebinfosys">GIT</a></li>
              <li><script>
              var l1="Zend-Game";
