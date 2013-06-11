@@ -22,7 +22,7 @@ var msgSuperNeeded = 'Du ben&ouml;tigst den Status eines Superusers um diesen Be
 var chatTopic = "!_42_!";
 
 /*
- * Alle Befehle welche dem User zur Verfügung stehen
+ * Alle Befehle welche dem User zur Verfï¿½gung stehen
  */
 var commands = {};
 commands['help'] = '/help - zeigt alle m&ouml;glichen Befehle mit Erkl&auml;rung an<br>';
@@ -40,7 +40,7 @@ io.sockets.on('connection', function (socket) {
 	//Wenn nachricht von user geschickt wird
 	socket.on('sendMsg', function (data) {
 		
-		// auf Befehle überprüfen, ansonsten normale Chatnachricht
+		// auf Befehle ï¿½berprï¿½fen, ansonsten normale Chatnachricht
 		
 		if(data.indexOf("/help") === 0){
 			
@@ -53,6 +53,10 @@ io.sockets.on('connection', function (socket) {
 		}else if(data.indexOf('/quit') === 0){
 			
 			handleQuit(socket);
+			
+		}else if(data.indexOf('/clear') === 0){
+			
+			handleClear(socket);
 			
 		}else if(data.indexOf('/topic:') === 0){
 			
@@ -119,11 +123,11 @@ io.sockets.on('connection', function (socket) {
 	});
 
 
-	// wenn ein User den Browser schließt, die Verbindung beendet, oder gekickt wird!
+	// wenn ein User den Browser schliesst, die Verbindung beendet, oder gekickt wird!
 	socket.on('disconnect', function(){
 		
 		/*
-		 * User löschen, counter verringern, Userliste updaten und im Chat mitteilen,
+		 * User loeschen, counter verringern, Userliste updaten und im Chat mitteilen,
 		 * dass der User den Chat verlassen hat!
 		 */
 		delete usernames[socket.username];
@@ -154,7 +158,7 @@ var handleName = function(socket, data){
 	var newName = data.split(':')[1];
 	/*
 	 * Wenn Username bereits vergeben ist, User darauf hinweisen,
-	 * ansonsten überprüfen ob der Username angeben wurde und darauf setzen.
+	 * ansonsten ueberpruefen ob der Username angeben wurde und darauf setzen.
 	 */
 	if(usernames[newName] !== undefined){
 		socket.emit('updateChat', 'SERVER', 'Benutzername bereits vergeben!');
@@ -180,6 +184,14 @@ var handleName = function(socket, data){
 };
 
 /**
+ * Bearbeitet den /clear-Befehl
+ */
+var handleClear = function(socket){
+	socket.emit('clear');
+};
+ 
+
+/**
  * Bearbeitet den /quit-Befehl
  */
 var handleQuit = function(socket, data){
@@ -191,12 +203,12 @@ var handleQuit = function(socket, data){
  * Bearbeitet den /super:myname-Befehl
  */
 var handleSuper = function(socket, data){
-	//auf Superuser überprüfen
+	//auf Superuser ueberpruefen
 	if(usernames[socket.username].superUser === true){
 		
 		var superUser = data.split(':')[1];
 		
-		// überprüfen ob ein richtiger User angegeben wurde
+		// ueberpruefen ob ein richtiger User angegeben wurde
 		if(superUser !== undefined && superUser !== '' && usernames[superUser]!== undefined){
 			usernames[superUser].superUser = true;
 			socket.emit('updateChat', 'SERVER', 'User "'+superUser+'" besitzt nun den Status eines Superusers!');
@@ -221,12 +233,12 @@ var handleTopic = function(socket){
  * Bearbeitet den /topic:mytopic-Befehl
  */
 var handleTopicAdvanced = function(socket, data){
-	//auf Superuser überprüfen
+	//auf Superuser ueberpruefen
 	if(usernames[socket.username].superUser === true){
 		
 		var newTopic = data.split(':')[1];
 		
-		// überprüfen ob ein Topic angegeben wurde
+		// ueberpruefen ob ein Topic angegeben wurde
 		if(newTopic !== undefined && newTopic !== ''){
 			chatTopic = newTopic;
 			socket.emit('updateChat', 'Topic', 'Chattopic ver&auml;ndert auf "'+chatTopic+'"!');
@@ -244,12 +256,12 @@ var handleTopicAdvanced = function(socket, data){
  * Bearbeitet den /kick-Befehl
  */
 var handleKick = function(socket, data){
-	//auf Superuser überprüfen
+	//auf Superuser ueberpruefen
 	if(usernames[socket.username].superUser === true){
 		
 		var kickUser = data.split(':')[1];
 		
-		// überprüfen ob ein richtiger User angegeben wurde
+		// ueberpruefen ob ein richtiger User angegeben wurde
 		if(kickUser !== undefined && kickUser !== '' && usernames[kickUser] !== undefined){
 			
 			var socketID = usernames[kickUser].socketID;
