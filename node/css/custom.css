@@ -7,6 +7,14 @@ footer{
   padding: 0 10px;
 }
 
-#user{
-  margin: 0px 0px 10px 0px;
+hr.user-line{
+  margin: 0;
+}
+
+textarea.messagebox{
+  width:auto;
+}
+
+input.datasend{
+  margin-left: 10px;
 }
