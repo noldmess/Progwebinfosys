@@ -64,7 +64,7 @@
 		$('#users').empty();
 		$.each(data, function(key, value) {
 			var str = value.name;
-			if(value.superuser === true){
+			if(value.superUser === true){
 				str+= " (super)";
 			}
 			$('#users').append('<div>' + str + '</div>');
