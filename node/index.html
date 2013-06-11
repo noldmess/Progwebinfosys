@@ -63,7 +63,11 @@
 	socket.on('updateUsers', function(data) {
 		$('#users').empty();
 		$.each(data, function(key, value) {
-			$('#users').append('<div>' + value.name + '</div>');
+			var str = value.name;
+			if(value.superuser === true){
+				str+= " (super)";
+			}
+			$('#users').append('<div>' + str + '</div>');
 		});
 	});
 	
