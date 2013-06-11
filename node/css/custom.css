@@ -8,12 +8,12 @@ footer{
 }
 
 #users{
-  height: 508px;
+  height: 458px;
   overflow-y:scroll;
 }
 
 #conversation{
-  height:350px;
+  height:300px;
   overflow-y:scroll;
 }
 
