@@ -105,6 +105,7 @@
     
 	$( document ).ready(function() {
 		$('.node').attr('href', window.location.protocol + "//" + window.location.hostname + ":8080/");
+		$('.brand').attr('href', window.location.protocol + "//" + window.location.hostname + "/");
 	});
     </script>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -115,11 +116,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <script>
-             var l1="Gruppe 2";
-             l1.addClass("brand");
-             document.write(l1.link(window.location.protocol + "//"+window.location.hostname+"/"));
-          </script>
+          <a class="brand" href="/">Grupp 2</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
              <li> <a href="https:/github.com/noldmess/Progwebinfosys">GIT</a></li>
