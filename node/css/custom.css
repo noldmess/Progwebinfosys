@@ -8,7 +8,7 @@ footer{
 }
 
 #users{
-  height: 500px;
+  height: 508px;
   overflow-y:scroll;
 }
 
@@ -18,7 +18,7 @@ footer{
 }
 
 hr.user-line{
-  margin: 5px 0;
+  margin: 6px 0;
 }
 
 textarea.messagebox{
