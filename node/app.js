@@ -214,6 +214,7 @@ var handleSuper = function(socket, data){
 			usernames[superUser].superUser = true;
 			socket.emit('updateChat', 'SERVER', 'User "'+superUser+'" besitzt nun den Status eines Superusers!');
 			io.sockets.socket(usernames[superUser].socketID).emit('updateChat', 'SERVER', 'Du wurdest von "'+ socket.username + '" zum Superuser ernannt!');
+			io.sockets.emit('updateUsers', usernames);
 		}else{
 			socket.emit('updateChat', 'SERVER', 'Bitte einen existierenden User angeben!');
 		}
