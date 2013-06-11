@@ -47,14 +47,14 @@
 		socket.emit('newUser');
 	});
 
-	// wenn der Server 'updateChat' aufruft, wird der Chat mit den uebergebenen erweitert. 
+	// wenn der Server 'updateChat' aufruft, wird der Chat mit den uebergebenen Daten erweitert. 
 	socket.on('updateChat', function (username, data) {
 		$('#conversation').append('<b>'+username + ':</b> ' + data + '<br>');
 		$('#conversation').scrollTop($('#conversation')[0].scrollHeight);
 	});
 	
-	// wenn der Server 'updateChat' aufruft, wird der Chat mit den uebergebenen erweitert. 
-	socket.on('clearChat', function (username, data) {
+	// wenn der Server 'clearChat' aufruft, wird der Chat entleert. 
+	socket.on('clearChat', function () {
 		$('#conversation').empty();
 		$('#conversation').scrollTop($('#conversation')[0].scrollHeight);
 	});
